@@ -1,19 +1,20 @@
 /*Cuerpo de página*/
 body{
-    margin:auto;
+    margin: 0;
     background-color: #fffefeae;
 }
 /*Barra de navegacion*/
 .barraNavegacion{
+    position: fixed; /*La barra siempre esta visible*/
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: #f1e5d5;
     display: flex;
     align-items:center;
     justify-content:space-around;
-    /*
-    justify-content: space-between;
-    padding: 10px 20px;
-    width: 100%;    
-    */
+    flex-wrap: wrap; /*Permite que el menú baje en móvil*/
+    z-index: 1000;/*Permite asegurarte de que quede por encima de otros elementos */
 }
 .barraNavegacion img{
     height: 100px;
@@ -21,11 +22,11 @@ body{
     padding-right: auto;
 }
 .Menu{
-    display: flex;
-    align-items: center;
+    display:flex;
     list-style: none;
     margin: 0;
     padding: 0;
+    gap: 20px;
 }
 .Menu li{
     color: #573c23;
@@ -42,30 +43,33 @@ body{
     cursor: pointer; /*Puntero de forma de mano*/
 
 }
-/*
-.ofrecemos{
+
+.ofrecemos{ 
+    justify-items: center;
+}
+
+/*Carrusel de imagenes*/
+.carrusel{
+    width: 100%;
+    height:600px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding:0;
     
 }
-*/
-/*Carrusel de imagenes*/
-.galeria-imagenes{
-    position: relative; /*Establece posicion relativa a los elemenos internos*/
-    max-width: 100%; /*Limita el tamaño máximo para que no se extienda demasiado*/
-    margin: auto; /*Centra el carrusel horizontalmente.*/
-}
-.diapositiva{ 
-    /*display: none;*/
-   /* position: absolute; */
-   /* top: 0;
-    left: 0;*/
+.carrusel img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute; 
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    width: 100%; /*Maximo tamaño de la img*/
 }
-.diapositiva.visible{
+.carrusel img.active{
     opacity: 1;
-    z-index: 1;
 }
+
 h1{
     font-family:'Times New Roman', Times, serif;
     font-style: italic;
@@ -81,15 +85,17 @@ div{
 
 /*Estilo tipo telefono*/
 @media (max-width:760px){
+    .barraNavegacion{
+        flex-direction: row; /*colocar los elementos en fila*/
+        align-items: flex-start;
+        align-items: center;
+    }
     .Menu{
         flex-direction: column;
-        position: absolute;
-        top: 100px; /*Debajo del navegador*/
-        left: 0px;
-        right: 0px;
         background-color: #f1e5d5; 
         display: none; /*Oculto por defecto*/
-        text-align: center;
+        width: 100%;
+        padding: 0;
         
     }   
     .Menu.show{
@@ -99,10 +105,14 @@ div{
         display: block; /*Pasa el contenido a forma de bloque*/
     }
     .Menu li{
-        padding: 10px;
         border-bottom: 1px solid#573c23;
         width: 100%; /*Que el borde ocupe todo el ancho*/
         margin: 0; /*Elimina cualquier margen*/
+        text-align: center;
+        padding: 0;
     }
-
+    .carrusel{
+        height: 300px;
+    }
+    
 }

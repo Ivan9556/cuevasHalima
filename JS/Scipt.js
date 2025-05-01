@@ -7,21 +7,17 @@ desplegable.addEventListener('click', ()=> {
 });
 
 //Funcion carrusel
+const img = document.querySelectorAll('.carrusel img');
 let indice = 0;
-mostrarImagenes();
-function mostrarImagenes(){
-    const img = document.getElementsByClassName("diapositiva");
-    for(let i = 0; i < img.length; i++){
-        //img[i].style.display = "none"; oculta todas las imagenes
-        img[i].classList.remove("visible");
-    }
-    /*
-    indice++;
-    if(indice > img.length) indice = 1;
-    */
+function siguienteImagen(){
+    //Quita la clase "active" a todas para ocultarlas (opacity: 0 en CSS)
+    img.forEach(img => img.classList.remove('active'));
+    //Añade la clase "active" hace visible la img (opacity: 1 con transición suave) 
+    img[indice].classList.add('active');
+    //% (módulo) sirve para volver a 0 
     indice = (indice + 1) % img.length;
-    img[indice].classList.add("visible");
-    //img[indice -1].style.display = "block"; //Muestra solo una
-    setTimeout(mostrarImagenes, 5000) //Cambia cada 3 seg
 }
+siguienteImagen();
+setInterval(siguienteImagen, 10000);
 
+//
