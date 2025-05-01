@@ -1,7 +1,9 @@
+/*Cuerpo de página*/
 body{
     margin:auto;
-    background-color: #ffffff;
+    background-color: #fffefeae;
 }
+/*Barra de navegacion*/
 .barraNavegacion{
     background-color: #f1e5d5;
     display: flex;
@@ -39,6 +41,42 @@ body{
     border: none;
     cursor: pointer; /*Puntero de forma de mano*/
 
+}
+/*
+.ofrecemos{
+    
+}
+*/
+/*Carrusel de imagenes*/
+.galeria-imagenes{
+    position: relative; /*Establece posicion relativa a los elemenos internos*/
+    max-width: 100%; /*Limita el tamaño máximo para que no se extienda demasiado*/
+    margin: auto; /*Centra el carrusel horizontalmente.*/
+}
+.diapositiva{ 
+    /*display: none;*/
+   /* position: absolute; */
+   /* top: 0;
+    left: 0;*/
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    width: 100%; /*Maximo tamaño de la img*/
+}
+.diapositiva.visible{
+    opacity: 1;
+    z-index: 1;
+}
+h1{
+    font-family:'Times New Roman', Times, serif;
+    font-style: italic;
+    color: #573c23; 
+}
+.tabla-ofrecemos th{
+    color: #573c23;
+    font-size: larger;    
+}
+div{
+    margin: 50px;  
 }
 
 /*Estilo tipo telefono*/
