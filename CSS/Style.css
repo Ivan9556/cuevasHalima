@@ -1,6 +1,7 @@
 /*Cuerpo de página*/
 body{
     margin: 0;
+    margin-top: 5%;
     background-color: #fffefeae;
 }
 /*Barra de navegacion*/
