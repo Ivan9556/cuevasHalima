@@ -90,8 +90,20 @@ h1{
 div{
     margin: 50px;  
 }
+/*Ubicación Maps*/
+.ubicacion{
+    display: flex;
+}
+.ubicacion iframe{
+    border: 0;
+
+}
 /*Pie de pagina*/
-.contacto{
+.piePagina{
+    background-color: #f1e5d5;
+    display: flex;
+}
+.contacto a{
     color: inherit;
     text-decoration: none;
 }
