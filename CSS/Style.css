@@ -6,7 +6,7 @@ body {
 }
 /*PIE DE PAGINA*/
 footer {
-    background-color: #f1e5d5;
+    background-color: #d6e8df;
     display: flex;
 
 }
@@ -18,7 +18,7 @@ footer {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #f1e5d5;
+    background-color: #d6e8df;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -43,8 +43,7 @@ footer {
     
 }
 
-.Menu li {
-     
+.Menu li {    
     margin-left: 30px;
     font-size: large;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -52,7 +51,7 @@ footer {
 
 .Menu li, a{
     text-decoration: none;
-    color: #573c23;
+    color: #057075;
 }
 
 /*OCULTAR BOTON EN LA PANTALLA GRANDE*/
@@ -108,16 +107,16 @@ footer {
 h1{
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-    color: #573c23;
+    color: #057075;
 }
 /*TODOS LOS ENCABEZADO H3*/
 h3{
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-    color: #573c23;
+    color: #057075;
 }    
 .tabla-ofrecemos th {
-    color: #573c23;
+    color: #057075;
     font-size: 25px;
 
 }
@@ -140,26 +139,26 @@ div {
 }
 .informacion{
     font-size: 20px;
-    background-color: #f1e5d5;
+    background-color: #d6e8df;
     padding: 10%;
     border-radius: 20%;
     display: block;
 }
 .informacion .ubicacion img{
     font-size: 25px;
-    color: #573c23;
+    color: #057075;
 }
 .ubicacion iframe {
-    border:5px solid #f1e5d5; 
+    border:5px solid #d6e8df; 
     border-radius: 20%; 
 }
 
 /*Pie de pagina*/
 
 .contacto{
-    color: #573c23;
+    color: #057075;
     font-size: 20px;
-  /*  border-radius: 30%;
+/*  border-radius: 30%;
     background-color: white;
     padding: 25px;
     border: 2px solid #573c23; */
@@ -181,7 +180,7 @@ div {
 
     .Menu {
         flex-direction: column;
-        background-color: #f1e5d5;
+        background-color: #d6e8df;
         display: none;
         /*Oculto por defecto*/
         width: 100%;
@@ -200,7 +199,7 @@ div {
     }
 
     .Menu li {
-        border-bottom: 1px solid#573c23;
+        border-bottom: 1px solid#057075;
         width: 100%;
         /*Que el borde ocupe todo el ancho*/
         margin: 0;
@@ -226,7 +225,7 @@ div {
         content: attr(data-label); /*Añadimos el data-label en los td de cada columna*/
         display: block;
         font-weight: bolder;
-        color: #573c23;
+        color: #057075;
         font-size: 20px;
     }
     

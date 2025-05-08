@@ -1,3 +1,13 @@
+Primer Boceto
 Color principal #f1e5d5
 
 Color secundario #573c23
+
+Segundo Boceto
+Color primcipal #057075
+
+Color secundario #057075
+
+
+
+
