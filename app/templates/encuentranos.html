@@ -1,65 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!--Pagina Encuentranos-->
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuentranos</title>
-    <link rel="stylesheet" href="../CSS/Style.css">
-</head>
+{% block title %}Encuentranos{% endblock %}
 
-<body>
-    <nav class="barraNavegacion">
-        <a href="../Index.html"><img src="/IMG/Logos/logoBoceto5.jpeg" alt="logo" id="fotoPerfil"></a>
-        <!--Boton desplegable-->
-        <button class="menu-desplegable" type="button" id="menuDesplegable">&#9776;</button>
-        <!--&#9776; menú hamburgesa-->
-        <!--menu navegador-->
-        <ul class="Menu" id="menu">
-            <li><a href="../Ventanas/sobreNosotros.html">Sobre nosotros</a></li>
-            <li><a href="../Ventanas/cueva.html">Nuestra cueva</a></li>
-            <li><a href="../Ventanas/queHacer.html">Qué hacer</a></li>
-            <li><a href="/Ventanas/encuentranos.html">Encuentranos</a></li>
-        </ul>
-    </nav>
-    <!--Google maps Iframe-->
-    <div class="ubicacion">
-        <div class="informacion">
-            <h3>Donde nos encontramos</h3>
-            <div class="ubicacion">
-                <img src="/IMG/Iconos/ubicacion.png" alt="ubicacion">C. Algarbe, 4 Bácor
-            </div>
+{% block content %}
+<!--Google maps Iframe-->
+<div class="ubicacion">
+    <div class="informacion">
+        <h3>Donde nos encontramos</h3>
+        <div class="ubicacion">
+            <img src="{{ url_for('static', filename='img/iconos/ubicacion.png')}}" alt="ubicacion">C. Algarbe, 4 Bácor
         </div>
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1582.0130443333264!2d-2.9527514612262706!3d37.53088229301196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6fc8bbb8ea70ff%3A0x8117d8fd540db2d6!2sC.%20Algarbe%2C%204%2C%2018860%20Guadix%2C%20Granada!5e0!3m2!1ses!2ses!4v1746357628465!5m2!1ses!2ses"
-            width="800" height="600" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            title="maps">
-        </iframe>
     </div>
-    <div>
-        <h3>No dudes en preguntarnos</h3>
-        <form action="enviar" method="post">
-        <label for="nombre">Nombre</label><br>
-        <input type="text" id="nombre" placeholder="Obligatorio" required ><br>
-        <label for="correo">Correo electronico</label><br>
-        <input type="text" id="correo" placeholder="Obligatorio" required><br>
-        <label for="asunto">Asunto</label><br>
-        <input type="text" id="asunto"><br>
-        <label for="tMensaje">Tu mensaje</label><br>
-        <textarea name="mensaje" id="mensaje"></textarea><br>
-        <button type="submit">Enviar</button>
-        </form>
-    </div>
-    <script src="JS/Scipt.js"></script>
-    <footer>
-        <div class="contacto">
-            <h3>Contacto</h3>
-            <img src="/IMG/Iconos/telefono.png" alt="telefono"> 665 94 66 80 <br>
-            <a href="https://www.instagram.com/cuevas.bustamante/profilecard/" target="_blank">
-                <img src="/IMG/Iconos/logoInstagram.png" alt="instagram"> ¡Síguenos!</a> <br>
-            <img src="/IMG/Iconos/correo-electronico.png" alt="correo"> ejemplo@ejemplo.com <br>
-        </div>
-    </footer>
-</body>
-
-</html>
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1582.0130443333264!2d-2.9527514612262706!3d37.53088229301196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6fc8bbb8ea70ff%3A0x8117d8fd540db2d6!2sC.%20Algarbe%2C%204%2C%2018860%20Guadix%2C%20Granada!5e0!3m2!1ses!2ses!4v1746357628465!5m2!1ses!2ses"
+        width="800" height="600" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="maps">
+    </iframe>
+</div>
+<div>
+    <h3>No dudes en preguntarnos</h3>
+    <form action="enviar" method="post">
+    <label for="nombre">Nombre</label><br>
+    <input type="text" id="nombre" placeholder="Obligatorio" required ><br>
+    <label for="correo">Correo electronico</label><br>
+    <input type="text" id="correo" placeholder="Obligatorio" required><br>
+    <label for="asunto">Asunto</label><br>
+    <input type="text" id="asunto"><br>
+    <label for="tMensaje">Tu mensaje</label><br>
+    <textarea name="mensaje" id="mensaje"></textarea><br>
+    <button type="submit">Enviar</button>
+    </form>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@ def create_app():
     #Este método nos permite vincular la app
     mongo.init_app(app) #Inicia MongoDB
 
-    from .rutas import main
+    from .route import main
     app.register_blueprint(main) # dividir rutas em varios archivos
 
     return app

@@ -5,10 +5,10 @@
 
 {% block content %}
     <div class="carrusel">
-        <img src="IMG/Carrusel/Foto1.jpg" alt="Bacor">
-        <img src="IMG/Carrusel/Foto4.jpg" alt="Pueblo">
-        <img src="IMG/Carrusel/Foto5.jpg" alt="Castillo">
-        <img src="IMG/Carrusel/Playa.jpg" alt="Playa">
+        <img src="{{ url_for('static', filename='img/carrusel/foto1.jpg') }}" alt="Bacor">
+        <img src="{{ url_for('static', filename='img/carrusel/foto2.jpg') }}" alt="Pueblo">
+        <img src="{{ url_for('static', filename='img/carrusel/foto3.jpg') }}" alt="Castillo">
+        <img src="{{ url_for('static', filename='img/carrusel/foto4.jpg') }}" alt="Playa">
     </div>
     <div class="contenedor ">
         <div class="bienvenida">

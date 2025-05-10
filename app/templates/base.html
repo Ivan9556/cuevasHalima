@@ -12,15 +12,20 @@
 <body>
     <!--Barra navegacion-->
     <nav class="barraNavegacion">
-        <a href="Index.html"><img src="IMG/Logos/logoBoceto5.jpeg" alt="logo" id="fotoPerfil"></a>
+        <a href="{{ url_for('main.inicio')}}"><img src="{{ url_for('static', filename='img/logos/logoBoceto5.jpeg')}}" alt="logo" id="fotoPerfil"></a>
         <!--Boton desplegable--&#9776 menú hamburgesa-->
         <button class="menu-desplegable" type="button" id="menuDesplegable">&#9776;</button>
         <!--menu navegador-->
+        <!--
+        Usamos la funcion "url_for" para rutas definidas en Flask "route.py" 
+        A diferencia de "url_for('static, filenmae=') que se usa para definir las rutas
+        de los archivos estáticos "/static".
+        -->
         <ul class="Menu" id="menu">
-            <li><a href="../Ventanas/sobreNosotros.html">Sobre nosotros</a></li>
-            <li><a href="../Ventanas/cueva.html">Nuestra cueva</a></li>
-            <li><a href="./Ventanas/queHacer.html">Qué hacer</a></li>
-            <li><a href="/Ventanas/encuentranos.html">Encuentranos</a></li>
+            <li><a href="{{ url_for('main.sobreNosotros')}}">Sobre nosotros</a></li>
+            <li><a href="{{ url_for('main.cueva')}}">Nuestra cueva</a></li>
+            <li><a href="{{ url_for('main.queHacer')}}">Qué hacer</a></li>
+            <li><a href="{{ url_for('main.encuentranos')}}">Encuentranos</a></li>
         </ul>
     </nav>
     <!--Contenido-->
@@ -31,16 +36,16 @@
     <footer>
         <div class="contacto">
             <h3>Contacto</h3>
-            <img src="IMG/Iconos/telefono.png" alt="telefono"> 665 94 66 80 <br>
-            <a href="https://www.instagram.com/cuevas.bustamante/profilecard/" target="_blank">
-                <img src="IMG/Iconos/logoInstagram.png" alt="instagram"> ¡Síguenos!</a> <br>
-            <img src="IMG/Iconos/correo-electronico.png" alt="correo"> cuevashalima@hotmail.com <br>
+            <img src="{{ url_for('static', filename='img/iconos/telefono.png')}}" alt="telefono"> 665 94 66 80 <br>
+            <a href="https://www.instagram.com/cuevas.halima/" target="_blank">
+                <img src="{{ url_for('static', filename='/img/iconos/logoInstagram.png')}}" alt="instagram"> ¡Síguenos!</a> <br>
+            <img src="{{ url_for('static', filename='img/iconos/correo-electronico.png')}}" alt="correo"> cuevashalima@hotmail.com <br>
         </div>
         <!--Script para barra navegación-->
         <!--
-    La siguiente ruta "url_For" función que utiliza Flask para generar una URL automática
-    Evitamos errores de rutas relativas 
-    -->
+        La siguiente ruta "url_For" función que utiliza Flask para generar una URL automática
+        Evitamos errores de rutas relativas 
+        -->
         <script src="{{ url_for('static', filename='js/script.js/')}}"></script>
     </footer>
 </body>
