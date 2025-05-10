@@ -14,5 +14,4 @@ __pycache__/
 .vscode/
 
 # Variables de entorno
-
 .env
