@@ -55,7 +55,7 @@ def enviar_mensaje():
     msg = Message(
         subject = asunto,
         sender = correo,
-        recipients = [ejemplo_cuevas@hotmail.com],
+        recipients = ['ejemplo_cuevas@hotmail.com'],
         body = mensaje
     )
     mail.send(msg)
