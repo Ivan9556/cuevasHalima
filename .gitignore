@@ -12,3 +12,7 @@ __pycache__/
 
 # Archivos de configuración de VSCode, no compartir el entorno
 .vscode/
+
+# Variables de entorno
+
+.env
