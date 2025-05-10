@@ -1,13 +1,9 @@
 <!--Pagina inicio-->
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-</head>
-<body>
+{% block title}Inicio{% endblock %}
+
+{% block content %}
     <div class="carrusel">
         <img src="IMG/Carrusel/Foto1.jpg" alt="Bacor">
         <img src="IMG/Carrusel/Foto4.jpg" alt="Pueblo">
@@ -72,6 +68,4 @@
             </table>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}

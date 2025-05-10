@@ -7,8 +7,8 @@ mongo = PyMongo()
 def create_app():
     app = Flask(__name__)  
     app.config.from_pyfile('../config.py') #Lee la configuracion desde config
-
-    mongo.__init__app(app) #Inicia MongoDB
+    #Este método nos permite vincular la app
+    mongo.init__app(app) #Inicia MongoDB
 
     from .rutas import main
     app.register_blueprint(main) # dividir rutas em varios archivos
