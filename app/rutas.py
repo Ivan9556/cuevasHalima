@@ -1,7 +1,7 @@
 #Rutas de la app
 from flask import Blueprint, render_template
 
-main = Blueprint(main ,__name__)
+main = Blueprint('main' ,__name__)
 
 @main.rutas('/') #se carga desde la raiz index.html
 def inicio():
