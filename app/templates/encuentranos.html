@@ -20,13 +20,13 @@
 </div>
 <div>
     <h3>No dudes en preguntarnos</h3>
-    <form action="enviar" method="post">
+    <form action="{{url_for('main.enviar_mensaje')}}" method="post">
     <label for="nombre">Nombre</label><br>
-    <input type="text" id="nombre" placeholder="Obligatorio" required ><br>
+    <input type="text" id="nombre" name="nombre" placeholder="Obligatorio" required ><br>
     <label for="correo">Correo electronico</label><br>
-    <input type="text" id="correo" placeholder="Obligatorio" required><br>
+    <input type="text" id="correo" name="correo" placeholder="Obligatorio" required><br>
     <label for="asunto">Asunto</label><br>
-    <input type="text" id="asunto"><br>
+    <input type="text" id="asunto" name="asunto"><br>
     <label for="tMensaje">Tu mensaje</label><br>
     <textarea name="mensaje" id="mensaje"></textarea><br>
     <button type="submit">Enviar</button>
