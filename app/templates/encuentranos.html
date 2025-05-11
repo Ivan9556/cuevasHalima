@@ -32,14 +32,14 @@
     <button type="submit">Enviar</button>
     </form>
     <!--Mensaje de confirmacion-->
-    {% with messages = get_flashed_message() %}
-        {% if messages % }
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
         <div class="mensaje_confirmacion">
-            {% for messages in messages %}
-            <p>{{menssage}}</p>
+            {% for message in messages %}
+            <p>{{ menssage }}</p>
             {% endfor %}
         </div>
-        {% enfif %}
+        {% endif %}
     {% endwith %}
 </div>
 {% endblock %}
