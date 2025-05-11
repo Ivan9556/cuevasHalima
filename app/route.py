@@ -14,7 +14,7 @@ registrar rutas y para llamar con url_for('main.nombre_función').
 __name__: Indica el módulo actual. Flask lo usa para localizar archivos 
 relacionados (por ejemplo, plantillas o archivos estáticos si se personaliza).
 """
-from flask import Blueprint, render_template, url_for, flash, request, redirect
+from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 
@@ -51,12 +51,22 @@ def enviar_mensaje():
     if not nombre or not correo:
         flash('Algunos campos son obligatorios')
         return redirect(url_for('main.inicio'))
-    
+    """
+    No se debe utilizar en sender otro correo que no sea el tuyo piopio
+    Gmail bloquea correos que afirman venir de una dirección que no coincide con la autenticación SMTP
+    """
     msg = Message(
         subject = asunto,
-        sender = correo,
+        sender = current_app.config['MAIL_USENAME'],
         recipients = ['cuevashalima@gmail.com'],
-        body = mensaje
+        body = f"""
+
+        Nombre:{nombre}
+        Correo-Electronico:{correo}
+
+        Mensaje:
+        {mensaje}
+        """    
     )
     mail.send(msg)
     flash('Mensaje enviado')
