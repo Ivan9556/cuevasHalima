@@ -57,7 +57,7 @@ def enviar_mensaje():
     """
     msg = Message(
         subject = asunto,
-        sender = current_app.config['MAIL_USENAME'],
+        sender = current_app.config['MAIL_USERNAME'],
         recipients = ['cuevashalima@gmail.com'],
         body = f"""
 
