@@ -50,7 +50,7 @@ def enviar_mensaje():
 
     if not nombre or not correo:
         flash('Algunos campos son obligatorios')
-        return redirect(url_for('main.inicio'))
+        return redirect(url_for('main.encuentranos'))
     """
     No se debe utilizar en sender otro correo que no sea el tuyo piopio
     Gmail bloquea correos que afirman venir de una dirección que no coincide con la autenticación SMTP
@@ -60,9 +60,8 @@ def enviar_mensaje():
         sender = current_app.config['MAIL_USERNAME'],
         recipients = ['cuevashalima@gmail.com'],
         body = f"""
-
-        Nombre:{nombre}
-        Correo-Electronico:{correo}
+        Nombre: {nombre}
+        Correo-Electronico: {correo}
 
         Mensaje:
         {mensaje}
@@ -70,4 +69,4 @@ def enviar_mensaje():
     )
     mail.send(msg)
     flash('Mensaje enviado')
-    return redirect(url_for('main.inicio'))
+    return redirect(url_for('main.encuentranos'))
