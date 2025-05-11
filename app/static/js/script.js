@@ -2,14 +2,14 @@
 const desplegable = document.getElementById('menuDesplegable');
 const menu = document.getElementById('menu');
 //Añadirmos un listener al icono del desplegable
-desplegable.addEventListener('click', ()=> {
+desplegable.addEventListener('click', () => {
     menu.classList.toggle('show'); // Alterna la clase 'show' en el menú
 });
 
 //Funcion carrusel
 const img = document.querySelectorAll('.carrusel img');
 let indice = 0;
-function siguienteImagen(){
+function siguienteImagen() {
     //Quita la clase "active" a todas para ocultarlas (opacity: 0 en CSS)
     img.forEach(img => img.classList.remove('active'));
     //Añade la clase "active" hace visible la img (opacity: 1 con transición suave) 
@@ -20,11 +20,4 @@ function siguienteImagen(){
 siguienteImagen();
 setInterval(siguienteImagen, 10000);
 
-//Ventana emergente (toast) de confirmacion para formulario 
-setTimeout(() => {
-    const toast = document.getElementById('toast');
-    if(toast){
-        toast.style.display= 'none';
 
-    } 
-}, 3000);

@@ -69,5 +69,6 @@ def enviar_mensaje():
         """    
     )
     mail.send(msg)
-    flash('Mensaje enviado')
+    #Guardamos el mensaje para utilizarlo en la plantilla que renderice
+    flash('Mensaje enviado correctamente')
     return redirect(url_for('main.encuentranos'))
