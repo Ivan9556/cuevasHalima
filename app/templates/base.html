@@ -41,12 +41,11 @@
                 <img src="{{ url_for('static', filename='img/iconos/logoInstagram.png')}}" alt="instagram"> ¡Síguenos!</a> <br>
             <img src="{{ url_for('static', filename='img/iconos/correo-electronico.png')}}" alt="correo"> cuevashalima@gmail.com <br>
         </div>
-        <!--Script para barra navegación-->
-        <!--
-        La siguiente ruta "url_For" función que utiliza Flask para generar una URL automática
-        Evitamos errores de rutas relativas 
-        -->
-        <script src="{{ url_for('static', filename='js/script.js')}}"></script>
     </footer>
+    <!--
+    La siguiente ruta "url_For" función que utiliza Flask para generar una URL automática
+    Evitamos errores de rutas relativas 
+    -->
+    <script src="{{ url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>

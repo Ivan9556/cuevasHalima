@@ -21,3 +21,6 @@ siguienteImagen();
 setInterval(siguienteImagen, 10000);
 
 
+
+
+

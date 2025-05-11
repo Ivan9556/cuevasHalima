@@ -45,12 +45,13 @@
         title="maps">
     </iframe>
 </div>
+
 <div class="formulario">
     <div>
         <h3>No dudes en preguntarnos</h3>
     </div>
     <div>
-        <form action="{{url_for('main.enviar_mensaje')}}" method="post">
+        <form action="{{url_for('main.enviar_mensaje')}}" method="POST">
             <label for="nombre">Nombre</label><br>
             <input type="text" id="nombre" name="nombre" placeholder="Obligatorio" required><br>
             <label for="correo">Correo electrónico</label><br>
@@ -61,6 +62,27 @@
             <textarea name="mensaje" id="mensaje"></textarea><br>
             <button type="submit">Enviar</button>
         </form>
+        <!--
+        Aquí insertamos el mensaje de confirmacion 
+        -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div id="toast" class="toast">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        <!--Ventana emergente (toast) de confirmacion para formulario-->
+        <script> 
+            setTimeout(() => {
+                const toast = document.getElementById('toast');
+                if (toast) {
+                    toast.classList.add('hide');
+                }
+            }, 3000);// 3 segundos visible
+        </script>
+        {% endif %}
+        {% endwith %}
     </div>
 </div>
 {% endblock %}

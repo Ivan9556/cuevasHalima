@@ -191,7 +191,23 @@ div {
     height: 150px;
     resize: none;
 }
+/*Estilo para mensaje emergente confirmacion*/
+.toast {
+    position: fixed;
+    top: 80px;
+    right: 50px;
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    z-index: 1000;
+}
 
+.toast.hide {
+    opacity: 0;
+}
 /*Pie de pagina*/
 
 .contacto {
