@@ -31,5 +31,15 @@
     <textarea name="mensaje" id="mensaje"></textarea><br>
     <button type="submit">Enviar</button>
     </form>
+    <!--Mensaje de confirmacion-->
+    {% with messages = get_flashed_message() %}
+        {% if messages % }
+        <div class="mensaje_confirmacion">
+            {% for messages in messages %}
+            <p>{{menssage}}</p>
+            {% endfor %}
+        </div>
+        {% enfif %}
+    {% endwith %}
 </div>
 {% endblock %}
