@@ -54,6 +54,7 @@ def enviar_mensaje():
     """
     No se debe utilizar en sender otro correo que no sea el tuyo piopio
     Gmail bloquea correos que afirman venir de una dirección que no coincide con la autenticación SMTP
+    Para Gmail hay que utilizar la clave app, si no ninja2 devuelve una excepcion
     """
     msg = Message(
         subject = asunto,

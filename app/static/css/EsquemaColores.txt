@@ -8,6 +8,8 @@ Color primcipal #057075
 
 Color secundario #057075
 
+Casi blanco: #e9f8f1 
+
 
 
 

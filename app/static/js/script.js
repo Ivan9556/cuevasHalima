@@ -20,4 +20,11 @@ function siguienteImagen(){
 siguienteImagen();
 setInterval(siguienteImagen, 10000);
 
-//
+//Ventana emergente (toast) de confirmacion para formulario 
+setTimeout(() => {
+    const toast = document.getElementById('toast');
+    if(toast){
+        toast.style.display= 'none';
+
+    } 
+}, 3000);

@@ -8,38 +8,63 @@
 <div class="ubicacion">
     <div class="informacion">
         <h3>Donde nos encontramos</h3>
-        <div class="ubicacion">
-            <img src="{{ url_for('static', filename='img/iconos/ubicacion.png')}}" alt="ubicacion">C. Algarbe, 4 Bácor
+        <div class="ubicaciones">
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/ubicacion.png')}}" alt="ubicacion">C. Algarbe, 4
+                Bácor
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/flecha.png')}}" alt="flecha">Salida 25 desde Autovía A92, dirección Baúl -Bácor-Cuevas del campo
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/carretera.png')}}" alt="carretera">Continuar recto hasta el desvío a la derecha hacia Bácor-Olivar
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/senal-de-trafico.png')}}" alt="senal-de trafico">Girar a la derecha y seguir por la carretera 13 km hasta llegar a Bácor
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/peatones.png')}}" alt="peatones">Continuar por la avenida principal y al llegar al 2° paso de peatones girar a la derecha
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/iglesia.png')}}" alt="iglesia">Pasar la plaza de la iglesia en dirección al ayuntamiento y continuar recto hasta llegar a una fuente de piedra
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/iconos/alfiler.png')}}" alt="alfiler">Coger la calle a la izquierda que hay junto a la fuente hacia Cuevas Halima
         </div>
     </div>
+</div>
     <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1582.0130443333264!2d-2.9527514612262706!3d37.53088229301196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6fc8bbb8ea70ff%3A0x8117d8fd540db2d6!2sC.%20Algarbe%2C%204%2C%2018860%20Guadix%2C%20Granada!5e0!3m2!1ses!2ses!4v1746357628465!5m2!1ses!2ses"
-        width="800" height="600" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        width="900" height="700" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
         title="maps">
     </iframe>
 </div>
-<div>
-    <h3>No dudes en preguntarnos</h3>
-    <form action="{{url_for('main.enviar_mensaje')}}" method="post">
-    <label for="nombre">Nombre</label><br>
-    <input type="text" id="nombre" name="nombre" placeholder="Obligatorio" required ><br>
-    <label for="correo">Correo electronico</label><br>
-    <input type="text" id="correo" name="correo" placeholder="Obligatorio" required><br>
-    <label for="asunto">Asunto</label><br>
-    <input type="text" id="asunto" name="asunto"><br>
-    <label for="tMensaje">Tu mensaje</label><br>
-    <textarea name="mensaje" id="mensaje"></textarea><br>
-    <button type="submit">Enviar</button>
-    </form>
-    <!--Mensaje de confirmacion-->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="mensaje_confirmacion">
-            {% for message in messages %}
-            <p>{{ menssage }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
-    {% endwith %}
+<!--Mensaje de confirmacion-->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="mensaje_confirmacion" id="toast">
+    {% for message in messages %}
+    <p>{{ menssage }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<div class="formulario">
+    <div>
+        <h3>No dudes en preguntarnos</h3>
+    </div>
+    <div>
+        <form action="{{url_for('main.enviar_mensaje')}}" method="post">
+            <label for="nombre">Nombre</label><br>
+            <input type="text" id="nombre" name="nombre" placeholder="Obligatorio" required><br>
+            <label for="correo">Correo electrónico</label><br>
+            <input type="text" id="correo" name="correo" placeholder="Obligatorio" required><br>
+            <label for="asunto">Asunto</label><br>
+            <input type="text" id="asunto" name="asunto"><br>
+            <label for="tMensaje">Mensaje</label><br>
+            <textarea name="mensaje" id="mensaje"></textarea><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

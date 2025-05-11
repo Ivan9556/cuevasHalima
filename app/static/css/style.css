@@ -51,7 +51,7 @@ footer {
 
 .Menu li, a{
     text-decoration: none;
-    color: #057075;
+    color: #201003;
 }
 
 /*OCULTAR BOTON EN LA PANTALLA GRANDE*/
@@ -132,24 +132,27 @@ div {
 
 /*UBICACION MAPS*/
 .ubicacion {
-    margin: 8%;
+    margin-top: 10%;
     display: flex;
     justify-content: center;
     
 }
 .informacion{
     font-size: 20px;
-    background-color: #d6e8df;
-    padding: 10%;
+    background-color: #f7f4f1;
     border-radius: 20%;
-    display: block;
 }
-.informacion .ubicacion img{
-    font-size: 25px;
-    color: #057075;
+.informacion h3{
+    color: rgb(78, 51, 16);
+    margin-left: 15%;
+}
+.informacion .ubicaciones div{
+    display:block;
+
 }
 .ubicacion iframe {
-    border:5px solid #d6e8df; 
+    margin-top: 3%;
+    border:5px solid #f7f4f1; 
     border-radius: 20%; 
 }
 
@@ -167,6 +170,29 @@ div {
 .contacto a {
     color: inherit;
     text-decoration: none;
+}
+
+.formulario{
+    background-color: #fcf7f3; 
+    border-radius: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.formulario h3{
+    color: rgb(78, 51, 16);
+    font-size: 30px;
+    margin-left: 20%;
+}
+.formulario form{
+    margin-left: 25%;
+    font-size: larger;
+}
+.formulario textarea{
+    width: 280px;
+    height: 150px;
+    resize: none;
 }
 
 /*ESTILO TIPO MOVIL*/
@@ -228,5 +254,6 @@ div {
         color: #057075;
         font-size: 20px;
     }
+
     
 }
