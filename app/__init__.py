@@ -11,19 +11,28 @@ Este archivo se encarga de inicializar la aplicación Flask y sus extensiones.
 from flask import Flask
 from flask_pymongo import PyMongo #extensión para conectar Flask con MongoDB.
 from flask_mail import Mail
-
+from config import Config
+import os
 
 mongo = PyMongo()
-mail =  Mail()
+mail = Mail()
 
 def create_app():
-    app = Flask(__name__)  
-    app.config.from_pyfile('../config.py') #Lee la configuracion desde config
-    #Este método nos permite vincular la app
-    mongo.init_app(app) #Inicia MongoDB
-    mail.init_app(app)
+    app = Flask(__name__)  # Crea la app Flask
 
+    # Cargar configuración desde el archivo de configuración
+    app.config.from_object(Config)  # Configuración desde el archivo Config.py
+
+
+    mongo.init_app(app)  # Inicializa MongoDB
+    mail.init_app(app)  # Inicializa Mail
+
+    #print("MONGO_URI:", app.config.get('MONGO_URI'))   Verifica que la URI esté cargada correctamente
+
+    # Rutas
     from .route import main
-    app.register_blueprint(main) # dividir rutas em varios archivos
+    app.register_blueprint(main)
 
     return app
+
+

@@ -14,9 +14,10 @@ registrar rutas y para llamar con url_for('main.nombre_función').
 __name__: Indica el módulo actual. Flask lo usa para localizar archivos 
 relacionados (por ejemplo, plantillas o archivos estáticos si se personaliza).
 """
-from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app
+from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
+from app import mongo # importa el objeto mongo de __init__.py
 
 
 main = Blueprint('main' ,__name__)
@@ -72,3 +73,15 @@ def enviar_mensaje():
     #Guardamos el mensaje para utilizarlo en la plantilla que renderice
     flash('Mensaje enviado correctamente')
     return redirect(url_for('main.encuentranos'))
+
+@main.route("/test-db")
+def test_db():
+    try:
+        # Accede a la base de datos y realiza un ping
+        db = mongo.db  # Accede al cliente MongoDB
+        db.command("ping")
+        return jsonify({"status": "Conectado a MongoDB correctamente"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
