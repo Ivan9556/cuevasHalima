@@ -20,14 +20,12 @@ mail = Mail()
 def create_app():
     app = Flask(__name__)  # Crea la app Flask
 
-    # Cargar configuración desde el archivo de configuración
-    app.config.from_object(Config)  # Configuración desde el archivo Config.py
+    # Cargar la clase config desde el archivo de configuración (Config.py) (solo utiliza variables de entorno tras la clase)
+    app.config.from_object(Config) 
 
 
     mongo.init_app(app)  # Inicializa MongoDB
     mail.init_app(app)  # Inicializa Mail
-
-    #print("MONGO_URI:", app.config.get('MONGO_URI'))   Verifica que la URI esté cargada correctamente
 
     # Rutas
     from .route import main

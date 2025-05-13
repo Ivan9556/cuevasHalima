@@ -3,7 +3,8 @@ import os
 from dotenv import load_dotenv
 
 #Carga automatica de las variables del archivo.env
-#IMPORTANTE cuando la 
+#IMPORTANTE de define una clase porque el metodo app.config.from_pyfile('../config.py')
+#Solo se le puede pasar variables de texto plano, no metodos get del archivo .env
 load_dotenv()
 
 class Config:
