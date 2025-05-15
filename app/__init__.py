@@ -20,7 +20,8 @@ mail = Mail()
 def create_app():
     app = Flask(__name__)  # Crea la app Flask
 
-    # Cargar la clase config desde el archivo de configuración (Config.py) (solo utiliza variables de entorno tras la clase)
+    # Cargar la clase config desde el archivo de configuración (Config.py) 
+    # (solo utiliza variables de entorno tras la clase)
     app.config.from_object(Config) 
 
 
