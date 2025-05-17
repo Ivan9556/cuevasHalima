@@ -210,9 +210,34 @@ h3 {
 
 /*Formulario reservas*/
 .reserva{
+    padding: 4%;
+    font-size: 25px;
     margin-top: 10%;
     background-color: #fcf7f3;
+    display: flex;
+    justify-content: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 5%;
 }
+.calendario{
+    display: block;
+}
+.calendario button{
+    font-size: 15px;
+}
+
+.personas-reserva {
+    margin-top: 98px;
+    margin-left:15%;
+}
+.personas-reserva select{
+    display: block;     
+    margin-top: 9   px;
+    width: 150px;
+    height: 25px;
+}
+
 
 /*Pie de pagina*/
 

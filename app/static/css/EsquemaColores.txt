@@ -24,7 +24,9 @@ Ejemplo estilo formulario reseras:
 .calendario input[type="text"] {
     font-size: 18px;
     padding: 8px 10px;
-    width: 200px;
+    width: 200px;Adultos￼
+1
+Niños
     margin-top: 5px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
