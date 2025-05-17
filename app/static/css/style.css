@@ -208,6 +208,13 @@ div {
 .toast.hide {
     opacity: 0;
 }
+
+/*Formulario reservas*/
+.reserva{
+    margin-top: 10%;
+    background-color: #fcf7f3;
+}
+
 /*Pie de pagina*/
 
 .contacto {

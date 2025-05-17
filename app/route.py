@@ -42,6 +42,10 @@ def queHacer():
 def encuentranos():
     return render_template('encuentranos.html')
 
+@main.route('/reserva')
+def reserva():
+    return render_template('reserva.html')
+
 @main.route('/encuentranos', methods=['POST'])
 def enviar_mensaje():
     nombre = request.form.get('nombre') 
