@@ -10,6 +10,40 @@ Color secundario #057075
 
 Casi blanco: #e9f8f1 
 
+Ejemplo estilo formulario reseras:
+
+.calendario form {
+    margin-bottom: 20px;
+}
+
+.calendario label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.calendario input[type="text"] {
+    font-size: 18px;
+    padding: 8px 10px;
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.calendario button {
+    font-size: 18px;
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.calendario button:hover {
+    background-color: #21867a;
+}
 
 
 

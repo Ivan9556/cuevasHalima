@@ -1,6 +1,11 @@
+<!--Plantilla reservas-->
 {% extends "base.html" %}
 
 {% block title %}Reservas{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
 
 {% block content %}
 
@@ -8,17 +13,17 @@
 <div class="reserva">
     <h3>Haz tu reserva</h3>
     <div class="calendario">
-    <form action="reservar" method="POST">
-        <label for="fecha">Fecha</label><br>
-        <input type="text" id="fecha" name="fecha" required><br>
-        <button type="submit">Aceptar</button>
-    </form>
+        <form action="reservar" method="POST">
+            <label for="fecha">Fecha</label><br>
+            <input type="text" id="fecha" name="fecha" required><br>
+            <button type="submit">Aceptar</button>
+        </form>
     </div>
     <div class="adultos">
         <label for="adultos">Adultos</label>
         <select name="adultos" id="adultos">
             {% for i in range (1,11) %}
-                <option value="{{i}}">{{i}}</option>
+            <option value="{{i}}">{{i}}</option>
             {% endfor %}
         </select>
     </div>
@@ -26,22 +31,22 @@
         <label for="niños">Niños</label>
         <select name="niños" id="niños">
             {% for i in range (1,5) %}
-                <option value="{{i}}">{{i}}</option>
+            <option value="{{i}}">{{i}}</option>
             {% endfor %}
         </select>
     </div>
 </div>
-
-{% endblock %}
-{% block script %}
 <!--Calendario Flatpickr con css y js-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        faltpickr("#fecha", {
-            dateFormat: "Y-m-d"
+    {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr("#fecha", {
+                inline: true,
+                appedTo: document.querySelector(".calendario")
+                
+            })
         })
-    })
-</script>
+    </script>
+    {% endblock %}
 {% endblock %}

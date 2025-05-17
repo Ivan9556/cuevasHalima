@@ -7,6 +7,7 @@ body {
 
 /*PIE DE PAGINA*/
 footer {
+    margin-top: 5%;
     background-color: #d6e8df;
     display: flex;
 
@@ -131,22 +132,20 @@ h3 {
     text-align: center;
 }
 
-div {
-    margin: 50px;
-}
 
 /*UBICACION MAPS*/
 .ubicacion {
-    margin-top: 10%;
     display: flex;
     justify-content: center;
-
+    margin: 10%;
+    margin-bottom: 2%;
 }
 
 .informacion {
     font-size: 20px;
     background-color: #f7f4f1;
     border-radius: 20%;
+    margin-right: 5%;
 }
 
 .informacion h3 {
@@ -156,11 +155,10 @@ div {
 
 .informacion .ubicaciones div {
     display: block;
-
+    padding: 3%;
 }
 
 .ubicacion iframe {
-    margin-top: 3%;
     border: 5px solid #f7f4f1;
     border-radius: 20%;
 }
@@ -171,6 +169,7 @@ div {
     border-radius: 20px;
     margin-left: 30%;
     margin-right: 30%;
+    margin-bottom: 1%;
     padding-top: 1%;
     padding-bottom: 1%;
 }
