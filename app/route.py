@@ -89,3 +89,23 @@ def test_db():
         return jsonify({"error": str(e)})
 
 
+@main.route('/reservar', methods=['POST'])
+def crear_reserva():
+    nombre = request.form.get('persona')
+    fechaEntrada = request.form.get('fecha_entrada')
+    fechaSalida = request.form.get('fecha_salida')
+    adultos = request.form.get('adultos')
+    ninos = request.form.get('ninos')
+
+    reserva = {
+        "nombre" : nombre,
+        "fecha_entrada": fechaEntrada,
+        "fecha_salida" : fechaSalida,
+        "adultos" : int(adultos),
+        "ninos" : int(ninos)
+    }
+    mongo.db.reservas.insert_one(reserva)
+    flash('Reserva hecha correctamente')
+    return redirect(url_for('main.reserva'))
+
+    
