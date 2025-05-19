@@ -14,12 +14,10 @@
     <div class="calendario">
         <h3>Haz tu reserva</h3>
         <form action="reservar" method="POST">
-            <label for="nombre-persona">Nombre</label><br>
-            <input type="text" id="persona" name="persona"><br>
             <label for="fecha">Fecha Entrada</label><br>
             <input type="text" id="fecha_entrada" name="fecha_entrada" required><br>
             <label for="fecha2">Fecha Salida</label><br>
-            <input type="text" name="fecha_salida" id="fecha_salida"><br>
+            <input type="text" name="fecha_salida" id="fecha_salida" required><br>
             <label for="adultos">Adultos</label>
             <select name="adultos" id="adultos">
                 {% for i in range (0,5) %}
@@ -35,6 +33,22 @@
             <button type="submit">Aceptar</button>
         </form>
     </div>
+    <div class="resultados">
+        <h3>Resultados</h3>
+        <div class="viviendas">
+            {% if viviendas %}
+            {% for v in viviendas %}
+            <div class="vivienda">
+                <h4>{{ v.nombre }}</h4>
+                <p>{{ v.descripcion }}</p>
+                <p>Precio: {{ v.precio }}€</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No hay viviendas disponibles</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
 <!--Calendario Flatpickr con css y js-->
 {% block scripts %}
@@ -44,11 +58,11 @@
     document.addEventListener("DOMContentLoaded", function () {
         flatpickr("#fecha_entrada", {
             locale: "es",
-            dateFormat:"d-m-Y"
+            dateFormat: "d-m-Y"
         })
         flatpickr("#fecha_salida    ", {
             locale: "es",
-            dateFormat:"d-m-Y"
+            dateFormat: "d-m-Y"
         })
 
     })

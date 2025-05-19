@@ -1,14 +1,14 @@
 #Clase cueva
 class cueva:
-    def __init__(self, id ,nombre, huespedes, precio):
-        self.id = id
+    def __init__(self,nombre, descripcion, precio, disponibilidad=True):
         self.nombre = nombre
-        self.huespedes = huespedes
+        self.descripcion = descripcion
         self.precio = precio
+        self.disponibilidad = disponibilidad
     def to_dict(self):
         return {
-        "id" : self.id,
         "nombre" : self.nombre,
-        "huespedes" : self.huespedes,
-        "precio" :  self.precio
+        "huespedes" : self.descripcion,
+        "precio" :  self.precio,
+        "disponibilidad" : self.disponibilidad
         }        

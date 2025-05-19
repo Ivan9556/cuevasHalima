@@ -90,15 +90,13 @@ def test_db():
 
 
 @main.route('/reservar', methods=['POST'])
-def crear_reserva():
-    nombre = request.form.get('persona')
+def reservaDisponible():
     fechaEntrada = request.form.get('fecha_entrada')
     fechaSalida = request.form.get('fecha_salida')
     adultos = request.form.get('adultos')
     ninos = request.form.get('ninos')
 
     reserva = {
-        "nombre" : nombre,
         "fecha_entrada": fechaEntrada,
         "fecha_salida" : fechaSalida,
         "adultos" : int(adultos),
@@ -107,5 +105,8 @@ def crear_reserva():
     mongo.db.reservas.insert_one(reserva)
     flash('Reserva hecha correctamente')
     return redirect(url_for('main.reserva'))
+
+
+
 
     
