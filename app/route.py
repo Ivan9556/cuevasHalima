@@ -89,8 +89,8 @@ def test_db():
         return jsonify({"error": str(e)})
 
 
-@main.route('/reservar', methods=['POST'])
-def reservaDisponible():
+@main.route('/buscar-reserva', methods=['POST'])
+def buscar_reserva():
     fechaEntrada = request.form.get('fecha_entrada')
     fechaSalida = request.form.get('fecha_salida')
     adultos = request.form.get('adultos')

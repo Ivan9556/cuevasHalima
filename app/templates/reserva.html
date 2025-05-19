@@ -13,7 +13,7 @@
 <div class="reserva">
     <div class="calendario">
         <h3>Haz tu reserva</h3>
-        <form action="reservar" method="POST">
+        <form action="buscar-reserva" method="POST">
             <label for="fecha">Fecha Entrada</label><br>
             <input type="text" id="fecha_entrada" name="fecha_entrada" required><br>
             <label for="fecha2">Fecha Salida</label><br>
@@ -30,11 +30,11 @@
                 <option value="{{i}}">{{i}}</option>
                 {% endfor %}
             </select><br>
-            <button type="submit">Aceptar</button>
+            <button type="submit">Buscar</button>
         </form>
     </div>
     <div class="resultados">
-        <h3>Resultados</h3>
+        <h3>Viviendas disponibles</h3>
         <div class="viviendas">
             {% if viviendas %}
             {% for v in viviendas %}
