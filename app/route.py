@@ -18,6 +18,7 @@ from flask import Blueprint, render_template, url_for, flash, request, redirect,
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
+from .models import Vivienda
 
 
 main = Blueprint('main' ,__name__)
@@ -79,7 +80,7 @@ def enviar_mensaje():
     return redirect(url_for('main.encuentranos'))
 
 @main.route("/test-db")
-def test_db():
+def test_db():    
     try:
         # Accede a la base de datos y realiza un ping
         db = mongo.db  # Accede al cliente MongoDB
@@ -87,6 +88,7 @@ def test_db():
         return jsonify({"status": "Conectado a MongoDB correctamente"})
     except Exception as e:
         return jsonify({"error": str(e)})
+
 
 
 @main.route('/buscar-reserva', methods=['POST'])
