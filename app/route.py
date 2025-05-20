@@ -86,6 +86,8 @@ def test_db():
         # Accede a la base de datos y realiza un ping
         db = mongo.db  # Accede al cliente MongoDB
         db.command("ping")
+        return jsonify({"Insetada vivienda nueva"})
+        
         return jsonify({"status": "Conectado a MongoDB correctamente"})
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -111,7 +113,7 @@ def buscar_reserva():
         #Esa informacion la recorremos con el for y vamos añadiendo a los parámetros del constructor esos datos
         vivienda = Vivienda(
             nombre=v['nombre'],
-            descripcion=v['huespedes'],
+            descripcion=v['descripcion'],
             precio=v['precio']
         )
         #Comprovamos si la vivienda está disponible con nuestro método "disponible"

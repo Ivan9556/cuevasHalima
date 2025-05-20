@@ -13,7 +13,7 @@ class Vivienda:
     def to_dict(self):
         return {
         "nombre" : self.nombre,
-        "huespedes" : self.descripcion,
+        "descripcion" : self.descripcion,
         "precio" :  self.precio,
         "disponibilidad" : self.disponibilidad
         }
