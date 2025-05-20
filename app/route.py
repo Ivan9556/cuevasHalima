@@ -19,6 +19,7 @@ from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
 from .models import Vivienda
+from datetime import datetime
 
 
 main = Blueprint('main' ,__name__)
@@ -93,8 +94,36 @@ def test_db():
 
 @main.route('/buscar-reserva', methods=['POST'])
 def buscar_reserva():
-    fechaEntrada = request.form.get('fecha_entrada')
-    fechaSalida = request.form.get('fecha_salida')
+    db= mongo.db
+    #Recogemos los datos del formulario y los convertimos en "datetime" para comparar fechas
+    #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
+    fechaEntrada = datetime.strptime(request.form['fecha_entrada'], '%d-%m-%Y')
+    fechaSalida = datetime.strptime(request.form['fecha_salida'], '%d-%m-%Y')
+    
+    #Obtenemos todas las viviendas disponibles en la bd
+    listaViviendas = db.viviendas.find({})
+
+    #Definimos una lista vacía para añadir las viviendas que esten disponibles
+    viviendasDisponibles = []
+
+    #Recorremos cada vivienda, 'v' se convierte en un diccionario de Python donde almacena la info de MongoDB (JSON)
+    for v in listaViviendas:
+        #Esa informacion la recorremos con el for y vamos añadiendo a los parámetros del constructor esos datos
+        vivienda = Vivienda(
+            nombre=v['nombre'],
+            descripcion=v['huespedes'],
+            precio=v['precio']
+        )
+        #Comprovamos si la vivienda está disponible con nuestro método "disponible"
+        if vivienda.disponible(fechaEntrada, fechaSalida, db):
+            #Si se cumple, añadimos la vivienda a la lista
+            viviendasDisponibles.append(vivienda)
+        #Renderizamos la pagina de nuevo y le pasamos la vivienda para que la represente
+        return render_template('/reserva.html', viviendas=viviendasDisponibles)
+
+
+"""
+Funcion reserva
     adultos = request.form.get('adultos')
     ninos = request.form.get('ninos')
 
@@ -107,8 +136,6 @@ def buscar_reserva():
     mongo.db.reservas.insert_one(reserva)
     flash('Reserva hecha correctamente')
     return redirect(url_for('main.reserva'))
-
-
-
+"""
 
     
