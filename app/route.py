@@ -101,6 +101,9 @@ def buscar_reserva():
     #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
     fechaEntrada = datetime.strptime(request.form['fecha_entrada'], '%d-%m-%Y')
     fechaSalida = datetime.strptime(request.form['fecha_salida'], '%d-%m-%Y')
+
+    #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
+    cantidadNoches = (fechaSalida - fechaEntrada).days
     
     #Obtenemos todas las viviendas disponibles en la bd
     listaViviendas = db.viviendas.find({})
@@ -121,8 +124,8 @@ def buscar_reserva():
             #Si se cumple, añadimos la vivienda a la lista
             viviendasDisponibles.append(vivienda)
 
-    #Renderizamos la pagina de nuevo y le pasamos la vivienda para que la represente
-    return render_template('/reserva.html', viviendas=viviendasDisponibles)
+    #Renderizamos la pagina de nuevo y le pasamos las viviendas y el número de noches para que las represente
+    return render_template('/reserva.html', viviendas=viviendasDisponibles, cantidadNoches = cantidadNoches)
 
 
 """

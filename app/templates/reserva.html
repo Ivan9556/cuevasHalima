@@ -42,13 +42,13 @@
                 <div class="vivienda">
                     <h4>{{ viviendas[0].nombre }}</h4>
                     <p>{{ viviendas[0].descripcion }}</p>
-                    <p>Precio: {{ viviendas[0].precio }}€</p>
+                    <p>Precio: {{ viviendas[0].precio * cantidadNoches }}€</p>
                     <button type="button">Seleccionar</button>
                 </div>
                 <div class="vivienda2">
                     <h4>{{ viviendas[1].nombre }}</h4>
                     <p>{{ viviendas[1].descripcion }}</p>
-                    <p>Precio: {{ viviendas[1].precio }}€</p>
+                    <p>Precio: {{ viviendas[1].precio * cantidadNoches}}€</p>
                     <button type="button">Seleccionar</button>
                 </div>
             {% else %}
