@@ -39,28 +39,18 @@
         <h3>Viviendas disponibles</h3>
         <div class="viviendas">
             {% if viviendas %}
-                {% for v in viviendas %}
                 <div class="vivienda">
-                    {% if v.nombre == "La Partera" %}
-                    <h4>{{ v.nombre }}</h4>
-                    <p>{{ v.descripcion }}</p>
-                    <p>Precio: {{ v.precio }}€</p>
+                    <h4>{{ viviendas[0].nombre }}</h4>
+                    <p>{{ viviendas[0].descripcion }}</p>
+                    <p>Precio: {{ viviendas[0].precio }}€</p>
                     <button type="button">Seleccionar</button>
-                    {% else %}
-                    <p>No existe Partera</p>
-                    {% endif %}
                 </div>
                 <div class="vivienda2">
-                    {% if v.nombre == "Villa Lali" %}
-                    <h4>{{ v.nombre }}</h4>
-                    <p>{{ v.descripcion }}</p>
-                    <p>Precio: {{ v.precio }}€</p>
+                    <h4>{{ viviendas[1].nombre }}</h4>
+                    <p>{{ viviendas[1].descripcion }}</p>
+                    <p>Precio: {{ viviendas[1].precio }}€</p>
                     <button type="button">Seleccionar</button>
-                    {% else %}
-                    <p>villa Lali</p>
-                    {% endif %}
                 </div>
-                {% endfor %}
             {% else %}
                 <p>No hay viviendas disponibles</p>
             {% endif %}

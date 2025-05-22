@@ -120,8 +120,9 @@ def buscar_reserva():
         if vivienda.disponible(fechaEntrada, fechaSalida, db):
             #Si se cumple, añadimos la vivienda a la lista
             viviendasDisponibles.append(vivienda)
-        #Renderizamos la pagina de nuevo y le pasamos la vivienda para que la represente
-        return render_template('/reserva.html', viviendas=viviendasDisponibles)
+
+    #Renderizamos la pagina de nuevo y le pasamos la vivienda para que la represente
+    return render_template('/reserva.html', viviendas=viviendasDisponibles)
 
 
 """
