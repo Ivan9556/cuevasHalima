@@ -13,7 +13,7 @@
 <div class="reserva">
     <div class="calendario">
         <h3>Haz tu reserva</h3>
-        <form action="buscar-reserva" method="POST">
+        <form action="buscar-reserva" method="GET">
             <label for="fecha">Fecha Entrada</label><br>
             <input type="text" id="fecha_entrada" name="fecha_entrada" required><br>
             <label for="fecha2">Fecha Salida</label><br>
@@ -43,7 +43,12 @@
                     <h4>{{ viviendas[0].nombre }}</h4>
                     <p>{{ viviendas[0].descripcion }}</p>
                     <p>Precio: {{ viviendas[0].precio * cantidadNoches }}€</p>
-                    <button type="button">Seleccionar</button>
+                    <!--Utilizamos el método GET para enviar la info al formulario de reserva la vivienda seleccionada-->
+                    <form action="seleccionar-reserva" method="GET">
+                        <!--Recogemos la id de la vivienda -->
+                        <input type="hidden" name="id_vivienda" value="{{ viviendas[0].id }}">
+                        <button type="submit">Seleccionar</button>
+                    </form>
                 </div>
                 <div class="vivienda2">
                     <h4>{{ viviendas[1].nombre }}</h4>
