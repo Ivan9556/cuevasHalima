@@ -26,13 +26,15 @@
                 <h4>{{ viviendas[0].nombre }}</h4>
                 <p>{{ viviendas[0].descripcion }}</p>
                 <p>Precio: {{ viviendas[0].precio * cantidad_noches }}€</p>
-                <button class="seleccionar-vivienda" data-nombre="{{ vivienda[0].nombre }}">Seleccionar</button>
+                <button type="button" class="seleccionar-vivienda" data-nombre="{{ viviendas[0].nombre }}"
+                data-precio="{{viviendas[0].precio * cantidad_noches}}">Seleccionar</button>
             </div>
             <div class="vivienda2">
                 <h4>{{ viviendas[1].nombre }}</h4>
                 <p>{{ viviendas[1].descripcion }}</p>
                 <p>Precio: {{ viviendas[1].precio * cantidad_noches}}€</p>
-                <button type="button">Seleccionar</button>
+                <button type="button" class="seleccionar-vivienda" data-nombre="{{ viviendas[1].nombre }}"
+                data-precio="{{viviendas[1].precio * cantidad_noches}}">Seleccionar</button>
             </div>
         {% endif %}
     </div>
@@ -40,6 +42,12 @@
 <div class="form-reserva" id="form-reserva">
     <h3>Formulario de reserva</h3>
     <form action="form_reserva" method="POST">
+        <input type="hidden" name="nombre_vivienda" id="nombre_vivienda">
+        <input type="hidden" name="precio_vivienda" id="precio_vivienda">
+        <input type="hidden" name="fecha_entrada" id="fecha_entrada" value="{{fecha_entrada}}">
+        <input type="hidden" name="fecha_salida" id="fecha_salida" value="{{fecha_salida}}">
+        <input type="hidden" name="numero_adultos" id="numero_adultos" value="{{numero_adultos}}">
+        <input type="hidden" name="numero_ninos" id="numero_ninos" value="{{numero_ninos}}">
         <label for="nombre_persona">Nombre</label>
         <input type="text" name="nombre_persona" id="nombre_persona"><br>
         <label for="apellidos_persona">Apellidos</label>
@@ -52,15 +60,27 @@
         <input type="text" name="provincia" id="provincia"><br>
         <label for="codigo-postal">Codigo postal</label>
         <input type="text" name="codigo_postal" id="codigo_postal"><br>
+        <label for="pais">Pais</label>
+        <input type="text" name="pais" id="pais"><br>
         <button type="submit">Reservar</button>
     </form>
 </div>
-{% endblock %}
 {% block script %}
 <script>
-    document.getElementById("form-reserva").addEventListener("click", function(){
-        const formulario = document.getElementsByName("form-reserva");
-        formulario.style.display = "block"
+    //Escuchar el clic de todos los botones "Seleccionar"
+    document.querySelectorAll(".seleccionar-vivienda",).forEach(button => {
+        button.addEventListener("click", function(){
+            const nomVivienda = this.dataset.nombre;
+            const precioVivienda =  this.dataset.precio;
+
+            //Guardar el nombre del objeto selecionado en el formulario reserva
+            document.getElementById("nombre_vivienda").value = nomVivienda;
+            document.getElementById("precio_vivienda").value = precioVivienda;
+
+            //Mostar el formulario reserva
+            document.getElementById("form-reserva").style.display = "block"
+        })
     })
 </script>
+{% endblock %}
 {% endblock %}

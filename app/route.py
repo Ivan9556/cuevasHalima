@@ -132,11 +132,22 @@ def buscar_reserva():
     return render_template('/formulario-reserva.html', viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
     fecha_entrada = fecha_entrada, fecha_salida = fecha_salida, numero_adultos = numero_adultos ,numero_ninos = numero_ninos)
 
-
-#Funcion reserva
 @main.route('/form-reserva', methods=['POST'])
 def hacer_reserva():
-
+    id_reserva = 1
+    nombre_vivienda = request.form("nombre_vivienda")
+    precio_reserva = request.form("precio_vivienda")
+    nombre_persona = request.form("nombre_persona")
+    apellidos_persona = reques.form("apellidos_persona")
+    fecha_entrada = request.form("fecha_entrada")
+    fecha_salida = request.form("fecha_salida")
+    numero_adultos = request.form("numero_adultos")
+    numero_ninos = request.form("numero_ninos")
+    telefono = request.form("telefono")
+    direccion = request.form("direccion")
+    provincia = reques.form("provincia")
+    codigo_postal = request.form("codigo_postal")
+    pais = request.form("pais")
 
 
 
