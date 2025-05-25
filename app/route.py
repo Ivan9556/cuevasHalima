@@ -96,8 +96,6 @@ def test_db():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-
-
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
     db= mongo.db
@@ -105,6 +103,8 @@ def buscar_reserva():
     #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
     fecha_entrada = datetime.strptime(request.args['fecha_entrada'], '%d-%m-%Y')
     fecha_salida = datetime.strptime(request.args['fecha_salida'], '%d-%m-%Y')
+    numero_adultos = request.args['adultos']
+    numero_ninos = request.args['ninos']
 
     #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
     cantidad_noches = (fecha_salida - fecha_entrada).days
@@ -129,19 +129,29 @@ def buscar_reserva():
             viviendas_disponibles.append(vivienda)
 
     #Renderizamos la pagina de nuevo y le pasamos las viviendas y el número de noches para que las represente
-    return render_template('/reserva.html', viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
-    fecha_entrada = fecha_entrada, fecha_salida = fecha_salida)
+    return render_template('/formulario-reserva.html', viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
+    fecha_entrada = fecha_entrada, fecha_salida = fecha_salida, numero_adultos = numero_adultos ,numero_ninos = numero_ninos)
 
 
 #Funcion reserva
 @main.route('/seleccionar-reserva', methods=['GET'])
-def hacer_reserva():
+def seleccionar_vivienda():
     nombre_vivienda  = request.args['nombre_vivienda']
     fecha_entrada = request.args['fecha_entrada']
     fecha_salida = request.args['fecha_salida']
 
+
+@main.route('/form-reserva', methods=['POST'])
+def hacer_reserva():
+
+
+
+
+
+    """
     return jsonify({
         "nombre_vivienda" : nombre_vivienda, 
         "fecha_entrada" : fecha_entrada, 
         "fecha_salida" : fecha_salida
         })
+    """

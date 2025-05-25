@@ -5,8 +5,16 @@
 
 {% block content %}
 <div>
+    <h3>Datos de la reserva</h3>
     <form action="informacion-reserva" method="GET">
-
+        <label for="fecha_entrada" >Fecha entrada</label>
+        <input type="text" value="{{fecha_entrada}}"><br>
+        <label for="fecha_salida" >Fecha salida</label>
+        <input type="text" value="{{fecha_salida}}"><br>
+        <label for="numero_adultos" >Adultos</label>
+        <input type="text" value="{{numero_adultos}}"><br>
+        <label for="numero_ninos" >Niños</label>
+        <input type="text" value="{{numero_ninos}}"><br>
         <button type="submit">Modificar</button>
     </form>
 </div>
@@ -35,5 +43,23 @@
             </div>
         {% endif %}
     </div>
+</div>
+<div class="form-reserva">
+    <h3>Formulario de reserva</h3>
+    <form action="form_reserva" method="POST">
+        <label for="nombre_persona">Nombre</label>
+        <input type="text" name="nombre_persona" id="nombre_persona"><br>
+        <label for="apellidos_persona">Apellidos</label>
+        <input type="text" name="apellidos_persona" id="apellidos_persona"><br>
+        <label for="telefono">Telefono</label>
+        <input type="text" name="telefono" id="telefono"><br>
+        <label for="direccion">Direccion</label>
+        <input type="text" name="direccion" id="direccion"><br>
+        <label for="provincia">Provincia</label>
+        <input type="text" name="provincia" id="provincia"><br>
+        <label for="codigo-postal">Codigo postal</label>
+        <input type="text" name="codigo_postal" id="codigo_postal"><br>
+        <button type="submit">Reservar</button>
+    </form>
 </div>
 {% endblock %}
