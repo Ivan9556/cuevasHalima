@@ -107,6 +107,10 @@ a {
     opacity: 1;
 }
 
+.form-reserva{
+    display: none;
+}
+
 /*TODOS LOS ENCABEZADOS H1*/
 h1 {
     font-family: 'Times New Roman', Times, serif;

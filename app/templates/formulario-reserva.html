@@ -26,14 +26,7 @@
                 <h4>{{ viviendas[0].nombre }}</h4>
                 <p>{{ viviendas[0].descripcion }}</p>
                 <p>Precio: {{ viviendas[0].precio * cantidad_noches }}€</p>
-                <!--Utilizamos el método GET para enviar la info al formulario de reserva la vivienda seleccionada-->
-                <form action="seleccionar-reserva" method="GET">
-                    <!--Recogemos la id de la vivienda -->
-                    <input type="hidden" name="nombre_vivienda" value="{{ viviendas[0].nombre }}">
-                    <input type="hidden" name="fecha_entrada" value="{{ fecha_entrada }}">
-                    <input type="hidden" name="fecha_salida" value="{{ fecha_salida }}">
-                    <button type="submit">Seleccionar</button>
-                </form>
+                <button class="seleccionar-vivienda" data-nombre="{{ vivienda[0].nombre }}">Seleccionar</button>
             </div>
             <div class="vivienda2">
                 <h4>{{ viviendas[1].nombre }}</h4>
@@ -44,7 +37,7 @@
         {% endif %}
     </div>
 </div>
-<div class="form-reserva">
+<div class="form-reserva" id="form-reserva">
     <h3>Formulario de reserva</h3>
     <form action="form_reserva" method="POST">
         <label for="nombre_persona">Nombre</label>
@@ -62,4 +55,12 @@
         <button type="submit">Reservar</button>
     </form>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+    document.getElementById("form-reserva").addEventListener("click", function(){
+        const formulario = document.getElementsByName("form-reserva");
+        formulario.style.display = "block"
+    })
+</script>
 {% endblock %}

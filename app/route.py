@@ -134,13 +134,6 @@ def buscar_reserva():
 
 
 #Funcion reserva
-@main.route('/seleccionar-reserva', methods=['GET'])
-def seleccionar_vivienda():
-    nombre_vivienda  = request.args['nombre_vivienda']
-    fecha_entrada = request.args['fecha_entrada']
-    fecha_salida = request.args['fecha_salida']
-
-
 @main.route('/form-reserva', methods=['POST'])
 def hacer_reserva():
 
