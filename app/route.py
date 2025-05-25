@@ -28,17 +28,17 @@ main = Blueprint('main' ,__name__)
 def inicio():
     return render_template('index.html') #busca html en 'template'
 
-@main.route('/sobreNosotros')
-def sobreNosotros():
-    return render_template('sobreNosotros.html')
+@main.route('/sobre-nosotros')
+def sobre_nosotros():
+    return render_template('sobre-nosotros.html')
 
 @main.route('/cueva')
 def cueva():
     return render_template('cueva.html')
 
-@main.route('/queHacer')
-def queHacer():
-    return render_template('queHacer.html')
+@main.route('/que-hacer')
+def que_hacer():
+    return render_template('que-hacer.html')
 
 @main.route('/encuentranos')
 def encuentranos():
@@ -47,6 +47,10 @@ def encuentranos():
 @main.route('/reserva')
 def reserva():
     return render_template('reserva.html')
+
+@main.route('/formulario-reserva')
+def formulario_reserva():
+    return render_template('formulario-reserva.html')
 
 @main.route('/encuentranos', methods=['POST'])
 def enviar_mensaje():
@@ -99,17 +103,17 @@ def buscar_reserva():
     db= mongo.db
     #Recogemos los datos del formulario y los convertimos en "datetime" para comparar fechas
     #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
-    fechaEntrada = datetime.strptime(request.args['fecha_entrada'], '%d-%m-%Y')
-    fechaSalida = datetime.strptime(request.args['fecha_salida'], '%d-%m-%Y')
+    fecha_entrada = datetime.strptime(request.args['fecha_entrada'], '%d-%m-%Y')
+    fecha_salida = datetime.strptime(request.args['fecha_salida'], '%d-%m-%Y')
 
     #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
-    cantidadNoches = (fechaSalida - fechaEntrada).days
+    cantidad_noches = (fecha_salida - fecha_entrada).days
     
     #Obtenemos todas las viviendas disponibles en la bd
     listaViviendas = db.viviendas.find({})
 
     #Definimos una lista vacía para añadir las viviendas que esten disponibles
-    viviendasDisponibles = []
+    viviendas_disponibles = []
 
     #Recorremos cada vivienda, 'v' se convierte en un diccionario de Python donde almacena la info de MongoDB (JSON)
     for v in listaViviendas:
@@ -120,16 +124,24 @@ def buscar_reserva():
             precio=v['precio']
         )
         #Comprovamos si la vivienda está disponible con nuestro método "disponible"
-        if vivienda.disponible(fechaEntrada, fechaSalida, db):
+        if vivienda.disponible(fecha_entrada, fecha_salida, db):
             #Si se cumple, añadimos la vivienda a la lista
-            viviendasDisponibles.append(vivienda)
+            viviendas_disponibles.append(vivienda)
 
     #Renderizamos la pagina de nuevo y le pasamos las viviendas y el número de noches para que las represente
-    return render_template('/reserva.html', viviendas=viviendasDisponibles, cantidadNoches = cantidadNoches)
+    return render_template('/reserva.html', viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
+    fecha_entrada = fecha_entrada, fecha_salida = fecha_salida)
 
 
 #Funcion reserva
 @main.route('/seleccionar-reserva', methods=['GET'])
 def hacer_reserva():
-    id_vivienda = request.args['id_vivienda']
-    return jsonify({id_vivienda})
+    nombre_vivienda  = request.args['nombre_vivienda']
+    fecha_entrada = request.args['fecha_entrada']
+    fecha_salida = request.args['fecha_salida']
+
+    return jsonify({
+        "nombre_vivienda" : nombre_vivienda, 
+        "fecha_entrada" : fecha_entrada, 
+        "fecha_salida" : fecha_salida
+        })

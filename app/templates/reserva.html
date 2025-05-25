@@ -17,8 +17,7 @@
             <label for="fecha">Fecha Entrada</label><br>
             <input type="text" id="fecha_entrada" name="fecha_entrada" required><br>
             <label for="fecha2">Fecha Salida</label><br>
-            <input type="text" name="fecha_salida" id="fecha_salida" required><br>
-            <!-- 
+            <input type="text" id="fecha_salida" name="fecha_salida" required><br>
             <label for="adultos">Adultos</label>
             <select name="adultos" id="adultos">
                 {% for i in range (0,5) %}
@@ -31,33 +30,8 @@
                 <option value="{{i}}">{{i}}</option>
                 {% endfor %}
             </select><br>
-            -->
             <button type="submit">Buscar</button>
         </form>
-    </div>
-    <div class="resultados">
-        <h3>Viviendas disponibles</h3>
-        <div class="viviendas">
-            {% if viviendas %}
-                <div class="vivienda">
-                    <h4>{{ viviendas[0].nombre }}</h4>
-                    <p>{{ viviendas[0].descripcion }}</p>
-                    <p>Precio: {{ viviendas[0].precio * cantidadNoches }}€</p>
-                    <!--Utilizamos el método GET para enviar la info al formulario de reserva la vivienda seleccionada-->
-                    <form action="seleccionar-reserva" method="GET">
-                        <!--Recogemos la id de la vivienda -->
-                        <input type="hidden" name="id_vivienda" value="{{ viviendas[0].nombre }}">
-                        <button type="submit">Seleccionar</button>
-                    </form>
-                </div>
-                <div class="vivienda2">
-                    <h4>{{ viviendas[1].nombre }}</h4>
-                    <p>{{ viviendas[1].descripcion }}</p>
-                    <p>Precio: {{ viviendas[1].precio * cantidadNoches}}€</p>
-                    <button type="button">Seleccionar</button>
-                </div>
-            {% endif %}
-        </div>
     </div>
 </div>
 <!--Calendario Flatpickr con css y js-->
