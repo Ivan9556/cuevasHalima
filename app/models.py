@@ -31,9 +31,9 @@ class Vivienda:
         return reserva is None #Devuelve true si la vivienda está disponible "is not Done" devuelve false y no estaría disponible 
 
 class Reserva():
-    def __init__(self, id_reserva, nombre_vivienda, precio_reserva ,nombre_persona, apellidos_persona, fecha_entrada, 
-        fecha_salida, numero_adultos, numero_ninos, telefono, direccion, ciudad, provincia, codigo_postal, pais):
-
+    def __init__(self, id_reserva, nombre_vivienda, precio_reserva, nombre_persona, apellidos_persona, fecha_entrada, 
+    fecha_salida, numero_adultos, numero_ninos, telefono, direccion, ciudad, provincia, codigo_postal, pais):
+        
         self.id_reserva = id_reserva
         self.nombre_vivienda = nombre_vivienda
         self.precio_reserva = precio_reserva
@@ -42,27 +42,29 @@ class Reserva():
         self.fecha_entrada = fecha_entrada
         self.fecha_salida = fecha_salida
         self.numero_adultos = numero_adultos
-        self.numero_ninos = nmero_ninos
+        self.numero_ninos = numero_ninos
         self.telefono = telefono
-        self.direccion = ciudad
+        self.direccion = direccion
+        self.ciudad = ciudad
         self.provincia = provincia
         self.codigo_postal = codigo_postal
         self.pais = pais
-    
+
     def to_dict(self):
-        return{
-            "id_reserva" : id_reserva,
-            "nombre_vivienda" : nombre_vivienda,
-            "precio_reserva" : precio_reserva,
-            "nombre_persona" : nombre_persona,
-            "apellidos_persona" : apellidos_persona,
-            "fecha_entrada" : fecha_entrada,
-            "fecha_salida" : fecha_salida,
-            "numero_adultos" : numero_adultos,
-            "numero_niños" : numero_ninos,
-            "telefono" : telefono,
-            "direccion" : direccion,
-            "provincia" : provincia,
-            "codigo_postal" : codigo_postal,
-            "pais" : pais
+        return {
+            "id_reserva": self.id_reserva,
+            "nombre_vivienda": self.nombre_vivienda,
+            "precio_reserva": self.precio_reserva,
+            "nombre_persona": self.nombre_persona,
+            "apellidos_persona": self.apellidos_persona,
+            "fecha_entrada": self.fecha_entrada,
+            "fecha_salida": self.fecha_salida,
+            "numero_adultos": self.numero_adultos,
+            "numero_ninos": self.numero_ninos,
+            "telefono": self.telefono,
+            "direccion": self.direccion,
+            "ciudad": self.ciudad,
+            "provincia": self.provincia,
+            "codigo_postal": self.codigo_postal,
+            "pais": self.pais
         }

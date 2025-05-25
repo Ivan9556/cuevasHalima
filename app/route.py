@@ -18,7 +18,7 @@ from flask import Blueprint, render_template, url_for, flash, request, redirect,
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
-from .models import Vivienda
+from .models import Vivienda, Reserva
 from datetime import datetime
 
 
@@ -132,30 +132,48 @@ def buscar_reserva():
     return render_template('/formulario-reserva.html', viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
     fecha_entrada = fecha_entrada, fecha_salida = fecha_salida, numero_adultos = numero_adultos ,numero_ninos = numero_ninos)
 
-@main.route('/form-reserva', methods=['POST'])
+@main.route('/form_reserva', methods=['POST'])
 def hacer_reserva():
+
+    db = mongo.db
+
     id_reserva = 1
-    nombre_vivienda = request.form("nombre_vivienda")
-    precio_reserva = request.form("precio_vivienda")
-    nombre_persona = request.form("nombre_persona")
-    apellidos_persona = reques.form("apellidos_persona")
-    fecha_entrada = request.form("fecha_entrada")
-    fecha_salida = request.form("fecha_salida")
-    numero_adultos = request.form("numero_adultos")
-    numero_ninos = request.form("numero_ninos")
-    telefono = request.form("telefono")
-    direccion = request.form("direccion")
-    provincia = reques.form("provincia")
-    codigo_postal = request.form("codigo_postal")
-    pais = request.form("pais")
+    nombre_vivienda = request.form["nombre_vivienda"]
+    precio_reserva = request.form["precio_vivienda"]
+    nombre_persona = request.form["nombre_persona"]
+    apellidos_persona = request.form["apellidos_persona"]
+    fecha_entrada = request.form["fecha_entrada"]
+    fecha_salida = request.form["fecha_salida"]
+    numero_adultos = request.form["numero_adultos"]
+    numero_ninos = request.form["numero_ninos"]
+    telefono = request.form["telefono"]
+    direccion = request.form["direccion"]
+    ciudad = request.form["ciudad"]
+    provincia = request.form["provincia"]
+    codigo_postal = request.form["codigo_postal"]
+    pais = request.form["pais"]
 
 
+    reserva = Reserva(
+        id_reserva=id_reserva, 
+        nombre_vivienda=nombre_vivienda,
+        precio_reserva=precio_reserva,
+        nombre_persona=nombre_persona,
+        apellidos_persona=nombre_persona,
+        fecha_entrada=fecha_entrada,
+        fecha_salida=fecha_salida,
+        numero_adultos=numero_adultos,
+        numero_ninos=numero_ninos,
+        telefono=telefono,
+        direccion=direccion,
+        ciudad=ciudad,
+        provincia=provincia,
+        codigo_postal=codigo_postal,
+        pais=pais
+    )
 
+    db.reservas.insert_one(reserva.to_dict())
 
-    """
-    return jsonify({
-        "nombre_vivienda" : nombre_vivienda, 
-        "fecha_entrada" : fecha_entrada, 
-        "fecha_salida" : fecha_salida
-        })
-    """
+    print("reserva insertada correctamente")
+
+    return render_template("/formulario-reserva.html")
