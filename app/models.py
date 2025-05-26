@@ -68,3 +68,6 @@ class Reserva():
             "codigo_postal": self.codigo_postal,
             "pais": self.pais
         }
+    def id_reserva(self, id_reserva, db):
+        
+        return 
