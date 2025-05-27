@@ -22,6 +22,7 @@ from .models import Vivienda, Reserva
 from datetime import datetime
 
 
+
 main = Blueprint('main' ,__name__)
 
 @main.route('/') #se carga desde la raiz index.html
@@ -101,8 +102,8 @@ def buscar_reserva():
     db= mongo.db
     #Recogemos los datos del formulario y los convertimos en "datetime" para comparar fechas
     #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
-    fecha_entrada = datetime.strptime(request.args['fecha_entrada'], '%d-%m-%Y')
-    fecha_salida = datetime.strptime(request.args['fecha_salida'], '%d-%m-%Y')
+    fecha_entrada = datetime.strptime(request.args['fecha_entrada'], '%d-%m-%Y').date()
+    fecha_salida = datetime.strptime(request.args['fecha_salida'], '%d-%m-%Y').date()
     numero_adultos = request.args['adultos']
     numero_ninos = request.args['ninos']
 
@@ -137,7 +138,7 @@ def hacer_reserva():
 
     db = mongo.db
 
-    id_reserva =
+    id_reserva = Reserva.generar_id(db)
 
     nombre_vivienda = request.form["nombre_vivienda"]
     precio_reserva = request.form["precio_vivienda"]
@@ -157,7 +158,7 @@ def hacer_reserva():
 
 
     reserva = Reserva(
-        id_reserva= id_reserva , 
+        id_reserva= id_reserva, 
         nombre_vivienda=nombre_vivienda,
         precio_reserva=precio_reserva,
         nombre_persona=nombre_persona,
@@ -178,4 +179,4 @@ def hacer_reserva():
 
     print("reserva insertada correctamente")
 
-    return render_template("/formulario-reserva.html")
+    return render_template("/reserva.html")

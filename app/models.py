@@ -68,16 +68,24 @@ class Reserva():
             "codigo_postal": self.codigo_postal,
             "pais": self.pais
         }
-
-"""
-Establecemos
-"""
+    """
+    Usamos la colleccion "contador", donde buscamos el documento con id llamado "id_reserva", "$inc" le indicamos a Mongo que 
+    incremente el valor en 1, comprobamos que exista documento con "upsert = true" y por último devolvemos el documento con el 
+    valor actualizado con "return_document" 
+    """
     @staticmethod
     def generar_id(db):
-        
         resultado = db.contador.find_one_and_update(
-            { "_id " : "id_reserva" },
-            { "$inc" : { "valor" : 1}},
-            upsert = True 
+                { "_id " : "id_reserva" },
+                { "$inc" : { "valor" : 1}},
+                upsert = True,
+                return_document = True
         )
-        return resultado
+        return resultado["valor"]
+"""
+@classmethod es un decorador que indica a Python que el método pertenece a ka clase, no a una instancia de la clase.
+En vez de usar "self" (representa una instancia), recibe "cls", que representa la clase misma. Útil si queremos acceder
+al método de la clase, pero no a un objeto.
+Podemos unar también @staticmethod, no necesita pasar "cls" ni "self" dentro del método ya que lo que hacemos es hacer estático el 
+método y por lo tanto no depende de ninguna instancia.
+"""
