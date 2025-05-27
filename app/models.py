@@ -68,6 +68,16 @@ class Reserva():
             "codigo_postal": self.codigo_postal,
             "pais": self.pais
         }
-    def id_reserva(self, id_reserva, db):
+
+"""
+Establecemos
+"""
+    @staticmethod
+    def generar_id(db):
         
-        return 
+        resultado = db.contador.find_one_and_update(
+            { "_id " : "id_reserva" },
+            { "$inc" : { "valor" : 1}},
+            upsert = True 
+        )
+        return resultado

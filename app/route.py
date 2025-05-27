@@ -137,7 +137,8 @@ def hacer_reserva():
 
     db = mongo.db
 
-    id_reserva = 1
+    id_reserva =
+
     nombre_vivienda = request.form["nombre_vivienda"]
     precio_reserva = request.form["precio_vivienda"]
     nombre_persona = request.form["nombre_persona"]
@@ -154,8 +155,9 @@ def hacer_reserva():
     pais = request.form["pais"]
 
 
+
     reserva = Reserva(
-        id_reserva=id_reserva, 
+        id_reserva= id_reserva , 
         nombre_vivienda=nombre_vivienda,
         precio_reserva=precio_reserva,
         nombre_persona=nombre_persona,
