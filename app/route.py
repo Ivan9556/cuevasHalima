@@ -99,13 +99,19 @@ def test_db():
 
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
+    
+    #Variable db
     db= mongo.db
-    #Recogemos los datos del formulario y los convertimos en "datetime" para comparar fechas
-    #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
-    fecha_entrada = request.args['entrada']
-    fecha_salida = request.args['salida']
-    numero_adultos = request.args['adultos']
-    numero_ninos = request.args['ninos']
+
+    #Recogemos los datos del formulario 
+    entrada_str = request.args.get('entrada')
+    salida_str = request.args.get('salida')
+    numero_adultos = request.args.get('adultos')
+    numero_ninos = request.args.get('niños')
+
+    #los convertimos en "datetime" para comparar fechas. Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
+    fecha_entrada = datetime.strptime(entrada_str , "%d-%m-%Y")
+    fecha_salida = datetime.strptime(salida_str, "%d-%m-%Y")
 
     #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
     cantidad_noches = (fecha_salida - fecha_entrada).days
@@ -124,14 +130,22 @@ def buscar_reserva():
             descripcion=v['descripcion'],
             precio=v['precio']
         )
-        #Comprovamos si la vivienda está disponible con nuestro método "disponible"
         if vivienda.disponible(fecha_entrada, fecha_salida, db):
-            #Si se cumple, añadimos la vivienda a la lista
             viviendas_disponibles.append(vivienda)
+            
 
     #Renderizamos la pagina de nuevo y le pasamos las viviendas y el número de noches para que las represente
-    return render_template(viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
-    fecha_entrada = fecha_entrada, fecha_salida = fecha_salida, numero_adultos = numero_adultos ,numero_ninos = numero_ninos)
+    return render_template(
+        '/reserva.html', 
+        viviendas=viviendas_disponibles,
+        cantidad_noches = cantidad_noches, 
+        fecha_entrada = fecha_entrada, 
+        fecha_salida = fecha_salida, 
+        entrada_str = entrada_str,
+        salida_str = salida_str,
+        numero_adultos = numero_adultos,
+        numero_ninos = numero_ninos
+        )
 
 @main.route('/form_reserva', methods=['POST'])
 def hacer_reserva():
@@ -139,13 +153,12 @@ def hacer_reserva():
     db = mongo.db
 
     id_reserva = Reserva.generar_id(db)
-
     nombre_vivienda = request.form["nombre_vivienda"]
     precio_reserva = request.form["precio_vivienda"]
     nombre_persona = request.form["nombre_persona"]
     apellidos_persona = request.form["apellidos_persona"]
-    fecha_entrada = request.form["fecha_entrada"]
-    fecha_salida = request.form["fecha_salida"]
+    fecha_entrada_str = request.form["fecha_entrada"]
+    fecha_salida_str= request.form["fecha_salida"]
     numero_adultos = request.form["numero_adultos"]
     numero_ninos = request.form["numero_ninos"]
     telefono = request.form["telefono"]
@@ -156,7 +169,11 @@ def hacer_reserva():
     pais = request.form["pais"]
 
 
+    #Pasamos las fechas a datetime
+    fecha_entrada = datetime.strptime(fecha_entrada_str, "%Y-%m-%d %H:%M:%S" )
+    fecha_salida = datetime.strptime(fecha_salida_str, "%Y-%m-%d %H:%M:%S")
 
+    #Guardamos la reserva en la db
     reserva = Reserva(
         id_reserva= id_reserva, 
         nombre_vivienda=nombre_vivienda,

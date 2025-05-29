@@ -38,9 +38,9 @@
     <h3>Datos de la reserva</h3>
     <form action="informacion-reserva" method="GET">
         <label for="fecha_entrada" >Fecha entrada</label>
-        <label for="fecha_entrada">: {{fecha_entrada}}</label><br>
+        <label for="fecha_entrada">:{{entrada_str}}</label><br>
         <label for="fecha_salida" >Fecha salida</label>
-        <label for="fecha_salida">: {{fecha_salida}}</label><br>
+        <label for="fecha_salida">: {{salida_str}}</label><br>
         <label for="numero_adultos" >Adultos</label>
         <label for="numero_adultos">: {{numero_adultos}}</label><br>
         <label for="numero_ninos" >Niños</label>
@@ -52,20 +52,18 @@
     <h3>Viviendas disponibles</h3>
     <div class="viviendas">
         {% if viviendas %}
-            <div class="vivienda">
-                <h4>{{ viviendas[0].nombre }}</h4>
-                <p>{{ viviendas[0].descripcion }}</p>
-                <p>Precio: {{ viviendas[0].precio * cantidad_noches }}€</p>
-                <button type="button" class="seleccionar-vivienda" data-nombre="{{ viviendas[0].nombre }}"
-                data-precio="{{viviendas[0].precio * cantidad_noches}}">Seleccionar</button>
-            </div>
-            <div class="vivienda2">
-                <h4>{{ viviendas[1].nombre }}</h4>
-                <p>{{ viviendas[1].descripcion }}</p>
-                <p>Precio: {{ viviendas[1].precio * cantidad_noches}}€</p>
-                <button type="button" class="seleccionar-vivienda" data-nombre="{{ viviendas[1].nombre }}"
-                data-precio="{{viviendas[1].precio * cantidad_noches}}">Seleccionar</button>
-            </div>
+            {% for vivienda in viviendas %}
+                <div class="vivienda">
+                    <h4>{{ vivienda.nombre }}</h4>
+                    <p>{{ vivienda.descripcion }}</p>
+                    <p>Precio: {{ vivienda.precio * cantidad_noches }}€</p>
+                    <button type="button" class="seleccionar-vivienda" 
+                        data-nombre="{{ vivienda.nombre }}" 
+                        data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay viviendas disponibles para esas fechas.</p>
         {% endif %}
     </div>
 </div>

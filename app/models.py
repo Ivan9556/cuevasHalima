@@ -24,7 +24,7 @@ class Vivienda:
     def disponible(self, fecha_entrada, fecha_salida, db):
         #Buscamos una resera con las 3 condiciones
         reserva = db.reservas.find_one({
-            "nombre": self.nombre, #Nombre de la vivienda
+            "nombre_vivienda": self.nombre, #Nombre de la vivienda
             "fecha_entrada": {"$lte": fecha_salida}, #La fecha de salida tiene que ser antes de la salida del usuario
             "fecha_salida": {"$gte": fecha_entrada} #La fecha entrada debe ser despúes de la fecha de entrada
         })    
