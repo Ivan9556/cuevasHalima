@@ -214,6 +214,7 @@ h3 {
 
 /*Formulario reservas*/
 .reserva{
+    /*
     font-size: 20px;
     margin-top: 10%;
     margin-left: 10%;
@@ -221,20 +222,7 @@ h3 {
     display: flex;
     border: solid 1px black;
     justify-content: center;
-}
-.calendario{
-    display: block;
-    background-color: #fcf7f3;
-    padding: 10%;
-}
-
-.calendario select{
-    margin-left: 5%;
-}
-
-.calendario button{
-    margin-top: 20%;
-    font-size: 15px;
+    */
 }
 
 

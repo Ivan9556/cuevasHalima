@@ -15,9 +15,9 @@
         <h3>Haz tu reserva</h3>
         <form action="buscar-reserva" method="GET">
             <label for="fecha">Fecha Entrada</label><br>
-            <input type="text" id="fecha_entrada" name="fecha_entrada" required><br>
+            <input type="text" id="entrada" name="entrada" required><br>
             <label for="fecha2">Fecha Salida</label><br>
-            <input type="text" id="fecha_salida" name="fecha_salida" required><br>
+            <input type="text" id="salida" name="salida" required><br>
             <label for="adultos">Adultos</label>
             <select name="adultos" id="adultos">
                 {% for i in range (0,5) %}
@@ -34,23 +34,101 @@
         </form>
     </div>
 </div>
+<div>
+    <h3>Datos de la reserva</h3>
+    <form action="informacion-reserva" method="GET">
+        <label for="fecha_entrada" >Fecha entrada</label>
+        <label for="fecha_entrada">: {{fecha_entrada}}</label><br>
+        <label for="fecha_salida" >Fecha salida</label>
+        <label for="fecha_salida">: {{fecha_salida}}</label><br>
+        <label for="numero_adultos" >Adultos</label>
+        <label for="numero_adultos">: {{numero_adultos}}</label><br>
+        <label for="numero_ninos" >Niños</label>
+        <label for="numero_ninos">: {{numero_ninos}}</label><br>
+        <button type="submit">Modificar</button>
+    </form>
+</div>
+<div class="resultados">
+    <h3>Viviendas disponibles</h3>
+    <div class="viviendas">
+        {% if viviendas %}
+            <div class="vivienda">
+                <h4>{{ viviendas[0].nombre }}</h4>
+                <p>{{ viviendas[0].descripcion }}</p>
+                <p>Precio: {{ viviendas[0].precio * cantidad_noches }}€</p>
+                <button type="button" class="seleccionar-vivienda" data-nombre="{{ viviendas[0].nombre }}"
+                data-precio="{{viviendas[0].precio * cantidad_noches}}">Seleccionar</button>
+            </div>
+            <div class="vivienda2">
+                <h4>{{ viviendas[1].nombre }}</h4>
+                <p>{{ viviendas[1].descripcion }}</p>
+                <p>Precio: {{ viviendas[1].precio * cantidad_noches}}€</p>
+                <button type="button" class="seleccionar-vivienda" data-nombre="{{ viviendas[1].nombre }}"
+                data-precio="{{viviendas[1].precio * cantidad_noches}}">Seleccionar</button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class="form-reserva" id="form-reserva">
+    <h3>Formulario de reserva</h3>
+    <form action="form_reserva" method="POST">
+        <input type="hidden" name="nombre_vivienda" id="nombre_vivienda">
+        <input type="hidden" name="precio_vivienda" id="precio_vivienda">
+        <input type="hidden" name="fecha_entrada" id="fecha_entrada" value="{{fecha_entrada}}">
+        <input type="hidden" name="fecha_salida" id="fecha_salida" value="{{fecha_salida}}">
+        <input type="hidden" name="numero_adultos" id="numero_adultos" value="{{numero_adultos}}">
+        <input type="hidden" name="numero_ninos" id="numero_ninos" value="{{numero_ninos}}">
+        <label for="nombre_persona">Nombre</label>
+        <input type="text" name="nombre_persona" id="nombre_persona"><br>
+        <label for="apellidos_persona">Apellidos</label>
+        <input type="text" name="apellidos_persona" id="apellidos_persona"><br>
+        <label for="telefono">Telefono</label>
+        <input type="text" name="telefono" id="telefono"><br>
+        <label for="direccion">Direccion</label>
+        <input type="text" name="direccion" id="direccion"><br>
+        <label for="ciudad">Ciudad</label>
+        <input type="text" name="ciudad" id="ciudad"><br>
+        <label for="provincia">Provincia</label>
+        <input type="text" name="provincia" id="provincia"><br>
+        <label for="codigo-postal">Codigo postal</label>
+        <input type="text" name="codigo_postal" id="codigo_postal"><br>
+        <label for="pais">Pais</label>
+        <input type="text" name="pais" id="pais"><br>
+        <button type="submit">Reservar</button>
+    </form>
+</div>
 <!--Calendario Flatpickr con css y js-->
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        flatpickr("#fecha_entrada", {
+        flatpickr("#entrada", {
             locale: "es",
             dateFormat: "d-m-Y"
         })
-        flatpickr("#fecha_salida    ", {
+        flatpickr("#salida", {
             locale: "es",
             dateFormat: "d-m-Y"
         })
 
     })
+</script>
+<script>
+    //Escuchar el clic de todos los botones "Seleccionar"
+    document.querySelectorAll(".seleccionar-vivienda",).forEach(button => {
+        button.addEventListener("click", function(){
+            const nomVivienda = this.dataset.nombre;
+            const precioVivienda =  this.dataset.precio;
 
+            //Guardar el nombre del objeto selecionado en el formulario reserva
+            document.getElementById("nombre_vivienda").value = nomVivienda;
+            document.getElementById("precio_vivienda").value = precioVivienda;
+
+            //Mostar el formulario reserva
+            document.getElementById("form-reserva").style.display = "block"
+        })
+    })
 </script>
 {% endblock %}
 {% endblock %}

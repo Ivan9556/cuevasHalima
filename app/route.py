@@ -102,8 +102,8 @@ def buscar_reserva():
     db= mongo.db
     #Recogemos los datos del formulario y los convertimos en "datetime" para comparar fechas
     #Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
-    fecha_entrada = datetime.strptime(request.args['fecha_entrada'], '%d-%m-%Y').date()
-    fecha_salida = datetime.strptime(request.args['fecha_salida'], '%d-%m-%Y').date()
+    fecha_entrada = request.args['entrada']
+    fecha_salida = request.args['salida']
     numero_adultos = request.args['adultos']
     numero_ninos = request.args['ninos']
 
@@ -130,7 +130,7 @@ def buscar_reserva():
             viviendas_disponibles.append(vivienda)
 
     #Renderizamos la pagina de nuevo y le pasamos las viviendas y el número de noches para que las represente
-    return render_template('/formulario-reserva.html', viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
+    return render_template(viviendas=viviendas_disponibles, cantidad_noches = cantidad_noches, 
     fecha_entrada = fecha_entrada, fecha_salida = fecha_salida, numero_adultos = numero_adultos ,numero_ninos = numero_ninos)
 
 @main.route('/form_reserva', methods=['POST'])
