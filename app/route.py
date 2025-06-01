@@ -69,7 +69,7 @@ def fechas_ocupadas(db):
     contador_fechas.items().. Devuelve los pares clave-valor del diccionario contador_fechas
     if count == total_viviendas.. Si el n. de viviendas que ocupa la fecha es igual al numero de viviendas en db
     """
-    fechas_bloqueadas =[ fecha for fecha, count in contador_fechas.items() if count == total_viviendas]
+    fechas_bloqueadas = [fecha for fecha, count in contador_fechas.items() if count == total_viviendas]
 
     return fechas_bloqueadas
 
