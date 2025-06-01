@@ -37,13 +37,13 @@
 <div>
     <h3>Datos de la reserva</h3>
     <form action="informacion-reserva" method="GET">
-        <label for="fecha_entrada" >Fecha entrada</label>
+        <label for="fecha_entrada">Fecha entrada</label>
         <label for="fecha_entrada">:{{entrada_str}}</label><br>
-        <label for="fecha_salida" >Fecha salida</label>
+        <label for="fecha_salida">Fecha salida</label>
         <label for="fecha_salida">: {{salida_str}}</label><br>
-        <label for="numero_adultos" >Adultos</label>
+        <label for="numero_adultos">Adultos</label>
         <label for="numero_adultos">: {{numero_adultos}}</label><br>
-        <label for="numero_ninos" >Niños</label>
+        <label for="numero_ninos">Niños</label>
         <label for="numero_ninos">: {{numero_ninos}}</label><br>
         <button type="submit">Modificar</button>
     </form>
@@ -52,18 +52,17 @@
     <h3>Viviendas disponibles</h3>
     <div class="viviendas">
         {% if viviendas %}
-            {% for vivienda in viviendas %}
-                <div class="vivienda">
-                    <h4>{{ vivienda.nombre }}</h4>
-                    <p>{{ vivienda.descripcion }}</p>
-                    <p>Precio: {{ vivienda.precio * cantidad_noches }}€</p>
-                    <button type="button" class="seleccionar-vivienda" 
-                        data-nombre="{{ vivienda.nombre }}" 
-                        data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
-                </div>
-            {% endfor %}
+        {% for vivienda in viviendas %}
+        <div class="vivienda">
+            <h4>{{ vivienda.nombre }}</h4>
+            <p>{{ vivienda.descripcion }}</p>
+            <p>Precio: {{ vivienda.precio * cantidad_noches }}€</p>
+            <button type="button" class="seleccionar-vivienda" data-nombre="{{ vivienda.nombre }}"
+                data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
+        </div>
+        {% endfor %}
         {% else %}
-            <p>No hay viviendas disponibles para esas fechas.</p>
+        <p>No hay viviendas disponibles para esas fechas.</p>
         {% endif %}
     </div>
 </div>
@@ -99,23 +98,30 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-<script> 
+<script id="fechasJSON">{{fechas_reservadas | tojson | safe }}</script>
+<script>
     document.addEventListener("DOMContentLoaded", function () {
-        
-        const fechas_ocupadas = {{ fechas_reservadas | tojson |  safe }};
-        console.log("Fechas ocupadas:", fechas_ocupadas); 
+
+        // Cargamos fechas desde scrip
+        const fechas_json = document.getElementById("fechasJSON").textContent;
+        // Y las paseamos a formto JSON para desabilitarltas 
+        const fechas_ocupadas = JSON.parse(fechas_json);
 
         flatpickr("#entrada", {
             locale: "es",
-            minDate : "today",
-            dateFormat: "d-m-Y",
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d-m-Y",
             disable: fechas_ocupadas
         })
         flatpickr("#salida", {
             locale: "es",
-            minDate : "today",
-            dateFormat: "d-m-Y",
-            disable:fechas_ocupadas
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d-m-Y",
+            disable: fechas_ocupadas
         })
 
     })
@@ -123,9 +129,9 @@
 <script>
     //Escuchar el clic de todos los botones "Seleccionar"
     document.querySelectorAll(".seleccionar-vivienda",).forEach(button => {
-        button.addEventListener("click", function(){
+        button.addEventListener("click", function () {
             const nomVivienda = this.dataset.nombre;
-            const precioVivienda =  this.dataset.precio;
+            const precioVivienda = this.dataset.precio;
 
             //Guardar el nombre del objeto selecionado en el formulario reserva
             document.getElementById("nombre_vivienda").value = nomVivienda;

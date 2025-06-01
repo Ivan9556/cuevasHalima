@@ -38,7 +38,6 @@ def fechas_ocupadas(db):
             f_ini += timedelta(days=1)
     return list(lista_fechas)
 
-
 @main.route('/') #se carga desde la raiz index.html
 def inicio():
     return render_template('index.html') #busca html en 'template'
@@ -126,8 +125,8 @@ def buscar_reserva():
     numero_ninos = request.args.get('niños')
 
     #los convertimos en "datetime" para comparar fechas. Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
-    fecha_entrada = datetime.strptime(entrada_str , "%d-%m-%Y")
-    fecha_salida = datetime.strptime(salida_str, "%d-%m-%Y")
+    fecha_entrada = datetime.strptime(entrada_str , "%Y-%m-%d")
+    fecha_salida = datetime.strptime(salida_str, "%Y-%m-%d")
 
     #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
     cantidad_noches = (fecha_salida - fecha_entrada).days
@@ -149,6 +148,7 @@ def buscar_reserva():
         if vivienda.disponible(fecha_entrada, fecha_salida, db):
             viviendas_disponibles.append(vivienda)
             
+    fechas_reservadas = fechas_ocupadas(db)
 
     #Renderizamos la pagina de nuevo y le pasamos las viviendas y el número de noches para que las represente
     return render_template(
@@ -160,7 +160,9 @@ def buscar_reserva():
         entrada_str = entrada_str,
         salida_str = salida_str,
         numero_adultos = numero_adultos,
-        numero_ninos = numero_ninos
+        numero_ninos = numero_ninos,
+        fechas_reservadas = fechas_reservadas
+
         )
 
 @main.route('/form_reserva', methods=['POST'])
