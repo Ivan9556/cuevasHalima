@@ -19,11 +19,25 @@ from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
 from .models import Vivienda, Reserva
-from datetime import datetime
-
+from datetime import datetime, timedelta
 
 
 main = Blueprint('main' ,__name__)
+
+def fechas_ocupadas(db):
+    db = mongo.db
+    reservas = db.reservas.find()
+    lista_fechas = set()
+
+    for reserva in reservas:
+        f_ini = reserva["fecha_entrada"]
+        f_fin = reserva["fecha_salida"]
+
+        while f_ini <= f_fin:
+            lista_fechas.add(f_ini.strftime('%Y-%m-%d'))
+            f_ini += timedelta(days=1)
+    return list(lista_fechas)
+
 
 @main.route('/') #se carga desde la raiz index.html
 def inicio():
@@ -47,7 +61,9 @@ def encuentranos():
 
 @main.route('/reserva')
 def reserva():
-    return render_template('reserva.html')
+    db= mongo.db
+    fechas_reservadas = fechas_ocupadas(db)
+    return render_template('reserva.html', fechas_reservadas = fechas_reservadas)
 
 @main.route('/formulario-reserva')
 def formulario_reserva():
