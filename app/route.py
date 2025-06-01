@@ -26,17 +26,32 @@ main = Blueprint('main' ,__name__)
 
 def fechas_ocupadas(db):
     db = mongo.db
+    #Almacenamos las reservas de la db
     reservas = db.reservas.find()
-    lista_fechas = set()
-
+    #Numero de viviendas en total
+    total_viviendas = db.viviendas.count_documents({})
+    #Lista de fechas que se van a ocupar
+    lista_fechas = {}
+    #Recorremos cada reserva con el objeto de acotar por el nombre_vivienda
     for reserva in reservas:
+        vivienda = reserva["nombre_vivienda"]
+        if vivienda not in lista_fechas:
+            lista_fechas[vivienda] = set()
+
         f_ini = reserva["fecha_entrada"]
         f_fin = reserva["fecha_salida"]
 
         while f_ini <= f_fin:
-            lista_fechas.add(f_ini.strftime('%Y-%m-%d'))
+            lista_fechas[vivienda].add(f_ini.strftime('%Y-%m-%d'))
             f_ini += timedelta(days=1)
-    return list(lista_fechas)
+    contador_fechas = {}
+    for fechas in lista_fechas.values():
+        for fecha in fechas:
+            contador_fechas[fecha] = contador_fechas.get(fecha, 0) + 1
+    
+    fechas_bloqueadas =[ fecha for fecha, count in contador_fechas.items() if count == total_viviendas]
+
+    return fechas_bloqueadas
 
 @main.route('/') #se carga desde la raiz index.html
 def inicio():
