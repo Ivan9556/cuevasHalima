@@ -212,6 +212,9 @@ def hacer_reserva():
 
     db.reservas.insert_one(reserva.to_dict())
 
+    fechas_reservadas = fechas_ocupadas(db)
+    
+
     print("reserva insertada correctamente")
 
-    return render_template("/reserva.html")
+    return render_template("/reserva.html", fechas_reservadas = fechas_reservadas)
