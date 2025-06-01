@@ -28,27 +28,47 @@ def fechas_ocupadas(db):
     db = mongo.db
     #Almacenamos las reservas de la db
     reservas = db.reservas.find()
-    #Numero de viviendas en total
+    #Numero de viviendas en total, para saber cuando una fecha está ocupada en todas 
     total_viviendas = db.viviendas.count_documents({})
-    #Lista de fechas que se van a ocupar
+    #Dicionario de fechas que se van a ocupar por cada vivienda
     lista_fechas = {}
-    #Recorremos cada reserva con el objeto de acotar por el nombre_vivienda
+    #Recorremos cada reserva y leemos a qué vivienda pertenece
     for reserva in reservas:
         vivienda = reserva["nombre_vivienda"]
         if vivienda not in lista_fechas:
+            #Si esa vivienda aún no tiene fechas creamos un set() "conjunto vacío"
             lista_fechas[vivienda] = set()
-
         f_ini = reserva["fecha_entrada"]
         f_fin = reserva["fecha_salida"]
-
+        #Agregamos las fechas de cada vivienda, usando la clave "nombre_vivienda" en el diccionario
         while f_ini <= f_fin:
             lista_fechas[vivienda].add(f_ini.strftime('%Y-%m-%d'))
             f_ini += timedelta(days=1)
+            """
+            Ej:
+            "A": {"2025-06-01", "2025-06-02"},
+            "B": {"2025-06-01", "2025-06-03"},
+            """
+
+    #Contamos cuantas viviendas tienen reservada cada fecha, creando un nuevo diccionario vacío
     contador_fechas = {}
     for fechas in lista_fechas.values():
         for fecha in fechas:
             contador_fechas[fecha] = contador_fechas.get(fecha, 0) + 1
-    
+    """
+    Ejemplo:    
+    "2025-06-01": 2,  # esta fecha está ocupada por 2 viviendas
+    "2025-06-02": 1,  # esta solo por una
+
+    Recorre todos los sets de fechas de cada vivienda. Por cada fecha, suma 1 al contador.
+
+    Ultimo paso, agregar solo las fechas que esten ocupadas por todas las viviendas, si viviendas es = 2
+    solo se bloquea las fechas con count == 2.
+    fecha for.. Incluye la fecha en la lista si cumple..
+    for fecha, count in.. Recorre cada uno de esos pares
+    contador_fechas.items().. Devuelve los pares clave-valor del diccionario contador_fechas
+    if count == total_viviendas.. Si el n. de viviendas que ocupa la fecha es igual al numero de viviendas en db
+    """
     fechas_bloqueadas =[ fecha for fecha, count in contador_fechas.items() if count == total_viviendas]
 
     return fechas_bloqueadas
