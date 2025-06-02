@@ -41,6 +41,7 @@ def fechas_ocupadas(db):
         f_ini = reserva["fecha_entrada"]
         f_fin = reserva["fecha_salida"]
         #Agregamos las fechas de cada vivienda, usando la clave "nombre_vivienda" en el diccionario
+        #No usamos for porque no estamos iterando, si no constuyendo un rango de fechas
         while f_ini <= f_fin:
             lista_fechas[vivienda].add(f_ini.strftime('%Y-%m-%d'))
             f_ini += timedelta(days=1)
@@ -52,8 +53,13 @@ def fechas_ocupadas(db):
 
     #Contamos cuantas viviendas tienen reservada cada fecha, creando un nuevo diccionario vacío
     contador_fechas = {}
+    #Ahora recorremos la lista_fechas (diccionario anterior) pero solo las fechas almacenadas (sin claves)
+    #Este primer for recorre la lista de fechas por vivienda 
     for fechas in lista_fechas.values():
+        #Con este recorremos cada fecha dentro de la lista
         for fecha in fechas:
+            #Y por último contamos cuantas veces aparece la fecha en todas las listas
+            #Si es la primera vez a 0 le +1 y si existe le +1 
             contador_fechas[fecha] = contador_fechas.get(fecha, 0) + 1
     """
     Ejemplo:    
