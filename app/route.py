@@ -20,9 +20,13 @@ from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
 from .models import Vivienda, Reserva
 from datetime import datetime, timedelta
+import stripe
+
 
 
 main = Blueprint('main' ,__name__)
+
+#Clave 
 
 def fechas_ocupadas(db):
     db = mongo.db
