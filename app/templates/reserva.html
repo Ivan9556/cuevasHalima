@@ -34,6 +34,13 @@
         </form>
     </div>
 </div>
+<br>
+<div>
+    <form action="metodo-pago" method="POST">
+        <p>Boton para pagar</p>
+        <button type="submit">Pago</button>
+    </form>
+</div>
 <div>
     <h3>Datos de la reserva</h3>
     <form action="informacion-reserva" method="GET">
@@ -97,6 +104,13 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 <script id="fechasJSON">{{fechas_reservadas | tojson | safe }}</script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe("pk_test_51RVutIQ6yxCCrrhAN9oVhwjwBQwOQ5gRZQp4pXVg1yG4nhKLUdrljl6LSQ9WRlBrXm1bq2AxYhAwi9Gie6d7eoKA00RTwJO1Tk");
+    return stripe.redirectToCheckout({
+        sessionId: data.id
+    })
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 

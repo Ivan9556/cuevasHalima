@@ -26,7 +26,6 @@ import stripe
 
 main = Blueprint('main' ,__name__)
 
-#Clave 
 
 def fechas_ocupadas(db):
     db = mongo.db
@@ -263,3 +262,38 @@ def hacer_reserva():
     print("reserva insertada correctamente")
 
     return render_template("/reserva.html", fechas_reservadas = fechas_reservadas)
+
+@main.route('/metodo-pago', methods=['POST'])
+def realizar_pago():
+
+    #Clave Stripe
+    stripe.api_key = 'sk_test_51RVutIQ6yxCCrrhAY5KuAL4b48LqwXJ0W3xCk1o4TabzZSqV9hVGoxQcjTIJaPggCy8GQpOYs7EKBmkIbAQt8WRI00r2LEGouc'
+
+    try:
+        sesion = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'eur',
+                    'product_data':{
+                        'name': 'Reserva vivienda',
+                    },
+                    'unit_amount': 5000,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://127.0.0.1:5000/sucess',
+            cancel_url='http://127.0.0.1:5000/cancel'
+        )
+        return redirect(sesion.url)
+    except Exception as e:
+        return jsonify(error=str(e)), 403
+
+@main.route('/sucess')
+def success():
+    return 'Pago exitoso'
+
+@main.route('/cancel')
+def cancel():
+    return 'El pago fallo'
