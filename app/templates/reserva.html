@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<!--Mi calendario-->
+<!--Calendario-->
 <div class="calendario">
     <div class="form-calendario">
         <img src="{{url_for ('static', filename='img/fotos/Portada_reserva.jpeg')}}" alt="portada_reserva">
@@ -34,6 +34,7 @@
         </form>
     </div>
 </div>
+<!--Resultados viviendas-->
 <div class="resultados" id="resultados">
     <div class="viviendas">
         {% if viviendas %}
@@ -41,7 +42,7 @@
         {% for vivienda in viviendas %}
         <div class="vivienda">
             <img src="{{url_for('static', filename='img/fotos/' + vivienda.img)}}" alt="{{vivienda.nombre}}" class="img-vivienda">
-            <h4>{{ vivienda.nombre }}</h4>
+            <h3>{{ vivienda.nombre }}</h3>
             <p>Descripcion: {{ vivienda.descripcion }}</p>
             <p><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="usuarios"> {{vivienda.capacidad}}</p>
             <p>Precio reserva: {{ vivienda.precio * cantidad_noches }}€</p>
@@ -53,7 +54,8 @@
         {% endif %}
     </div>
 </div>
-<div class="datos-reserva">
+<!--Datos de la reserva-->
+<div class="datos-reserva" id="datos-reserva">
     <h3>Datos de la reserva</h3>
     <form action="informacion-reserva" method="GET">
         <label for="fecha_entrada">Fecha entrada</label>
@@ -67,6 +69,7 @@
         <button type="submit">Modificar</button>
     </form>
 </div>
+<!--Formulario reserva-->
 <div class="form-reserva" id="form-reserva">
     <h3>Formulario de reserva</h3>
     <form action="form_reserva" method="POST">
@@ -101,8 +104,8 @@
         <button type="submit">Pago</button>
     </form>
 </div>
-<!--Calendario Flatpickr con css y js-->
 {% block scripts %}
+<!--Calendario Flatpickr con css y js-->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 <script id="fechasJSON">{{fechas_reservadas | tojson | safe }}</script>
@@ -151,6 +154,11 @@
             document.getElementById("nombre_vivienda").value = nomVivienda;
             document.getElementById("precio_vivienda").value = precioVivienda;
 
+            //Ocultar viviendas 
+            document.getElementById("resultados").style.display = "none"
+            
+            //Mostrar datos de la reserva
+            document.getElementById("datos-reserva").style.display = "block"
             //Mostar el formulario reserva
             document.getElementById("form-reserva").style.display = "block"
         })

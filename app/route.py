@@ -187,7 +187,7 @@ def buscar_reserva():
         vivienda = Vivienda(
             nombre=v['nombre'],
             descripcion=v['descripcion'],
-            precio=v['precio'],
+            precio=int(v['precio']),
             img=v['img'],
             capacidad=v['capacidad']
         )
