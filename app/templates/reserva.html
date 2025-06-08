@@ -49,7 +49,7 @@
             <p><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="usuarios"> {{vivienda.capacidad}}</p>
             <p>Precio reserva: {{ vivienda.precio * cantidad_noches }}€</p>
             <p class="precio-noche">{{ vivienda.precio }}€ por noche</p>
-            <button type="button" class="seleccionar-vivienda" data-nombre="{{ vivienda.nombre }}"
+            <button type="button" class="seleccionar-vivienda" data-img="{{vivienda.img}}" data-nombre="{{ vivienda.nombre }}"
                 data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
         </div>
         {% endfor %}
@@ -62,11 +62,11 @@
 <!--Datos de la reserva-->
 <div class="datos-reserva" id="datos-reserva">
     <h3>Datos de la reserva</h3>
-    <form action="informacion-reserva" method="GET">
+        <img id="img-vivienda" src="{{url_for ('static', filename='img/fotos/')}}" alt="img-vivienda"><br>
         <label for="vivienda">Vivienda:</label>
-        <p><span id="nombre-vivienda-reserva"></span></p><br>
+        <label for="nombre-vivienda"><span id="nombre-vivienda-reserva"></span></label><br>
         <label for="precio">Precio reserva:</label>
-        <p><span id="precio-vivienda-reserva"></span></p><br>
+        <label for="precio-reserva"><span id="precio-vivienda-reserva"></span>€</label><br>
         <label for="fecha_entrada">Fecha entrada:</label>
         <label for="fecha_entrada"> {{entrada_str}}</label><br>
         <label for="fecha_salida">Fecha salida</label>
@@ -77,8 +77,6 @@
         <label for="numero_adultos"> {{numero_adultos}}</label><br>
         <label for="numero_ninos">Niños:</label>
         <label for="numero_ninos"> {{numero_ninos}}</label><br>
-        <button type="submit">Modificar</button>
-    </form>
 </div>
 <!--Formulario reserva-->
 <div class="form-reserva" id="form-reserva">
@@ -106,7 +104,7 @@
         <input type="text" name="codigo_postal" id="codigo_postal"><br>
         <label for="pais">Pais</label>
         <input type="text" name="pais" id="pais"><br>
-        <button type="submit">Reservar</button>
+        <button type="submit">Continuar</button>
     </form>
 </div>
 </div>
@@ -161,7 +159,8 @@
         button.addEventListener("click", function () {
             const nomVivienda = this.dataset.nombre;
             const precioVivienda = this.dataset.precio;
-
+            const imgVivienda = this.dataset.img;
+            
             //Guardar la vivienda seleccionada en el formulario reserva
             document.getElementById("nombre_vivienda").value = nomVivienda;
             document.getElementById("precio_vivienda").value = precioVivienda;
@@ -169,6 +168,7 @@
             //Representar la vivienda selecionada en el formulario datos-reserva
             document.getElementById("nombre-vivienda-reserva").textContent = nomVivienda;
             document.getElementById("precio-vivienda-reserva").textContent = precioVivienda;
+            document.getElementById("img-vivienda").src = "/static/img/fotos/" +imgVivienda;
 
 
             //Ocultar calendario

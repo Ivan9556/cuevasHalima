@@ -210,9 +210,13 @@ h3 {
 }
 
 /*Reserva*/
+.bloque-busqueda{
+    margin-bottom: 12%;
+}
 .calendario{
     justify-items: center;
     text-align: center;
+    margin-bottom: 5%;
 }
 .form-calendario img{
     border-radius: 20px;
@@ -284,18 +288,23 @@ h3 {
     align-items: center;
     justify-content: center;
     gap: 200px;
-    font-size: large;
+    font-size: larger;
     opacity: 0;
     transform: translateX(-50px);
     animation: entradaIzquierda 0.6s ease forwards;
     animation-delay: var(--delay, 0s);
 }
 .datos-reserva{
+    font-size: larger;
     border-radius: 10px;
     box-shadow: 0 12px 50px #d6e8df;
     padding: 30px 50px
 }
-
+.datos-reserva img{
+    width: 250px;
+    height: 150px;
+    border-radius: 5px;
+}
 .datos-reserva button{
     width: 100%;
     border: none;
