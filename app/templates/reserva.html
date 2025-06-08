@@ -63,16 +63,20 @@
 <div class="datos-reserva" id="datos-reserva">
     <h3>Datos de la reserva</h3>
     <form action="informacion-reserva" method="GET">
-        <label for="fecha_entrada">Fecha entrada</label>
-        <label for="fecha_entrada">:{{entrada_str}}</label><br>
+        <label for="vivienda">Vivienda:</label>
+        <p><span id="nombre-vivienda-reserva"></span></p><br>
+        <label for="precio">Precio reserva:</label>
+        <p><span id="precio-vivienda-reserva"></span></p><br>
+        <label for="fecha_entrada">Fecha entrada:</label>
+        <label for="fecha_entrada"> {{entrada_str}}</label><br>
         <label for="fecha_salida">Fecha salida</label>
-        <label for="fecha_salida">: {{salida_str}}</label><br>
-        <label for="fecha_salida">Número de noches</label>
-        <label for="fecha_salida">: {{cantidad_noches}}</label><br>
-        <label for="numero_adultos">Adultos</label>
-        <label for="numero_adultos">: {{numero_adultos}}</label><br>
-        <label for="numero_ninos">Niños</label>
-        <label for="numero_ninos">: {{numero_ninos}}</label><br>
+        <label for="fecha_salida"> {{salida_str}}</label><br>
+        <label for="fecha_salida">Número de noches:</label>
+        <label for="fecha_salida"> {{cantidad_noches}}</label><br>
+        <label for="numero_adultos">Adultos:</label>
+        <label for="numero_adultos"> {{numero_adultos}}</label><br>
+        <label for="numero_ninos">Niños:</label>
+        <label for="numero_ninos"> {{numero_ninos}}</label><br>
         <button type="submit">Modificar</button>
     </form>
 </div>
@@ -158,9 +162,14 @@
             const nomVivienda = this.dataset.nombre;
             const precioVivienda = this.dataset.precio;
 
-            //Guardar el nombre del objeto selecionado en el formulario reserva
+            //Guardar la vivienda seleccionada en el formulario reserva
             document.getElementById("nombre_vivienda").value = nomVivienda;
             document.getElementById("precio_vivienda").value = precioVivienda;
+
+            //Representar la vivienda selecionada en el formulario datos-reserva
+            document.getElementById("nombre-vivienda-reserva").textContent = nomVivienda;
+            document.getElementById("precio-vivienda-reserva").textContent = precioVivienda;
+
 
             //Ocultar calendario
             document.getElementById("bloque-busqueda").style.display = "none"

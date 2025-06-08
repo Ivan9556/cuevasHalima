@@ -166,7 +166,7 @@ def buscar_reserva():
     entrada_str = request.args.get('entrada')
     salida_str = request.args.get('salida')
     numero_adultos = request.args.get('adultos')
-    numero_ninos = request.args.get('niños')
+    numero_ninos = request.args.get('ninos')
 
     #los convertimos en "datetime" para comparar fechas. Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
     fecha_entrada = datetime.strptime(entrada_str , "%Y-%m-%d")
