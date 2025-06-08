@@ -30,21 +30,21 @@
                 <option value="{{i}}">{{i}}</option>
                 {% endfor %}
             </select><br>
-            <button type="submit">Buscar</button>
+            <button type="submit" class="buscar-vivienda">Buscar</button>
         </form>
     </div>
 </div>
-<div class="resultados">
-    <h3>Viviendas disponibles</h3>
+<div class="resultados" id="resultados">
     <div class="viviendas">
         {% if viviendas %}
+        <h3>Viviendas disponibles</h3>
         {% for vivienda in viviendas %}
         <div class="vivienda">
             <img src="{{url_for('static', filename='img/fotos/' + vivienda.img)}}" alt="{{vivienda.nombre}}">
             <h4>{{ vivienda.nombre }}</h4>
-            <p>Descripcion: {{ vivienda.descripcion }}</p>
+            <p>descripcion: {{ vivienda.descripcion }}</p>
             <p>Precio: {{ vivienda.precio * cantidad_noches }}€</p>
-            <p>Precio: {{ vivienda.precio}}€ por noche</p>
+            <p>Precio: {{ vivienda.precio }}€ por noche</p>
             <button type="button" class="seleccionar-vivienda" data-nombre="{{ vivienda.nombre }}"
                 data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
         </div>
@@ -104,7 +104,7 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-<script id="fechasJSON">{ { fechas_reservadas | tojson | safe } }</script>
+<script id="fechasJSON">{{fechas_reservadas | tojson | safe }}</script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     const stripe = Stripe("pk_test_51RVutIQ6yxCCrrhAN9oVhwjwBQwOQ5gRZQp4pXVg1yG4nhKLUdrljl6LSQ9WRlBrXm1bq2AxYhAwi9Gie6d7eoKA00RTwJO1Tk");

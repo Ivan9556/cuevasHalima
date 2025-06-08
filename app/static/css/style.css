@@ -107,9 +107,6 @@ a {
     opacity: 1;
 }
 
-.form-reserva{
-    display: none;
-}
 
 /*TODOS LOS ENCABEZADOS H1*/
 h1 {
@@ -212,19 +209,6 @@ h3 {
     opacity: 0;
 }
 
-/*Formulario reservas 
-.reserva{
-    
-    font-size: 20px;
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    display: flex;
-    border: solid 1px black;
-    justify-content: center;
-    
-}
-*/
 /*Reserva*/
 .calendario{
     justify-items: center;
@@ -256,7 +240,6 @@ h3 {
     font-size: 16px;
     border-radius: 6px;
 }
-
 .resultados{
     justify-items: center;
     text-align: center;
@@ -266,12 +249,16 @@ h3 {
     border: 1px solid;
     padding: 20px 30px;
     gap: 20px;
+    align-items: center;
 }
 .vivienda img{
-    width: 150px;
-    height: 100px;
+    width: 250px;
+    height: 150px;
 }
 
+.form-reserva{
+    display: none;
+}
 /*Pie de pagina*/
 
 .contacto {
