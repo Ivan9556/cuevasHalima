@@ -1,10 +1,11 @@
 #Clase cueva
 class Vivienda:
-    def __init__(self,nombre, descripcion, precio, img):
+    def __init__(self,nombre, descripcion, precio, img, capacidad):
         self.nombre = nombre
         self.descripcion = descripcion
         self.precio = precio
         self.img = img
+        self.capacidad = capacidad
     """
     "to_dict" se define para convertir una instancia de una clase (un objeto) en un diccionario Python (serelizarlos)
     MongoDB (a través de PyMongo) espera recibir diccionarios, no objetos personalizados
@@ -15,7 +16,8 @@ class Vivienda:
         "nombre" : self.nombre,
         "descripcion" : self.descripcion,
         "precio" :  self.precio,
-        "img" : self.img
+        "img" : self.img,
+        "capacidad" : self.capacidad
         }
     """    
     Metodo disponible para comprobar que la vivienda esté reservada o libre según las fechas

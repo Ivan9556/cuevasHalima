@@ -40,11 +40,12 @@
         <h3>Viviendas disponibles</h3>
         {% for vivienda in viviendas %}
         <div class="vivienda">
-            <img src="{{url_for('static', filename='img/fotos/' + vivienda.img)}}" alt="{{vivienda.nombre}}">
+            <img src="{{url_for('static', filename='img/fotos/' + vivienda.img)}}" alt="{{vivienda.nombre}}" class="img-vivienda">
             <h4>{{ vivienda.nombre }}</h4>
-            <p>descripcion: {{ vivienda.descripcion }}</p>
-            <p>Precio: {{ vivienda.precio * cantidad_noches }}€</p>
-            <p>Precio: {{ vivienda.precio }}€ por noche</p>
+            <p>Descripcion: {{ vivienda.descripcion }}</p>
+            <p><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="usuarios"> {{vivienda.capacidad}}</p>
+            <p>Precio reserva: {{ vivienda.precio * cantidad_noches }}€</p>
+            <p class="precio-noche">{{ vivienda.precio }}€ por noche</p>
             <button type="button" class="seleccionar-vivienda" data-nombre="{{ vivienda.nombre }}"
                 data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
         </div>

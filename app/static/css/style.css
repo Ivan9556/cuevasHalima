@@ -251,9 +251,13 @@ h3 {
     gap: 20px;
     align-items: center;
 }
-.vivienda img{
+.img-vivienda{
     width: 250px;
     height: 150px;
+}
+
+.precio-noche{
+    font-size: small;
 }
 
 .datos-reserva{

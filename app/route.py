@@ -188,7 +188,8 @@ def buscar_reserva():
             nombre=v['nombre'],
             descripcion=v['descripcion'],
             precio=v['precio'],
-            img=v['img']
+            img=v['img'],
+            capacidad=v['capacidad']
         )
         if vivienda.disponible(fecha_entrada, fecha_salida, db):
             viviendas_disponibles.append(vivienda)
