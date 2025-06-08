@@ -256,7 +256,15 @@ h3 {
     height: 150px;
 }
 
+.datos-reserva{
+    display: none;
+}
+
 .form-reserva{
+    display: none;
+}
+
+.pago{
     display: none;
 }
 /*Pie de pagina*/
