@@ -9,8 +9,10 @@
 
 {% block content %}
 
+<!--Bloque busqueda-->
+<div class="bloque-busqueda" id="bloque-busqueda">
 <!--Calendario-->
-<div class="calendario">
+<div class="calendario" id="calendario">
     <div class="form-calendario">
         <img src="{{url_for ('static', filename='img/fotos/Portada_reserva.jpeg')}}" alt="portada_reserva">
         <form action="buscar-reserva" method="GET">
@@ -19,7 +21,7 @@
             <label for="fecha2">Fecha Salida</label><br>
             <input type="text" id="salida" name="salida" required><br>
             <label for="adultos">Adultos</label>
-            <select name="adultos" id="adultos">
+            <select name="adultos" id="adultos" required>
                 {% for i in range (0,5) %}
                 <option value="{{i}}">{{i}}</option>
                 {% endfor %}
@@ -54,6 +56,9 @@
         {% endif %}
     </div>
 </div>
+</div>
+<!--Bloque reserva-->
+<div class="bloque-reserva" id="bloque-reserva">
 <!--Datos de la reserva-->
 <div class="datos-reserva" id="datos-reserva">
     <h3>Datos de la reserva</h3>
@@ -62,6 +67,8 @@
         <label for="fecha_entrada">:{{entrada_str}}</label><br>
         <label for="fecha_salida">Fecha salida</label>
         <label for="fecha_salida">: {{salida_str}}</label><br>
+        <label for="fecha_salida">Número de noches</label>
+        <label for="fecha_salida">: {{cantidad_noches}}</label><br>
         <label for="numero_adultos">Adultos</label>
         <label for="numero_adultos">: {{numero_adultos}}</label><br>
         <label for="numero_ninos">Niños</label>
@@ -97,6 +104,7 @@
         <input type="text" name="pais" id="pais"><br>
         <button type="submit">Reservar</button>
     </form>
+</div>
 </div>
 <div class="pago">
     <form action="metodo-pago" method="POST">
@@ -154,13 +162,18 @@
             document.getElementById("nombre_vivienda").value = nomVivienda;
             document.getElementById("precio_vivienda").value = precioVivienda;
 
+            //Ocultar calendario
+            document.getElementById("bloque-busqueda").style.display = "none"
+
             //Ocultar viviendas 
-            document.getElementById("resultados").style.display = "none"
-            
-            //Mostrar datos de la reserva
+            document.getElementById("bloque-reserva").style.display = "flex"
+
+            /*Mostrar datos de la reserva
             document.getElementById("datos-reserva").style.display = "block"
+
             //Mostar el formulario reserva
             document.getElementById("form-reserva").style.display = "block"
+            */
         })
     })
 </script>
