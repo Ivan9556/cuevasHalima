@@ -10,9 +10,9 @@
 {% block content %}
 
 <!--Mi calendario-->
-<div class="reserva">
-    <div class="calendario">
-        <h3>Haz tu reserva</h3>
+<div class="calendario">
+    <div class="form-calendario">
+        <img src="{{url_for ('static', filename='img/fotos/Portada_reserva.jpeg')}}" alt="portada_reserva">
         <form action="buscar-reserva" method="GET">
             <label for="fecha">Fecha Entrada</label><br>
             <input type="text" id="entrada" name="entrada" required><br>
@@ -34,27 +34,6 @@
         </form>
     </div>
 </div>
-<br>
-<div>
-    <form action="metodo-pago" method="POST">
-        <p>Boton para pagar</p>
-        <button type="submit">Pago</button>
-    </form>
-</div>
-<div>
-    <h3>Datos de la reserva</h3>
-    <form action="informacion-reserva" method="GET">
-        <label for="fecha_entrada">Fecha entrada</label>
-        <label for="fecha_entrada">:{{entrada_str}}</label><br>
-        <label for="fecha_salida">Fecha salida</label>
-        <label for="fecha_salida">: {{salida_str}}</label><br>
-        <label for="numero_adultos">Adultos</label>
-        <label for="numero_adultos">: {{numero_adultos}}</label><br>
-        <label for="numero_ninos">Niños</label>
-        <label for="numero_ninos">: {{numero_ninos}}</label><br>
-        <button type="submit">Modificar</button>
-    </form>
-</div>
 <div class="resultados">
     <h3>Viviendas disponibles</h3>
     <div class="viviendas">
@@ -70,6 +49,20 @@
         {% endfor %}
         {% endif %}
     </div>
+</div>
+<div>
+    <h3>Datos de la reserva</h3>
+    <form action="informacion-reserva" method="GET">
+        <label for="fecha_entrada">Fecha entrada</label>
+        <label for="fecha_entrada">:{{entrada_str}}</label><br>
+        <label for="fecha_salida">Fecha salida</label>
+        <label for="fecha_salida">: {{salida_str}}</label><br>
+        <label for="numero_adultos">Adultos</label>
+        <label for="numero_adultos">: {{numero_adultos}}</label><br>
+        <label for="numero_ninos">Niños</label>
+        <label for="numero_ninos">: {{numero_ninos}}</label><br>
+        <button type="submit">Modificar</button>
+    </form>
 </div>
 <div class="form-reserva" id="form-reserva">
     <h3>Formulario de reserva</h3>
@@ -97,6 +90,12 @@
         <label for="pais">Pais</label>
         <input type="text" name="pais" id="pais"><br>
         <button type="submit">Reservar</button>
+    </form>
+</div>
+<div>
+    <form action="metodo-pago" method="POST">
+        <p>Boton para pagar</p>
+        <button type="submit">Pago</button>
     </form>
 </div>
 <!--Calendario Flatpickr con css y js-->
