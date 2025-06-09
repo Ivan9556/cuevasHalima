@@ -219,7 +219,7 @@ def hacer_reserva():
 
     id_reserva = Reserva.generar_id(db)
     nombre_vivienda = request.form["nombre_vivienda"]
-    precio_reserva = request.form["precio_vivienda"]
+    precio_reserva = int(float( request.form["precio_vivienda"]) * 100) 
     nombre_persona = request.form["nombre_persona"]
     apellidos_persona = request.form["apellidos_persona"]
     fecha_entrada_str = request.form["fecha_entrada"]
@@ -254,17 +254,40 @@ def hacer_reserva():
         ciudad=ciudad,
         provincia=provincia,
         codigo_postal=codigo_postal,
-        pais=pais
+        pais=pais,
+        estado="pendiente"
     )
 
     db.reservas.insert_one(reserva.to_dict())
 
     fechas_reservadas = fechas_ocupadas(db)
-    
 
-    print("reserva insertada correctamente")
+        #Clave Stripe
+    stripe.api_key = 'sk_test_51RVutIQ6yxCCrrhAY5KuAL4b48LqwXJ0W3xCk1o4TabzZSqV9hVGoxQcjTIJaPggCy8GQpOYs7EKBmkIbAQt8WRI00r2LEGouc'
 
-    return render_template("/reserva.html", fechas_reservadas = fechas_reservadas)
+    try:
+        sesion = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'eur',
+                    'product_data':{
+                        'name': 'Reserva: {nombre_vivienda}',
+                    },
+                    'unit_amount': precio_reserva,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://127.0.0.1:5000/sucess?id_reserva={id_reserva}?fechas_reservadas0{fechas_reservadas}',
+            cancel_url='http://127.0.0.1:5000/cancel',
+            metadata={'id_reserva' : id_reserva},
+            metadata={'fechas_reservadas': fechas_reservadas}
+            
+        )
+        return redirect(sesion.url)
+    except Exception as e:
+        return jsonify(error=str(e)), 403
 
 @main.route('/metodo-pago', methods=['POST'])
 def realizar_pago():
@@ -295,7 +318,22 @@ def realizar_pago():
 
 @main.route('/sucess')
 def success():
-    return 'Pago exitoso'
+    db = mongo.db
+    id_reserva = request.args.get("id_reserva")
+
+    if not id_reserva:
+        return "id no encontrado", 400
+    
+    #Actualizamos la base de datos
+
+    db.reservas.update_one(
+        {'id_reserva' : id_reserva},
+        {'$set' : {'estado' : 'pagado'}}
+    )
+
+    reserva = db.reservas.find_one({'id_reserva': id_reserva})
+
+    return render_template("/reserva.html", reserva=reserva)
 
 @main.route('/cancel')
 def cancel():

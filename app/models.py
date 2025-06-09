@@ -34,7 +34,7 @@ class Vivienda:
 
 class Reserva():
     def __init__(self, id_reserva, nombre_vivienda, precio_reserva, nombre_persona, apellidos_persona, fecha_entrada, 
-    fecha_salida, numero_adultos, numero_ninos, telefono, direccion, ciudad, provincia, codigo_postal, pais):
+    fecha_salida, numero_adultos, numero_ninos, telefono, direccion, ciudad, provincia, codigo_postal, pais, estado):
         
         self.id_reserva = id_reserva
         self.nombre_vivienda = nombre_vivienda
@@ -51,6 +51,7 @@ class Reserva():
         self.provincia = provincia
         self.codigo_postal = codigo_postal
         self.pais = pais
+        self.estado = estado
 
     def to_dict(self):
         return {
@@ -68,7 +69,8 @@ class Reserva():
             "ciudad": self.ciudad,
             "provincia": self.provincia,
             "codigo_postal": self.codigo_postal,
-            "pais": self.pais
+            "pais": self.pais,
+            "estado": self.estado
         }
     """
     Usamos la colleccion "contador", donde buscamos el documento con id llamado "id_reserva", "$inc" le indicamos a Mongo que 
