@@ -219,7 +219,8 @@ def hacer_reserva():
 
     id_reserva = Reserva.generar_id(db)
     nombre_vivienda = request.form["nombre_vivienda"]
-    precio_reserva = int(float( request.form["precio_vivienda"]) * 100) 
+    precio_reserva = int(float( request.form["precio_vivienda"]) * 100)
+    cantidad_noches = request.form["cantidad_noches"]
     nombre_persona = request.form["nombre_persona"]
     apellidos_persona = request.form["apellidos_persona"]
     fecha_entrada_str = request.form["fecha_entrada"]
@@ -255,7 +256,7 @@ def hacer_reserva():
         provincia=provincia,
         codigo_postal=codigo_postal,
         pais=pais,
-        estado="pendiente"
+        estado="pendiente de pago"
     )
 
     db.reservas.insert_one(reserva.to_dict())
@@ -272,60 +273,28 @@ def hacer_reserva():
                 'price_data': {
                     'currency': 'eur',
                     'product_data':{
-                        'name': 'Reserva: {nombre_vivienda}',
+                        'name': f'Reserva: {nombre_vivienda}',
+                        'description': f'Numero de noches : {cantidad_noches}'
                     },
-                    'unit_amount': precio_reserva,
+                    'unit_amount':precio_reserva,
                 },
                 'quantity': 1,
             }],
             mode='payment',
-            success_url='http://127.0.0.1:5000/sucess?id_reserva={id_reserva}?fechas_reservadas0{fechas_reservadas}',
+            success_url=f'http://127.0.0.1:5000/success?id_reserva={id_reserva}',
             cancel_url='http://127.0.0.1:5000/cancel',
             metadata={'id_reserva' : id_reserva},
-            metadata={'fechas_reservadas': fechas_reservadas}
-            
         )
         return redirect(sesion.url)
     except Exception as e:
         return jsonify(error=str(e)), 403
 
-@main.route('/metodo-pago', methods=['POST'])
-def realizar_pago():
-
-    #Clave Stripe
-    stripe.api_key = 'sk_test_51RVutIQ6yxCCrrhAY5KuAL4b48LqwXJ0W3xCk1o4TabzZSqV9hVGoxQcjTIJaPggCy8GQpOYs7EKBmkIbAQt8WRI00r2LEGouc'
-
-    try:
-        sesion = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[{
-                'price_data': {
-                    'currency': 'eur',
-                    'product_data':{
-                        'name': 'Reserva vivienda',
-                    },
-                    'unit_amount': 5000,
-                },
-                'quantity': 1,
-            }],
-            mode='payment',
-            success_url='http://127.0.0.1:5000/sucess',
-            cancel_url='http://127.0.0.1:5000/cancel'
-        )
-        return redirect(sesion.url)
-    except Exception as e:
-        return jsonify(error=str(e)), 403
-
-@main.route('/sucess')
+@main.route('/success')
 def success():
     db = mongo.db
-    id_reserva = request.args.get("id_reserva")
-
-    if not id_reserva:
-        return "id no encontrado", 400
+    id_reserva = int(request.args.get("id_reserva"))
     
     #Actualizamos la base de datos
-
     db.reservas.update_one(
         {'id_reserva' : id_reserva},
         {'$set' : {'estado' : 'pagado'}}
@@ -333,8 +302,12 @@ def success():
 
     reserva = db.reservas.find_one({'id_reserva': id_reserva})
 
-    return render_template("/reserva.html", reserva=reserva)
+    fechas_reservadas = fechas_ocupadas(db)
+
+    return render_template("/reserva.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
 
 @main.route('/cancel')
 def cancel():
-    return 'El pago fallo'
+    db = mongo.db
+    fechas_reservadas = fechas_ocupadas(db)
+    return render_template("/reserva.html", fechas_reservadas=fechas_reservadas)
