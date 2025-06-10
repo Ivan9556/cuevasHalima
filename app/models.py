@@ -34,7 +34,7 @@ class Vivienda:
 
 class Reserva():
     def __init__(self, id_reserva, nombre_vivienda, precio_reserva, nombre_persona, apellidos_persona, fecha_entrada, 
-    fecha_salida, numero_adultos, numero_ninos, telefono, direccion, ciudad, provincia, codigo_postal, pais, estado):
+    fecha_salida, numero_adultos, numero_ninos, telefono, correo, direccion, ciudad, provincia, codigo_postal, pais, estado):
         
         self.id_reserva = id_reserva
         self.nombre_vivienda = nombre_vivienda
@@ -46,6 +46,7 @@ class Reserva():
         self.numero_adultos = numero_adultos
         self.numero_ninos = numero_ninos
         self.telefono = telefono
+        self.correo = correo
         self.direccion = direccion
         self.ciudad = ciudad
         self.provincia = provincia
@@ -65,6 +66,7 @@ class Reserva():
             "numero_adultos": self.numero_adultos,
             "numero_ninos": self.numero_ninos,
             "telefono": self.telefono,
+            "correo": self.correo,
             "direccion": self.direccion,
             "ciudad": self.ciudad,
             "provincia": self.provincia,

@@ -10,15 +10,6 @@ Color secundario #057075
 
 Casi blanco: #e9f8f1 
 
-<script>
-    document.querySelectorAll(".buscar-fecha",).forEach(button => {
-        button.addEventListener("clieck", function(){
-            document.getElementsByClassName("resultados").style.display = "block"
-        })
-    })
-</script>
-            <img src="{{url_for('static', filename='img/fotos/' + vivienda.img)}}" alt="{{vivienda.nombre}}">
-
 
 
 

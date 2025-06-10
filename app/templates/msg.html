@@ -1,0 +1,24 @@
+<style>
+    .contenido{padding: 15px;}
+    .pie{font-size: 12px; color: #777; padding: 10px;}
+</style>
+
+<img src="{{url_for('static', filename='img/logos/logoBoceto6msg.jpeg')}}" alt="logo">
+
+<div class="contenido">
+    <p>Gracias por tu reserva {{nombre}} {{apellidos}}</p>
+    <p>Datos de la reserva:</p>
+    <p>Cueva: {{vivienda}}</p>
+    <p>Fecha entrada: {{entrada}}</p>
+    <p>Fecha salida: {{salida}}</p>
+    <p>Adultos: {{adultos}}</p>
+    <p>Niños: {{niños}}</p>
+
+    <p>¡Gracias por confiar en nosotros!</p>
+    <p>Saludos cordiales</p>
+</div>
+
+<div class="pie">
+    Cuevas Halima · Granada · cuevashalima@gmail.com<br>
+    Síguenos en <a href="https://www.instagram.com/cuevas.halima/">Instagram</a>
+</div>

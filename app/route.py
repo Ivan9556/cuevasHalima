@@ -228,6 +228,7 @@ def hacer_reserva():
     numero_adultos = request.form["numero_adultos"]
     numero_ninos = request.form["numero_ninos"]
     telefono = request.form["telefono"]
+    correo = request.form["correo"]
     direccion = request.form["direccion"]
     ciudad = request.form["ciudad"]
     provincia = request.form["provincia"]
@@ -246,6 +247,7 @@ def hacer_reserva():
     "numero_adultos": numero_adultos,
     "numero_ninos": numero_ninos,
     "telefono": telefono,
+    "correo": correo,
     "direccion": direccion,
     "ciudad": ciudad,
     "provincia": provincia,
@@ -300,6 +302,7 @@ def success():
         numero_adultos=datos["numero_adultos"],
         numero_ninos=datos["numero_ninos"],
         telefono=datos["telefono"],
+        correo=datos["correo"],
         direccion=datos["direccion"],
         ciudad=datos["ciudad"],
         provincia=datos["provincia"],
@@ -310,6 +313,21 @@ def success():
 
     fechas_reservadas = fechas_ocupadas(db)
     db.reservas.insert_one(reserva.to_dict())
+    
+    msg = Message(
+        "Confirmacion de su reserva",
+        sender = current_app.config['MAIL_USERNAME'],
+        recipients = [reserva.correo])
+    msg.html = render_template("msg.html",
+        nombre=reserva.nombre_persona,
+        apellidos=reserva.apellidos_persona,
+        vivienda=reserva.nombre_vivienda,
+        entrada=reserva.fecha_entrada.strftime("%d-%m-%Y"),
+        salida=reserva.fecha_salida.strftime("%d-%m-%Y"),
+        adultos=reserva.numero_adultos,
+        niños=reserva.numero_ninos   
+    )
+    mail.send(msg)
 
     return render_template("/reserva.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
 
@@ -318,3 +336,7 @@ def cancel():
     db = mongo.db
     fechas_reservadas = fechas_ocupadas(db)
     return render_template("/reserva.html", fechas_reservadas=fechas_reservadas)
+
+@main.route('/msg')
+def msg():
+    return render_template('/msg.html')
