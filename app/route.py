@@ -14,7 +14,7 @@ registrar rutas y para llamar con url_for('main.nombre_función').
 __name__: Indica el módulo actual. Flask lo usa para localizar archivos 
 relacionados (por ejemplo, plantillas o archivos estáticos si se personaliza).
 """
-from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify
+from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify, session
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
@@ -234,34 +234,24 @@ def hacer_reserva():
     codigo_postal = request.form["codigo_postal"]
     pais = request.form["pais"]
 
-
-    #Pasamos las fechas a datetime
-    fecha_entrada = datetime.strptime(fecha_entrada_str, "%Y-%m-%d %H:%M:%S" )
-    fecha_salida = datetime.strptime(fecha_salida_str, "%Y-%m-%d %H:%M:%S")
-
-    #Guardamos la reserva en la db
-    reserva = Reserva(
-        id_reserva= id_reserva, 
-        nombre_vivienda=nombre_vivienda,
-        precio_reserva=precio_reserva,
-        nombre_persona=nombre_persona,
-        apellidos_persona=nombre_persona,
-        fecha_entrada=fecha_entrada,
-        fecha_salida=fecha_salida,
-        numero_adultos=numero_adultos,
-        numero_ninos=numero_ninos,
-        telefono=telefono,
-        direccion=direccion,
-        ciudad=ciudad,
-        provincia=provincia,
-        codigo_postal=codigo_postal,
-        pais=pais,
-        estado="pendiente de pago"
-    )
-
-    db.reservas.insert_one(reserva.to_dict())
-
-    fechas_reservadas = fechas_ocupadas(db)
+    #Utilizamos session de Flask, para guardar dato temporales, del usuario entre peticiones. 
+    session['datos-reserva'] = {
+    "id_reserva": id_reserva,
+    "nombre_vivienda": nombre_vivienda,
+    "precio_reserva": precio_reserva,
+    "nombre_persona": nombre_persona,
+    "apellidos_persona": apellidos_persona,
+    "fecha_entrada": fecha_entrada_str,
+    "fecha_salida": fecha_salida_str,
+    "numero_adultos": numero_adultos,
+    "numero_ninos": numero_ninos,
+    "telefono": telefono,
+    "direccion": direccion,
+    "ciudad": ciudad,
+    "provincia": provincia,
+    "codigo_postal": codigo_postal,
+    "pais": pais
+    }
 
         #Clave Stripe
     stripe.api_key = 'sk_test_51RVutIQ6yxCCrrhAY5KuAL4b48LqwXJ0W3xCk1o4TabzZSqV9hVGoxQcjTIJaPggCy8GQpOYs7EKBmkIbAQt8WRI00r2LEGouc'
@@ -281,28 +271,45 @@ def hacer_reserva():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url=f'http://127.0.0.1:5000/success?id_reserva={id_reserva}',
+            success_url=f'http://127.0.0.1:5000/success',
             cancel_url='http://127.0.0.1:5000/cancel',
-            metadata={'id_reserva' : id_reserva},
         )
         return redirect(sesion.url)
     except Exception as e:
         return jsonify(error=str(e)), 403
-
+    
 @main.route('/success')
 def success():
     db = mongo.db
-    id_reserva = int(request.args.get("id_reserva"))
-    
-    #Actualizamos la base de datos
-    db.reservas.update_one(
-        {'id_reserva' : id_reserva},
-        {'$set' : {'estado' : 'pagado'}}
+    #Recogemos los datos de la sesión y la borramos 
+    datos = session.pop("datos-reserva", None)
+
+    #Pasamos las fechas a datetime
+    fecha_entrada = datetime.strptime(datos["fecha_entrada"], "%Y-%m-%d %H:%M:%S" )
+    fecha_salida = datetime.strptime(datos["fecha_salida"], "%Y-%m-%d %H:%M:%S")
+
+    #Guardamos la reserva en la db
+    reserva = Reserva(
+        id_reserva=datos["id_reserva"],
+        nombre_vivienda=datos["nombre_vivienda"],
+        precio_reserva=datos["precio_reserva"],
+        nombre_persona=datos["nombre_persona"],
+        apellidos_persona=datos["apellidos_persona"],
+        fecha_entrada=fecha_entrada,
+        fecha_salida=fecha_salida,
+        numero_adultos=datos["numero_adultos"],
+        numero_ninos=datos["numero_ninos"],
+        telefono=datos["telefono"],
+        direccion=datos["direccion"],
+        ciudad=datos["ciudad"],
+        provincia=datos["provincia"],
+        codigo_postal=datos["codigo_postal"],
+        pais=datos["pais"],
+        estado="pagado"
     )
 
-    reserva = db.reservas.find_one({'id_reserva': id_reserva})
-
     fechas_reservadas = fechas_ocupadas(db)
+    db.reservas.insert_one(reserva.to_dict())
 
     return render_template("/reserva.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
 
