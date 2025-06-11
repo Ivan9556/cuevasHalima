@@ -274,7 +274,7 @@ def hacer_reserva():
             }],
             mode='payment',
             success_url=f'http://127.0.0.1:5000/success',
-            cancel_url='http://127.0.0.1:5000/cancel',
+            cancel_url='http://127.0.0.1:5000/cancelacion',
         )
         return redirect(sesion.url)
     except Exception as e:
@@ -329,7 +329,7 @@ def success():
     )
     mail.send(msg)
 
-    return render_template("/reserva.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
+    return render_template("/confirmacion.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
 
 @main.route('/cancel')
 def cancel():
