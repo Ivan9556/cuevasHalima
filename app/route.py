@@ -340,3 +340,10 @@ def cancel():
 @main.route('/msg')
 def msg():
     return render_template('/msg.html')
+
+@main.route('/confirmacion')
+def confirmacion():
+    return render_template('/confirmacion.html')
+@main.route('/cancelacion')
+def cancelacion():
+    return render_template('/cancelacion.html')

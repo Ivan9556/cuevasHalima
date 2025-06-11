@@ -282,7 +282,6 @@ h3 {
     font-size: small;
 }
 
-
 .bloque-reserva{
     display: none;
     align-items: center;
@@ -334,6 +333,23 @@ h3 {
 .pago{
     display: none;
 }
+
+/*Ventana confirmacion / cancelacion*/
+
+.ventana-confi_cancel{
+    background-color: #d6e8df;
+    font-size: larger;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 9%;
+    padding: 5%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #2e4a39;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /*Pie de pagina*/
 
 .contacto {
