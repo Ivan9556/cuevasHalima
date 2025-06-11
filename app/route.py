@@ -167,6 +167,11 @@ def buscar_reserva():
     salida_str = request.args.get('salida')
     numero_adultos = request.args.get('adultos')
     numero_ninos = request.args.get('ninos')
+    
+    #Comprobamos que existen fechas
+    if not entrada_str or not salida_str:
+        fechas_reservadas = fechas_ocupadas(db)
+        return render_template('/reserva.html', fechas_reservadas=fechas_reservadas)
 
     #los convertimos en "datetime" para comparar fechas. Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
     fecha_entrada = datetime.strptime(entrada_str , "%Y-%m-%d")
@@ -210,7 +215,6 @@ def buscar_reserva():
         fechas_reservadas = fechas_reservadas
 
         )
-
 
 @main.route('/form_reserva', methods=['POST'])
 def hacer_reserva():
@@ -275,6 +279,7 @@ def hacer_reserva():
             mode='payment',
             success_url=f'http://127.0.0.1:5000/success',
             cancel_url='http://127.0.0.1:5000/cancelacion',
+            customer_email=correo,
         )
         return redirect(sesion.url)
     except Exception as e:
@@ -330,12 +335,6 @@ def success():
     mail.send(msg)
 
     return render_template("/confirmacion.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
-
-@main.route('/cancel')
-def cancel():
-    db = mongo.db
-    fechas_reservadas = fechas_ocupadas(db)
-    return render_template("/reserva.html", fechas_reservadas=fechas_reservadas)
 
 @main.route('/msg')
 def msg():
