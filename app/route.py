@@ -192,7 +192,7 @@ def buscar_reserva():
         vivienda = Vivienda(
             nombre=v['nombre'],
             descripcion=v['descripcion'],
-            precio=int(v['precio']),
+            precio=v['precio'],
             img=v['img'],
             capacidad=v['capacidad']
         )
@@ -223,7 +223,8 @@ def hacer_reserva():
 
     id_reserva = Reserva.generar_id(db)
     nombre_vivienda = request.form["nombre_vivienda"]
-    precio_reserva = int(float( request.form["precio_vivienda"]) * 100)
+    precio_reserva = request.form["precio_vivienda"]
+    precio_reserva_stripe = int(float(request.form["precio_vivienda"]) * 100) #Parseamos el precio en centavos para que pueda entenderlo stripe
     cantidad_noches = request.form["cantidad_noches"]
     nombre_persona = request.form["nombre_persona"]
     apellidos_persona = request.form["apellidos_persona"]
@@ -244,6 +245,7 @@ def hacer_reserva():
     "id_reserva": id_reserva,
     "nombre_vivienda": nombre_vivienda,
     "precio_reserva": precio_reserva,
+    "precio_reserva_stripe" : precio_reserva_stripe,
     "nombre_persona": nombre_persona,
     "apellidos_persona": apellidos_persona,
     "fecha_entrada": fecha_entrada_str,
@@ -272,7 +274,7 @@ def hacer_reserva():
                         'name': f'Reserva: {nombre_vivienda}',
                         'description': f'Numero de noches : {cantidad_noches}'
                     },
-                    'unit_amount':precio_reserva,
+                    'unit_amount':precio_reserva_stripe,
                 },
                 'quantity': 1,
             }],
@@ -294,6 +296,7 @@ def success():
     #Pasamos las fechas a datetime
     fecha_entrada = datetime.strptime(datos["fecha_entrada"], "%Y-%m-%d %H:%M:%S" )
     fecha_salida = datetime.strptime(datos["fecha_salida"], "%Y-%m-%d %H:%M:%S")
+
 
     #Guardamos la reserva en la db
     reserva = Reserva(
