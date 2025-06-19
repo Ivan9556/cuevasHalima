@@ -85,4 +85,30 @@
         {% endwith %}
     </div>
 </div>
+{% block script %}
+        <script> //Script para interactuar con el scroll
+        //Con el DOMContentLoaded esperamos que el documento este cargado completamente 
+            document.addEventListener("DOMContentLoaded", function(){
+                const formulario = document.querySelector('.formulario'); //Aquí seleccionamos el bloque que vamos a animar
+                //Utilizamos IntersectionObserver para detectar cuándo un objeto entra en pantalla (por ejemplo haciendo scroll) 
+                //Mucho más liviano que escuchar scroll manualmente
+                const observacion = new IntersectionObserver(entradas => { //"entradas" una lista de los elementos observados en este caso form
+                //Se usa forEach parar recorrer la lista de los elementos que necesiten un cambio de visibilidad
+                    entradas.forEach(entrada => {
+                        //Comprobamos que el form este visible en pantalla. Utilizamos isIntersecting (boolean) para 
+                        //verificar el % indicado (threshold)
+                        if (entrada.isIntersecting){
+                            //Añadimos a la lista el form   
+                            formulario.classList.add('visible');//Activamos el bloque que tenemos en css
+                            observacion.disconnect();//Solo una vez
+                        }
+                    }); 
+                },{
+                threshold: 0.2 // Este es el % de bloque que queremos animar (20%)
+                });
+                // Por último pedimos a IntersectionObserver que observe ese bloque cuando entre y salga de la pantalla
+                observacion.observe(formulario);
+            });
+        </script>
+{% endblock %}
 {% endblock %}

@@ -179,10 +179,22 @@ h3 {
 .formulario {
     background-color: #fcfbfb;
     border-radius: 12px;
-    max-width: 400px; /* más estrecho */
-    margin: 40px auto; /* centrado vertical y horizontal */
-    padding: 20px 25px; /* menos padding */
+    max-width: 400px;
+    margin: 40px auto; 
+    margin-top:100px;
+    padding: 20px 25px;
     box-shadow: 0 12px 50px #d6e8df;
+    /*Hacemos el bloque oculto al inicio y añadimos una transaccion suave*/
+    visibility: hidden; /*Evistamos usar display porque es más robusto (no animable)*/
+    opacity: 0; /* opacity + transform permite animaciones suaves*/
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.formulario.visible{
+    /*Aquí hacemos visible el bloque tras el uso de JS*/
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .formulario h3 {
