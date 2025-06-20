@@ -346,6 +346,19 @@ def msg():
 @main.route('/confirmacion')
 def confirmacion():
     return render_template('/confirmacion.html')
+
 @main.route('/cancelacion')
 def cancelacion():
     return render_template('/cancelacion.html')
+
+@main.route('/senderismo')
+def senderismo():
+    return render_template('/senderismo.html')
+
+@main.route('/kayak')
+def kayak():
+    return render_template('/kayak.html')
+
+@main.route('/aguas-termales')
+def aguas_termales():
+    return render_template('/aguas-termales.html')

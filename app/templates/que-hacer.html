@@ -7,16 +7,65 @@
 
 <div class="intro">
     <h3>Disfutra de inumerables actividades durante tu estancia</h3>
-    Disfruta de la naturaleza en estado puro con estas propuestas al aire libre. Desde deportes acuáticos hasta baños termales o rutas en bicicleta, el entorno de Bácor ofrece planes para todos los gustos.
+    Disfruta de la naturaleza en estado puro con estas propuestas al aire libre. Desde deportes acuáticos hasta baños
+    termales o rutas de senderismo, el entorno de Bácor ofrece planes para todos los gustos.
 </div>
 <div class="fila">
     <div class="senderismo">
         <h3>Senderismo</h3>
-        <p>IMG</p>
-        <pre>
-            
-        </pre>
-
+        <img src="{{url_for('static', filename='img/fotos/actividades/senderismo.jpg')}}" alt="senderismo">
+        <p>
+            Descubre a pie los paisajes semidesérticos del Geoparque de Granada. Barrancos, badlans y una rica
+            biodiversidad te esperan en una experiencia única de senderismo en plena naturaleza.
+        </p>
+        <a href="{{url_for('main.senderismo')}}">Ver más</a>
+    </div>
+    <div class="kayak">
+        <h3>Experiencia en Kayak</h3>
+        <img src="{{url_for('static', filename='img/fotos/actividades/kayak.jpg')}}" alt="kayak">
+        <p>
+            Explora el embalse del Negratín en kayak o paddle surf. Navegar por sus aguas azul turquesa entre barrancos
+            y acantilados es una experiencia inolvidable.
+        </p>
+        <a href="{{url_for('main.kayak')}}">Ver más</a>
+    </div>
+    <div class="aguas-termales">
+        <h3>Aguas termales</h3>
+        <img src="{{url_for('static', filename='img/fotos/actividades/aguas.jpg')}}" alt="aguas">
+        <p>
+            Sumérgete en aguas termales naturales con vistas espectaculares. Perfectas para relajarse
+            y simplemente desconectar.
+        </p>
+        <a href="{{url_for('main.aguas_termales')}}">Ver más</a>
     </div>
 </div>
-{% endblock %}   
+<div class="fila-2">
+    <div class="senderismo">
+        <h3>Senderismo</h3>
+        <img src="{{url_for('static', filename='img/fotos/actividades/senderismo.jpg')}}" alt="senderismo">
+        <p>
+            Descubre a pie los paisajes semidesérticos del Geoparque de Granada. Barrancos, badlans y una rica
+            biodiversidad te esperan en una experiencia única de senderismo en plena naturaleza.
+        </p>
+        <a href="{{url_for('main.senderismo')}}">Ver más</a>
+    </div>
+    <div class="kayak">
+        <h3>Experiencia en Kayak</h3>
+        <img src="{{url_for('static', filename='img/fotos/actividades/kayak.jpg')}}" alt="kayak">
+        <p>
+            Explora el embalse del Negratín en kayak o paddle surf. Navegar por sus aguas azul turquesa entre barrancos
+            y acantilados es una experiencia inolvidable.
+        </p>
+        <a href="{{url_for('main.senderismo')}}">Ver más</a>
+    </div>
+    <div class="aguas-termales">
+        <h3>Aguas termales</h3>
+        <img src="{{url_for('static', filename='img/fotos/actividades/aguas.jpg')}}" alt="aguas">
+        <p>
+            Sumérgete en aguas termales naturales con vistas espectaculares. Perfectas para relajarse
+            y simplemente desconectar.
+        </p>
+        <a href="{{url_for('main.senderismo')}}">Ver más</a>
+    </div>
+</div>
+{% endblock %}

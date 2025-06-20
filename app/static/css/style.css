@@ -148,10 +148,74 @@ h3 {
 }
 
 .nosotros .texto {
-    font-size: larger;
+    font-size: large;
     text-align: center;
 }
 
+/*Que hacer*/
+
+.intro{
+    margin-left: 1%;
+    font-size: larger
+} 
+
+.fila {
+    display: flex;
+    margin-top: 2%;
+    margin-right: 17%;
+    margin-left : 7%;
+    gap: 5%;
+}
+
+.fila h3, p{
+    font-size: larger;
+}
+
+.fila div{
+    text-align: center;
+}
+
+.fila img{
+    width: 500px;
+    height: 300px;
+}
+
+.fila a{
+    background-color: #d6e8df;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.fila-2{
+    display: flex;
+    margin-top: 2%;
+    margin-right: 17%;
+    margin-left : 7%;
+    gap: 5%;  
+}
+
+.fila-2 h3, p{
+    font-size: larger;
+}
+
+.fila-2 div{
+    text-align: center;
+}
+
+.fila-2 img{
+    width: 500px;
+    height: 300px;
+}
+
+.fila-2 a{
+    background-color: #d6e8df;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+}
 /* UBICACION MAPS */
 .ubicacion {
     display: flex;
@@ -162,10 +226,10 @@ h3 {
 
 .informacion {
     font-size: 20px;
-    background-color: #fcfbfb; /* Color más claro y suave */
-    border-radius: 12px; /* Redondeado más natural */
+    background-color: #fcfbfb; 
+    border-radius: 12px;
     margin-right: 5%;
-    box-shadow: 0 12px 50px #d6e8df; /* Sombra suave */
+    box-shadow: 0 12px 50px #d6e8df; 
 }
 
 .informacion h3 {
@@ -233,7 +297,6 @@ h3 {
 
 .formulario button {
     background-color: #d6e8df;
-
     border: none;
     padding: 10px;
     font-size: 16px;
