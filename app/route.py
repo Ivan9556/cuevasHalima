@@ -362,3 +362,11 @@ def kayak():
 @main.route('/aguas-termales')
 def aguas_termales():
     return render_template('/aguas-termales.html')
+
+@main.route('/gastronomia')
+def gastronomia():
+    return render_template('/gastronomia.html')
+
+@main.route('/lugares')
+def lugares():
+    return render_template('/lugares.html')

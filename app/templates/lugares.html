@@ -1,0 +1,62 @@
+<!--Plantilla lugares a conocer-->
+{% extends "base.html" %}
+
+{% block title %}Lugares a conocer{% endblock %}
+
+{% block content %}
+<div class="lugar">
+    <div class="sitios">
+        <div class="texto">
+            <h3>Castillo de Bácor‑Olivar</h3>
+            <p>
+                Antigua fortaleza califal situada en lo alto del pueblo. Ofrece vistas espectaculares de la vega y los
+                badlands del Geoparque de Granada. Se aprecian las casas‑cueva y su torre evocadora de siglos de
+                historia. <br>
+            </p>
+            <h3>Miradores panorámicos</h3>
+            <p>
+                <b>Mirador La Chacha Carmen</b>: panorámicas del embalse del Negratín, Cerro Jabalcón y el típico barrio
+                de
+                cuevas árabes. <br>
+                <b>Mirador Manolico: memoria y paisaje: </b>
+                Desde este mirador se contempla la vega y el casco histórico, pero también se guarda memoria. Aquí se
+                alza
+                un monolito en homenaje a los vecinos de Bácor que fueron deportados al campo de concentración de
+                Mauthausen, recordando su historia y resistencia como parte de la memoria colectiva del pueblo. <br>
+                <b>Mirador La Celestina</b>: vistas únicas a los barrios de cuevas, un entorno de descanso y belleza
+                natural
+            </p>
+            <h3>Barrio de cuevas de El Olivar</h3>
+            <p>
+                Calles tradicionales entre vegas y badlands, con viviendas excavadas y reminiscencias de la arquitectura
+                troglodita. <br>
+            </p>
+            <h3>Fuentes locales</h3>
+            <p>
+                Destacan las fuentes tradicionales como El Caño, testigos del antiguo ritmo de vida del pueblo, y
+                refrescantes durante el paseo. El antiguo lavadero del caño de Bácor, hecho en piedra y alimentado por
+                el agua de la fuente, conserva sus pilas originales y refleja la vida cotidiana de antaño, cuando era
+                punto de encuentro para lavar la ropa y charlar entre vecinas. <br>
+            </p>
+            <h3>Lugares de interés cercanos</h3>
+            <p>
+                <b>Presa del Negratín</b>: aguas turquesas y entorno tranquilo <br>
+                <b>Parque Natural Sierra de Baza</b>: diversidad de ecosistemas a unos 16 km
+            </p>
+            <h3>Fiestas tradicionales</h3>
+            <p>
+                Fiestas locales en honor a San Bernabé (aprox. 11 de junio) <br>
+                Otras celebraciones destacadas: <br>
+                Día de las Merendetas (3 de febrero) <br>
+                Día de la Cruz (1 de mayo)<br>
+                Festividad de la Virgen de Fátima (13 de mayo)
+            </p>
+        </div>
+        <div>
+            <img src="{{url_for('static', filename='img/fotos/img_bacor/banco.jpeg')}}" alt="sitios">
+            <img src="{{url_for('static', filename='img/fotos/iglesia2.jpg')}}" alt="sitios">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -8,8 +8,8 @@
 <div class="intro">
     <h3>Disfutra de inumerables actividades durante tu estancia</h3>
     <p>
-    Naturaleza en estado puro con estas propuestas al aire libre. Desde deportes acuáticos hasta baños
-    termales o rutas de senderismo, el entorno de Bácor ofrece planes para todos los gustos.
+        Naturaleza en estado puro con estas propuestas al aire libre. Desde deportes acuáticos hasta baños
+        termales o rutas de senderismo, el entorno de Bácor ofrece planes para todos los gustos.
     </p>
 </div>
 <div class="fila">
@@ -43,31 +43,24 @@
 </div>
 <div class="fila-2">
     <div class="senderismo">
-        <h3>Senderismo</h3>
-        <img src="{{url_for('static', filename='img/fotos/actividades/senderismo.jpg')}}" alt="senderismo">
+        <h3>Gastronomía</h3>
+        <img src="{{url_for('static', filename='img/fotos/actividades/gastronomia/migas.png')}}" alt="gastronomia">
         <p>
-            Descubre a pie los paisajes semidesérticos del Geoparque de Granada. Barrancos, badlans y una rica
-            biodiversidad te esperan en una experiencia única de senderismo en plena naturaleza.
+            La gastronomía de Bácor es sencilla, casera y con raíces. Platos de cuchara, productos de la tierra y
+            recetas heredadas se mantienen vivas en cada celebración y en las cocinas del día a día. Aquí, el sabor es
+            tradición y cada bocado cuenta una historia.
         </p>
-        <a href="{{url_for('main.senderismo')}}">Ver más</a>
+        <a href="{{url_for('main.gastronomia')}}">Ver más</a>
     </div>
-    <div class="kayak">
-        <h3>Experiencia en Kayak</h3>
-        <img src="{{url_for('static', filename='img/fotos/actividades/kayak.jpg')}}" alt="kayak">
+    <div class="pueblo">
+        <h3>Conoce Bácor</h3>
+        <img src="{{url_for('static', filename='img/fotos/img_bacor/pueblo.jpeg')}}" alt="pueblo">
         <p>
-            Explora el embalse del Negratín en kayak o paddle surf. Navegar por sus aguas azul turquesa entre barrancos
-            y acantilados es una experiencia inolvidable.
+            Bácor-Olivar es un pequeño pueblo con alma, enclavado entre badlands, cuevas habitadas y paisajes que miran
+            al embalse del Negratín. Historia, tradición y naturaleza se entrelazan en sus calles y miradores,
+            invitándote a descubrir un lugar auténtico donde el pasado sigue vivo
         </p>
-        <a href="{{url_for('main.senderismo')}}">Ver más</a>
-    </div>
-    <div class="aguas-termales">
-        <h3>Aguas termales</h3>
-        <img src="{{url_for('static', filename='img/fotos/actividades/aguas.jpg')}}" alt="aguas">
-        <p>
-            Sumérgete en aguas termales naturales con vistas espectaculares. Perfectas para relajarse
-            y simplemente desconectar.
-        </p>
-        <a href="{{url_for('main.senderismo')}}">Ver más</a>
+        <a href="{{url_for('main.lugares')}}">Ver más</a>
     </div>
 </div>
 {% endblock %}

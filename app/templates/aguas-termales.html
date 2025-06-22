@@ -4,5 +4,26 @@
 {% block title %}Experiencia aguas termales{% endblock %}
 
 {% block content %}
-
+<div class="termales">
+    <h3>Aguas Termales</h3>
+    <div class="actividad-termal">
+        <div class="texto">
+            <p>Ubicación: Zújar</p>
+            <p>
+                Un baño de bienestar natural, situado en un entorno espectacular a orillas del embalse del Negratín, las
+                Aguas Termales de Zújar son un
+                rincón único donde relajarse y reconectar con la naturaleza. Sus aguas brotan a más de 30 °C durante
+                todo el
+                año, ricas en minerales con propiedades terapéuticas ideales para aliviar el estrés, mejorar la
+                circulación
+                y cuidar la piel. Rodeadas de paisajes semiáridos y vistas impresionantes a la Sierra de Baza, estas
+                pozas
+                naturales ofrecen una experiencia inolvidable de bienestar al aire libre.
+            </p>
+        </div>
+        <div>
+            <img src="{{url_for('static', filename='img/fotos/actividades/termales/termal.jpg')}}" alt="termal">
+        </div>
+    </div>
+</div>
 {% endblock %}

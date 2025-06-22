@@ -1,0 +1,29 @@
+<!--Plantilla gastronomia-->
+{% extends "base.html" %}
+
+{% block title %}Nuestra gastronomía{% endblock %}
+
+{% block content %}
+<div class="gastronomia">
+    <h3>Nuestra gastronomía</h3>
+    <div class="comida">
+        <div class="texto">
+            <h4>Gastronomía local: tradición y sabor en cada rincón</h4>
+            <p>
+            En Bácor y sus alrededores, la gastronomía forma parte de la esencia del lugar. Aquí se cocinan los
+            sabores de siempre, con productos artesanos que conservan la autenticidad de lo hecho a mano y a fuego
+            lento. <br>
+            Pan recién hecho en hornos tradicionales, embutidos caseros de calidad inmejorable elaborados en
+            carnicerías locales, y platos típicos que aún se comparten en las mesas de los vecinos: migas
+            congurupina, potajes de temporada o los sabrosos gurullos. <br>
+            Si te gusta comer bien y descubrir la cultura a través del paladar, aquí te espera una experiencia
+            auténtica. Desde los desayunos con pan casero y aceite del terreno, hasta las comidas con aroma a
+            tradición, cada bocado te conecta con la historia de este rincón del Altiplano granadino.
+            </p>
+        </div>
+        <div>
+            <img src="{{url_for('static', filename='img/fotos/actividades/gastronomia/tapa.png')}}" alt="plato">
+        </div>
+    </div>
+</div>
+{% endblock %}
