@@ -216,6 +216,60 @@ h3 {
     font-size: 16px;
     border-radius: 6px;
 }
+/*senderismo*/
+.rutas img{
+    height: 400px;
+    width: 450px;
+    padding-top: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 15%;
+    background-color: #fbf1e9;
+    box-shadow: 0 12px 50px #d6e8df; 
+}
+.tracamulas, 
+.chimeneas, 
+.pajarillo,
+.playa{
+    display: flex;
+    gap: 10%;   
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+}
+
+.rutas h3{
+    text-align: center;
+    font-size: 30px;
+}
+
+/*Kayak*/
+.acuatica{
+    display: flex;
+    gap: 10%;   
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+}
+
+.actividad-acuatica h3{
+    
+    text-align: center;
+    font-size: 30px;
+}
+
+.acuatica img{
+    height: 400px;
+    width: 450px;
+    margin-top: 15%;
+    padding-top: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 15%;
+    background-color: #fbf1e9;
+    box-shadow: 0 12px 50px #d6e8df; 
+}
+
 /* UBICACION MAPS */
 .ubicacion {
     display: flex;
