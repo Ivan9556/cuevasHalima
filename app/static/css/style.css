@@ -239,7 +239,8 @@ h3 {
 .tracamulas, 
 .chimeneas, 
 .pajarillo,
-.playa{
+.playa,
+.jabalcon{
     display: flex;
     gap: 10%;   
     margin-left: 20%;
@@ -293,6 +294,30 @@ h3 {
     font-size: 30px;
 }
 .actividad-termal img{
+    height: 400px;
+    width: 450px;
+    margin-top: 15%;
+    padding-top: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 15%;
+    background-color: #fbf1e9;
+    box-shadow: 0 12px 50px #d6e8df; 
+}
+
+.baño{
+    display: flex;
+    gap: 10%;   
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 5%; 
+}
+
+.baño .texto{
+    margin-top: 10%;
+}
+
+.baño img{
     height: 400px;
     width: 450px;
     margin-top: 15%;
