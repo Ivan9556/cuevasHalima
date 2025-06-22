@@ -147,14 +147,18 @@ h3 {
 
 .nosotros .cuerpo {
     display: flex;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
     gap: 5%;
 }
 
-.nosotros .texto {
-    font-size: large;
-    text-align: center;
+.nosotros .cuerpo h3{
+    font-size: 25px;
+}
+.nosotros .cuerpo img{
+    width: 600px;
+    height: 500px;
+    box-shadow: 0 20px 60px #d6e8df;
 }
 
 /*Que hacer*/
