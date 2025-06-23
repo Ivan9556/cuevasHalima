@@ -1,43 +1,90 @@
 <!--Plantilla mensaje correo-->
 <style>
+    html {
+        margin-right: 70%;
+    }
+
+    img {
+        width: 550px;
+    }
+
+    hr {
+        height: 2px;
+        background-color: #057075;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
     .contenido {
+        max-width: 600px;
+        margin: 0 auto;
         padding: 15px;
     }
+
 
     .contenido h4 {
         font-size: larger;
         color: #057075;
     }
 
+    .tabla-estancia {
+        border: 1px solid #057075;
+    }
+
+    .tabla-estancia .cabecera {
+        background-color: #e9f8f1;
+        border: 1px solid #057075;
+        text-align: center;
+    }
+
+    .tabla-estancia .total {
+        background-color: #e9f8f1;
+        text-align: center;
+    }
+
     .pie {
         font-size: 12px;
         color: #777;
         padding: 10px;
+        text-align: center;
     }
 </style>
-
-<img src="{{url_for('static', filename='img/logos/logoBoceto6msg.jpeg')}}" alt="logo">
-
 <div class="contenido">
-    <h4>{{nombre}}, ¡Su reserva ha sido confirmado!</h4>
+    <img src="{{url_for('static', filename='img/logos/logoBoceto6msg.jpeg')}}" alt="logo">
+
+    <h4>{{nombre}}, ¡su reserva ha sido confirmada!</h4>
     <p>Gracias por reservar con nosotros. Estos son los datos de tu reserva:</p>
-    <p>
-        <u>Datos del titular</u> <br>
-        Nombre:{{nombre}} <br>
-        Apellidos: {{apellidos}} <br>
-        Telefono: {{telefono}} <br>
-        Email: {{correo}} <br>
-        Cueva: {{vivienda}} <br>
-        Fecha entrada: {{entrada}} <br>
-        Fecha salida: {{salida}} <br>
-        Adultos: {{adultos}} <br>
-        Niños: {{niños}} <br>
-        Precio reserva: {{precio}} <br>
-    </p>
-    <p>Saludos cordiales</p>
+
+    <div class="datos-titular">
+        <p><strong>Nombre:</strong> {{nombre}}</p>
+        <p><strong>Apellidos:</strong> {{apellidos}}</p>
+        <p><strong>Teléfono:</strong> {{telefono}}</p>
+        <p><strong>Email:</strong> {{correo}}</p>
+    </div>
+
+    <hr>
+
+    <div class="tabla-estancia">
+        <div class="cabecera"><strong>Estancia</strong></div>
+        <div class="datos">
+            <p><strong>Cueva:</strong> {{vivienda}}</p>
+            <p><strong>Fecha entrada:</strong> {{entrada}}</p>
+            <p><strong>Fecha salida:</strong> {{salida}}</p>
+            <p><strong>Adultos:</strong> {{adultos}}</p>
+            <p><strong>Niños:</strong> {{niños}}</p>
+        </div>
+        <div class="total"><strong>Precio reserva:</strong> {{precio}}€</div>
+    </div>
+
+    <p>¡Les esperamos pronto!</p>
 </div>
 
 <div class="pie">
     Cuevas Halima · Granada · cuevashalima@gmail.com<br>
-    Síguenos en <a href="https://www.instagram.com/cuevas.halima/">Instagram</a>
+    Síguenos en <a href="https://www.instagram.com/cuevas.halima/">Instagram</a><br>
+    Teléfono: 665 94 66 80
 </div>
