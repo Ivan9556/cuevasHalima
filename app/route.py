@@ -329,11 +329,14 @@ def success():
     msg.html = render_template("msg.html",
         nombre=reserva.nombre_persona,
         apellidos=reserva.apellidos_persona,
+        telefono=reserva.telefono,
+        correo=reserva.correo,
         vivienda=reserva.nombre_vivienda,
         entrada=reserva.fecha_entrada.strftime("%d-%m-%Y"),
         salida=reserva.fecha_salida.strftime("%d-%m-%Y"),
         adultos=reserva.numero_adultos,
-        niños=reserva.numero_ninos   
+        niños=reserva.numero_ninos,
+        precio=reserva.precio_reserva   
     )
     mail.send(msg)
 
