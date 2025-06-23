@@ -68,4 +68,24 @@
             </table>
         </div>
     </div>
+{% block script %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const ofrecemos = document.querySelector('.ofrecemos');
+            const tabla = document.querySelector('.tabla-ofrecemos')
+            const visualizar = new IntersectionObserver(entradas => {
+                entradas.forEach(entrada=>{
+                    if(entrada.isIntersecting){
+                        ofrecemos.classList.add('visible');
+                        tabla.classList.add('visible');
+                        visualizar.disconnect();
+                    }
+                });
+            },{
+                threshold: 1.0
+            });
+            visualizar.observe(ofrecemos,tabla)
+        })
+    </script>
+{% endblock %}
 {% endblock %}
