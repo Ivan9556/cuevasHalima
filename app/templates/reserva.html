@@ -40,7 +40,7 @@
 <div class="resultados" id="resultados">
     <div class="viviendas">
         {% if viviendas %}
-        <h3>Viviendas disponibles</h3>
+        <h3>Selecciona vivienda</h3>
         {% for vivienda in viviendas %}
         <div class="vivienda">
             <img src="{{url_for('static', filename='img/fotos/cueva/' + vivienda.img)}}" alt="{{vivienda.nombre}}" class="img-vivienda">
