@@ -43,7 +43,7 @@
         <h3>Viviendas disponibles</h3>
         {% for vivienda in viviendas %}
         <div class="vivienda">
-            <img src="{{url_for('static', filename='img/fotos/' + vivienda.img)}}" alt="{{vivienda.nombre}}" class="img-vivienda">
+            <img src="{{url_for('static', filename='img/fotos/cueva/' + vivienda.img)}}" alt="{{vivienda.nombre}}" class="img-vivienda">
             <h3>{{ vivienda.nombre }}</h3>
             <p>Descripcion: {{ vivienda.descripcion }}</p>
             <p><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="usuarios"> {{vivienda.capacidad}}</p>
@@ -62,7 +62,7 @@
 <!--Datos de la reserva-->
 <div class="datos-reserva" id="datos-reserva">
     <h3>Datos de la reserva</h3>
-        <img id="img-vivienda" src="{{url_for ('static', filename='img/fotos/')}}" alt="img-vivienda"><br>
+        <img id="img-vivienda" src="{{url_for ('static', filename='img/fotos/cueva/')}}" alt="img-vivienda"><br>
         <label for="vivienda">Vivienda:</label>
         <label for="nombre-vivienda"><span id="nombre-vivienda-reserva"></span></label><br>
         <label for="precio">Precio reserva:</label>
@@ -171,7 +171,7 @@
             //Representar la vivienda selecionada en el formulario datos-reserva
             document.getElementById("nombre-vivienda-reserva").textContent = nomVivienda;
             document.getElementById("precio-vivienda-reserva").textContent = precioVivienda;
-            document.getElementById("img-vivienda").src = "/static/img/fotos/" +imgVivienda;
+            document.getElementById("img-vivienda").src = "/static/img/fotos/cueva/" +imgVivienda;
 
 
             //Ocultar calendario
