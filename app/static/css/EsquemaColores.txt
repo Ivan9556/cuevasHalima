@@ -13,3 +13,15 @@ Casi blanco: #e9f8f1
 
 
 
+<td>
+    <tr>
+        <strong>:</strong> .
+    </tr>
+    <tr>🍽️ <strong>:</strong> .</tr>
+    <li>🛋️ <strong>:</strong> .</li>
+    <li>🚿 <strong>Baños modernos:</strong> Cuartos de baño funcionales con ducha amplia, lavabos de estilo rústico y
+        buena iluminación.</li>
+    <li>🌄 <strong>:</strong> /li>
+    <li>🔥 <strong>Barbacoa y horno tradicional:</strong> Perfectos para comidas al aire libre, aprovechando el clima y
+        el entorno.</li>
+    <li>🌬️ <strong>:</strong> 

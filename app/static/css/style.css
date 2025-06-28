@@ -209,6 +209,46 @@ h3 {
     height: 500px;
     box-shadow: 0 20px 60px #d6e8df;
 }
+/*Nuestra cueva*/
+
+.intro-cueva{
+    text-align: center;
+}
+.intro-cueva h3{
+    font-size: 40px;
+}
+
+.intro-cueva h4{
+    font-size: 25px;
+    color: #057075;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+
+}
+
+.tabla-cueva{
+    font-size: larger;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.tabla-cueva h3{
+    text-align: center;
+
+}
+
+.tabla-ofrecemos table, tr{
+    text-align: center;
+}
+.tabla-cueva th {
+    color: #057075;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+
+
 
 /*Que hacer*/
 
