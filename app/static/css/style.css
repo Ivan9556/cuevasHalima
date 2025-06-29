@@ -17,7 +17,6 @@ footer {
 }
 
 footer .contacto {
-    text-align: center;
     max-width: 500px;
 }
 
@@ -157,7 +156,7 @@ h3 {
     color: #057075;
 }
 
-.tabla-ofrecemos{
+.tabla-ofrecemos {
     margin-top: 2%;
 }
 
@@ -173,15 +172,15 @@ h3 {
 }
 
 .ofrecemos,
-.tabla-ofrecemos{
+.tabla-ofrecemos {
     visibility: hidden;
-    opacity: 0; 
+    opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .ofrecemos.visible,
-.tabla-ofrecemos.visible{
+.tabla-ofrecemos.visible {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
@@ -201,24 +200,27 @@ h3 {
     gap: 5%;
 }
 
-.nosotros .cuerpo h3{
+.nosotros .cuerpo h3 {
     font-size: 25px;
 }
-.nosotros .cuerpo img{
+
+.nosotros .cuerpo img {
     width: 600px;
     height: 500px;
     box-shadow: 0 20px 60px #d6e8df;
 }
+
 /*Nuestra cueva*/
 
-.intro-cueva{
+.intro-cueva {
     text-align: center;
 }
-.intro-cueva h3{
+
+.intro-cueva h3 {
     font-size: 40px;
 }
 
-.intro-cueva h4{
+.intro-cueva h4 {
     font-size: 25px;
     color: #057075;
     font-family: 'Times New Roman', Times, serif;
@@ -226,59 +228,89 @@ h3 {
 
 }
 
-.tabla-cueva{
+.tabla-cueva {
     font-size: larger;
     margin-left: 1%;
     margin-right: 1%;
 }
 
-.tabla-cueva h3{
+.tabla-cueva h3 {
     text-align: center;
 
 }
 
-.tabla-ofrecemos table, tr{
-    text-align: center;
-}
-.tabla-cueva th {
-    color: #057075;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
+.plantilla-cueva{
+    display: flex;
 }
 
+.carruseles{
+    display: block;
+}
 
+.gallery-top {
+    width: 100%; /*Usamos el 100% del contenedor padre "plantilla-cueva"*/
+    max-width: 800px; 
+    margin: 40px auto;
+
+}
+
+.gallery-top img {
+    margin-left: 10%;
+    width: 650px;
+    height: 700px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.gallery-thumbs {
+    width: 100%;
+    max-width: 800px;
+    margin: 10px auto;
+    box-sizing: border-box;
+}
+
+.gallery-thumbs .swiper-slide {
+    height: 80px;
+    margin-right: 1px
+}
+
+.gallery-thumbs img {
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
 
 
 /*Que hacer*/
 
-.intro{
+.intro {
     margin-left: 1%;
     font-size: larger
-} 
+}
 
 .fila {
     display: flex;
     margin-top: 2%;
     margin-right: 17%;
-    margin-left : 7%;
+    margin-left: 7%;
     gap: 5%;
 }
 
-.fila h3, p{
+.fila h3,
+p {
     font-size: larger;
 }
 
-.fila div{
+.fila div {
     text-align: center;
 }
 
-.fila img{
+.fila img {
     width: 500px;
     height: 300px;
 }
 
-.fila a{
+.fila a {
     background-color: #d6e8df;
     border: none;
     padding: 10px;
@@ -286,36 +318,38 @@ h3 {
     border-radius: 6px;
 }
 
-.fila-2{
+.fila-2 {
     display: flex;
     margin-top: 2%;
     margin-right: 17%;
-    margin-left : 17%;
-    gap: 5%;  
+    margin-left: 17%;
+    gap: 5%;
 }
 
-.fila-2 h3, p{
+.fila-2 h3,
+p {
     font-size: larger;
 }
 
-.fila-2 div{
+.fila-2 div {
     text-align: center;
 }
 
-.fila-2 img{
+.fila-2 img {
     width: 500px;
     height: 300px;
 }
 
-.fila-2 a{
+.fila-2 a {
     background-color: #d6e8df;
     border: none;
     padding: 10px;
     font-size: 16px;
     border-radius: 6px;
 }
+
 /*senderismo*/
-.rutas img{
+.rutas img {
     height: 400px;
     width: 450px;
     padding-top: 2%;
@@ -323,40 +357,41 @@ h3 {
     padding-right: 4%;
     padding-bottom: 15%;
     background-color: #fbf1e9;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
-.tracamulas, 
-.chimeneas, 
+
+.tracamulas,
+.chimeneas,
 .pajarillo,
 .playa,
-.jabalcon{
+.jabalcon {
     display: flex;
-    gap: 10%;   
+    gap: 10%;
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 5%;
 }
 
-.rutas h3{
+.rutas h3 {
     text-align: center;
     font-size: 30px;
 }
 
 /*Kayak*/
-.acuatica{
+.acuatica {
     display: flex;
-    gap: 10%;   
+    gap: 10%;
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 5%;
 }
 
-.actividad-acuatica h3{
+.actividad-acuatica h3 {
     text-align: center;
     font-size: 30px;
 }
 
-.acuatica img{
+.acuatica img {
     height: 400px;
     width: 450px;
     margin-top: 15%;
@@ -365,24 +400,28 @@ h3 {
     padding-right: 4%;
     padding-bottom: 15%;
     background-color: #fbf1e9;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
+
 /*Aguas termales*/
-.actividad-termal{
+.actividad-termal {
     display: flex;
-    gap: 10%;   
+    gap: 10%;
     margin-left: 20%;
     margin-right: 20%;
-    margin-bottom: 5%; 
+    margin-bottom: 5%;
 }
-.actividad-termal .texto{
+
+.actividad-termal .texto {
     margin-top: 10%;
 }
-.termales h3{
+
+.termales h3 {
     text-align: center;
     font-size: 30px;
 }
-.actividad-termal img{
+
+.actividad-termal img {
     height: 400px;
     width: 450px;
     margin-top: 15%;
@@ -391,22 +430,22 @@ h3 {
     padding-right: 4%;
     padding-bottom: 15%;
     background-color: #fbf1e9;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
 
-.baño{
+.baño {
     display: flex;
-    gap: 10%;   
+    gap: 10%;
     margin-left: 20%;
     margin-right: 20%;
-    margin-bottom: 5%; 
+    margin-bottom: 5%;
 }
 
-.baño .texto{
+.baño .texto {
     margin-top: 10%;
 }
 
-.baño img{
+.baño img {
     height: 400px;
     width: 450px;
     margin-top: 15%;
@@ -415,28 +454,33 @@ h3 {
     padding-right: 4%;
     padding-bottom: 15%;
     background-color: #fbf1e9;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
+
 /*Gastronomia*/
-.comida{
+.comida {
     display: flex;
-    gap: 10%;   
+    gap: 10%;
     margin-left: 20%;
     margin-right: 20%;
-    margin-bottom: 5%; 
+    margin-bottom: 5%;
 }
-.comida h3{
+
+.comida h3 {
     text-align: center;
     font-size: 30px;
 }
-.gastronomia h3{
+
+.gastronomia h3 {
     text-align: center;
     font-size: 30px;
 }
-.comida .texto{
+
+.comida .texto {
     margin-top: 5%;
 }
-.gastronomia img{
+
+.gastronomia img {
     height: 400px;
     width: 500px;
     margin-top: 15%;
@@ -445,21 +489,23 @@ h3 {
     padding-right: 4%;
     padding-bottom: 15%;
     background-color: #fbf1e9;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
+
 /*lugares*/
-.sitios{
+.sitios {
     display: flex;
     margin-left: 10%;
     margin-right: 10%;
     gap: 10%;
 }
-.sitios .texto{
+
+.sitios .texto {
     margin-top: 5%;
 }
 
 
-.sitios img{
+.sitios img {
     height: 500px;
     width: 500px;
     margin-top: 15%;
@@ -468,7 +514,7 @@ h3 {
     padding-right: 4%;
     padding-bottom: 15%;
     background-color: #fbf1e9;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
 
 /* UBICACION MAPS */
@@ -481,10 +527,10 @@ h3 {
 
 .informacion {
     font-size: 20px;
-    background-color: #fcfbfb; 
+    background-color: #fcfbfb;
     border-radius: 12px;
     margin-right: 5%;
-    box-shadow: 0 12px 50px #d6e8df; 
+    box-shadow: 0 12px 50px #d6e8df;
 }
 
 .informacion h3 {
@@ -495,21 +541,25 @@ h3 {
     display: block;
     padding: 3%;
 }
+
 .formulario {
     background-color: #fcfbfb;
     border-radius: 12px;
     max-width: 400px;
-    margin: 40px auto; 
-    margin-top:100px;
+    margin: 40px auto;
+    margin-top: 100px;
     padding: 20px 25px;
     box-shadow: 0 12px 50px #d6e8df;
     /*Hacemos el bloque oculto al inicio y añadimos una transaccion suave*/
-    visibility: hidden; /*Evistamos usar display porque es más robusto (no animable)*/
-    opacity: 0; /* opacity + transform permite animaciones suaves*/
+    visibility: hidden;
+    /*Evistamos usar display porque es más robusto (no animable)*/
+    opacity: 0;
+    /* opacity + transform permite animaciones suaves*/
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.formulario.visible{
+
+.formulario.visible {
     /*Aquí hacemos visible el bloque tras el uso de JS*/
     visibility: visible;
     opacity: 1;

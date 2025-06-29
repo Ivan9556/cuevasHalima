@@ -2,102 +2,117 @@
 
 {% block title %}Nuestra cueva{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{% endblock %}
+
 {% block content %}
+<h3>Cueva La Partera</h3>
+<div class="plantilla-cueva">
+    <div class="bloque-cueva">
+        <div class="intro-cueva">
+            <h4>Autenticidad, historia y relax</h4>
+            <p>
+                Capacidad para 2-4 personas. Dormitorio principal con cama de matrimonio y opción de cama supletoria.
+                Salón acogedor con estufa decorativa, sofá, TV y WiFi. Comedor integrado y cocina totalmente equipada
+                con microondas, cafetera, tostadora, hervidor, frigorífico y menaje completo.
+            </p>
+        </div>
 
-<div class="intro-cueva">
-    <h3>La Partera</h3>
-    <h4>Una Experiencia Única en la Naturaleza</h4>
-    <p>
-        Sumérgete en una experiencia inolvidable en La Partera, una encantadora casa-cueva restaurada que fusiona
-        tradición
-        y confort en un entorno natural y auténtico. Ideal para quienes buscan desconexión, historia y comodidad en un
-        solo
-        lugar.
-    </p>
+        <div class="detalles-cueva">
+            <h4>Un espacio con alma y tradición</h4>
+            <p>
+                La cueva conserva su estructura excavada en la roca, lo que le proporciona aislamiento térmico natural
+                y un ambiente silencioso y sereno durante todo el año. La decoración rústica —piedra vista, madera y
+                suelos de barro— se mezcla con todas las comodidades modernas.
+            </p>
+
+            <p>
+                En el exterior, una <strong>bañera artesanal circular</strong> invita al relax, junto a una zona
+                chill-out
+                con
+                cojines y vistas al entorno rural. También destaca un <strong>antiguo horno tradicional</strong> en
+                perfecto
+                estado,
+                símbolo del pasado del barrio, cuando esta cueva formaba parte del obrador local.
+            </p>
+
+            <p>
+                Su nombre, <em>La Partera</em>, rinde homenaje a las mujeres que aquí cuidaban de la vida y del entorno,
+                manteniendo viva su memoria en cada rincón.
+            </p>
+
+            <ul>
+                <li><strong>Capacidad estándar:</strong> 2 plazas (ampliable a 4).</li>
+                <li><strong>WiFi gratuito.</strong></li>
+                <li><strong>Leña incluida.</strong></li>
+                <li><strong>Bañera exterior + horno tradicional.</strong></li>
+                <li><strong>Decoración tradicional, comodidad moderna.</strong></li>
+            </ul>
+        </div>
+    </div>
+    <div class="carruseles">
+        <!--Carrusel Swiper: -->
+        <!--Bloque principal donde se ejecuta el carrusel-->
+        <div class="swiper gallery-top">
+            <!--Contenedor de imagenes-->
+            <div class="swiper-wrapper">
+                {% for img in [
+                'entrada.jpg', 'comedor.jpg', 'cocina.jpeg', 'baño.jpeg', 'baño2.jpeg',
+                'dormitorio.jpeg', 'habitacion2.jpeg', 'cama.jpg', 'cama2.jpg',
+                'cama3.jpeg', 'balcon.jpg', 'piscina.jpeg', 'terraza.jpg'
+                ] %}
+                <!--Bloque representa cada imagen del carrusel-->
+                <div class="swiper-slide">
+                    <a href="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" data-lightbox="galeria-cueva">
+                        <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Flechas de navegación -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <!-- Paginación por imagenes -->
+        <div class="swiper gallery-thumbs">
+            <div class="swiper-wrapper">
+                {% for img in [
+                'entrada.jpg', 'comedor.jpg', 'cocina.jpeg', 'baño.jpeg', 'baño2.jpeg',
+                'dormitorio.jpeg', 'habitacion2.jpeg', 'cama.jpg', 'cama2.jpg',
+                'cama3.jpeg', 'balcon.jpg', 'piscina.jpeg', 'terraza.jpg'
+                ] %}
+                <div class="swiper-slide">
+                    <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
-<div class="tabla-cueva">
-    <h3>Disfruta de tu estancia</h3>
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Dormitorios acogedores</th>
-                <th scope="col">Cocina totalmente equipada</th>
-                <th scope="col">Zona de estar y comedor</th>
-                <th scope="col">Entorno exterior encantador</th>
-                <th scope="col">Ambiente fresco y silencioso</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td data-label="dormitorio">Habitaciones decoradas con gusto rústico, camas confortables y
-                    detalles en piedra que aportan frescura natural todo el año
-                </td>
-                <td data-label="cocina">Espacio moderno con frigorífico, microondas, fogones y menaje
-                    completo para cocinar como en casa
-                </td>
-                <td data-label="comedor">Amplio salón con sofás, chimenea decorativa y mesa comedor, ideal
-                    para compartir en familia o con amigos
-                </td>
-                <td data-label="exterior">Zona ajardinada y miradores desde donde disfrutar del paisaje
-                    rural; ideal para relajarse o desayunar al aire libre.
-                </td>
-                <td data-label="fresco">Al estar excavada en la roca, la cueva mantiene una
-                    temperatura agradable durante todo el año y ofrece total aislamiento acústico.
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div class="detalles-cueva">
-    <h4>Detalles que Debes Destacar de la Cueva La Partera</h4>
 
-    <h5>Arquitectura de Cueva Auténtica</h5>
-    <p>
-        La construcción se mantiene fiel a la tradición de las casas-cueva, con paredes excavadas en la roca que aportan
-        aislamiento térmico y una atmósfera íntima y serena. Esta característica no solo es funcional, sino que también
-        ofrece una experiencia única e inmersiva.
-    </p>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const thumbs = new Swiper('.gallery-thumbs', {
+        spaceBetween: 10,
+        slidesPerView: 5,
+        freeMode: true,
+        watchSlidesProgress: true,
+    });
 
-    <h5>Decoración Rústica con Encanto</h5>
-    <p>
-        Cada espacio está decorado con elementos rústicos y naturales como vigas de madera, suelos de barro cocido, y
-        detalles en piedra vista. Se logra un equilibrio entre lo tradicional y lo acogedor.
-    </p>
-
-    <h5>Iluminación Natural y Cálida</h5>
-    <p>
-        Las entradas de luz están bien aprovechadas con claraboyas o ventanales estratégicos. Además, las luces
-        interiores
-        cálidas resaltan las texturas de la piedra y la madera, creando un ambiente muy relajante.
-    </p>
-</div>
-<h5>Espacios Funcionales y Acogedores</h5>
-<ul>
-    <li><strong>Salón:</strong> Espacioso, con sofás cómodos y zona de comedor. Ideal para el descanso o reuniones
-        familiares.</li>
-    <li><strong>Cocina:</strong> Compacta pero totalmente equipada, manteniendo estética campestre sin perder
-        funcionalidad.</li>
-    <li><strong>Dormitorios:</strong> Habitaciones limpias, con ropa de cama bien presentada y detalles personales que
-        aportan calidez.</li>
-    <li><strong>Baños:</strong> Revestidos con materiales modernos que contrastan elegantemente con el entorno rústico.
-    </li>
-</ul>
-<h5>Exterior Bien Integrado con el Entorno</h5>
-<p>
-    La entrada de la cueva y su entorno inmediato están rodeados de vegetación y zonas de descanso. Se pueden observar
-    bancos rústicos, espacio para comer al aire libre y vistas que invitan a la tranquilidad.
-</p>
-
-<h5>Elementos Tradicionales Conservados</h5>
-<p>
-    Algunos muebles, detalles decorativos o utensilios antiguos ayudan a mantener viva la historia del lugar. Es un
-    guiño al pasado que enriquece la estancia.
-</p>
-
-<h5>Espacios para Desconectar</h5>
-<p>
-    La distribución invita al relax y la contemplación. Se nota que es un lugar pensado para desconectar del estrés
-    urbano.
-</p>
-
+    const swiper = new Swiper('.gallery-top', {
+        loop: true,
+        spaceBetween: 20,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+            swiper: thumbs,
+        },
+        keyboard: true,
+    });
+</script>
 {% endblock %}
