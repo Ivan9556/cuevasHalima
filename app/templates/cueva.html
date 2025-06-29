@@ -64,7 +64,7 @@
                 ] %}
                 <!--Bloque representa cada imagen del carrusel-->
                 <div class="swiper-slide">
-                    <a href="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" data-lightbox="galeria-cueva">
+                    <a href="#" onclick="openModal(this)">
                         <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
                     </a>
                 </div>
@@ -88,6 +88,11 @@
                 {% endfor %}
             </div>
         </div>
+    </div>
+    <!-- Modal para ampliar imágenes -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img id="modalImg" class="modal-content" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Imagen ampliada">
     </div>
 </div>
 
@@ -114,5 +119,26 @@
         },
         keyboard: true,
     });
+</script>
+<script>
+    function openModal(el) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImg");
+        const img = el.querySelector('img');
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    }
+
+    // Cierra el modal al hacer clic en la cruz
+    document.querySelector(".close").onclick = function () {
+        document.getElementById("imageModal").style.display = "none";
+    };
+
+    // Opcional: cerrar al hacer clic fuera de la imagen
+    document.getElementById("imageModal").onclick = function (e) {
+        if (e.target.id === "imageModal") {
+            e.target.style.display = "none";
+        }
+    };
 </script>
 {% endblock %}
