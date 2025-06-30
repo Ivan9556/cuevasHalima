@@ -340,11 +340,33 @@ def success():
     )
     mail.send(msg)
 
+    msg2 = Message(
+    "Nueva reserva recibida",
+    sender=current_app.config['MAIL_USERNAME'],
+    recipients=[current_app.config['MAIL_USERNAME']])
+    msg2.html = render_template("msg2.html",
+    nombre=reserva.nombre_persona,
+    apellidos=reserva.apellidos_persona,
+    telefono=reserva.telefono,
+    correo=reserva.correo,
+    vivienda=reserva.nombre_vivienda,
+    entrada=reserva.fecha_entrada.strftime("%d-%m-%Y"),
+    salida=reserva.fecha_salida.strftime("%d-%m-%Y"),
+    adultos=reserva.numero_adultos,
+    niños=reserva.numero_ninos,
+    precio=reserva.precio_reserva   
+    )
+    mail.send(msg2)
+
     return render_template("/confirmacion.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
 
 @main.route('/msg')
 def msg():
     return render_template('/msg.html')
+
+@main.route('/msg2')
+def msg2():
+    return render_template('/msg2.html')
 
 @main.route('/confirmacion')
 def confirmacion():

@@ -7,13 +7,15 @@
 {% endblock %}
 
 {% block content %}
-<h3>Cueva La Partera</h3>
+<div class="portada-cueva">
+<img src="{{url_for('static', filename='img/fotos/portada_cueva.png')}}" alt="portada_cueva">
+</div>
 <div class="plantilla-cueva">
     <div class="bloque-cueva">
         <div class="intro-cueva">
             <h4>Autenticidad, historia y relax</h4>
             <p>
-                Capacidad para 2-4 personas. Dormitorio principal con cama de matrimonio y opción de cama supletoria.
+                Capacidad 5 personas. Dormitorio principal con cama de matrimonio y opción de cama supletoria.
                 Salón acogedor con estufa decorativa, sofá, TV y WiFi. Comedor integrado y cocina totalmente equipada
                 con microondas, cafetera, tostadora, hervidor, frigorífico y menaje completo.
             </p>
@@ -41,13 +43,12 @@
                 Su nombre, <em>La Partera</em>, rinde homenaje a las mujeres que aquí cuidaban de la vida y del entorno,
                 manteniendo viva su memoria en cada rincón.
             </p>
-
             <ul>
-                <li><strong>Capacidad estándar:</strong> 2 plazas (ampliable a 4).</li>
-                <li><strong>WiFi gratuito.</strong></li>
-                <li><strong>Leña incluida.</strong></li>
-                <li><strong>Bañera exterior + horno tradicional.</strong></li>
-                <li><strong>Decoración tradicional, comodidad moderna.</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="capacidad"><strong>Capacidad estándar:</strong> 5 personas.</li>
+                <li><img src="{{url_for('static', filename='img/iconos/wifi.png')}}" alt="wifi"><strong>WiFi gratuito.</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/piscina.png')}}" alt="bañera"><strong>Bañera exterior</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/cocina.png')}}" alt="cocina"><strong>Cocina equipada</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/cama.png')}}" alt="cama"><strong>Decoración tradicional, comodidad moderna.</strong></li>
             </ul>
         </div>
     </div>

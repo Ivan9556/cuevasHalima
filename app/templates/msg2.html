@@ -1,4 +1,4 @@
-<!--Plantilla mensaje correo cliente-->
+<!--Plantilla mensaje correo personal-->
 <style>
     html {
         margin-right: 70%;
@@ -56,9 +56,7 @@
 <div class="contenido">
     <img src="{{url_for('static', filename='img/logos/logoBoceto6msg.jpeg')}}" alt="logo">
 
-    <h4>{{nombre}}, ¡su reserva ha sido confirmada!</h4>
-    <p>Gracias por reservar con nosotros. Estos son los datos de tu reserva:</p>
-
+    <h4>Nueva reserva</h4>
     <div class="datos-titular">
         <p><strong>Nombre:</strong> {{nombre}}</p>
         <p><strong>Apellidos:</strong> {{apellidos}}</p>
@@ -79,12 +77,4 @@
         </div>
         <div class="total"><strong>Precio reserva:</strong> {{precio}}€</div>
     </div>
-
-    <p>¡Les esperamos pronto!</p>
-</div>
-
-<div class="pie">
-    Cuevas Halima · Granada · cuevashalima@gmail.com<br>
-    Síguenos en <a href="https://www.instagram.com/cuevas.halima/">Instagram</a><br>
-    Teléfono: 665 94 66 80
 </div>
