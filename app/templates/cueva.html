@@ -52,7 +52,7 @@
         </div>
     </div>
     <div class="carruseles">
-        <!--Carrusel Swiper: -->
+        <!--Carrusel Swiper: Libreria que funciona con clases especificas como .swiper, .swiper-slide,.swiper-wrapper, etc-->
         <!--Bloque principal donde se ejecuta el carrusel-->
         <div class="swiper gallery-top">
             <!--Contenedor de imagenes-->
@@ -64,8 +64,8 @@
                 ] %}
                 <!--Bloque representa cada imagen del carrusel-->
                 <div class="swiper-slide">
-                    <a href="#" onclick="openModal(this)">
-                        <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
+                    <a href="#" onclick="openModal(this); return false;">
+                    <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
                     </a>
                 </div>
                 {% endfor %}
@@ -91,7 +91,7 @@
     </div>
     <!-- Modal para ampliar imágenes -->
     <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
+        <span class="close">&times;</span> <!--Botón "X" cerrar-->
         <img id="modalImg" class="modal-content" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Imagen ampliada">
     </div>
 </div>
@@ -120,25 +120,35 @@
         keyboard: true,
     });
 </script>
-<script>
+<script> //Script para abrir y cerrar el modal
+// Parámetro 'el' es el elemento HTML (normalmente el <a> o contenedor) que se ha clicado
     function openModal(el) {
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("modalImg");
-        const img = el.querySelector('img');
-        modal.style.display = "block";
-        modalImg.src = img.src;
+    // Obtiene el elemento del modal por su ID
+    const modal = document.getElementById("imageModal");
+    // Obtiene el elemento <img> dentro del modal donde se mostrará la imagen ampliada
+    const modalImg = document.getElementById("modalImg");
+    // Dentro del elemento clicado, busca la etiqueta <img> para obtener su src
+    const img = el.querySelector('img');
+    // Muestra el modal cambiando su estilo display a "block"
+    modal.style.display = "block";
+    // Asigna la imagen clicada (src) al src del <img> del modal para mostrarla ampliada
+    modalImg.src = img.src;
+}
+
+// Event listener para cerrar el modal al hacer clic en la "X" (elemento con clase "close")
+document.querySelector(".close").onclick = function () {
+    // Oculta el modal cambiando su display a "none"
+    document.getElementById("imageModal").style.display = "none";
+};
+
+// Event listener para cerrar el modal si el usuario hace clic fuera de la imagen
+document.getElementById("imageModal").onclick = function (e) {
+    // Comprueba que el clic fue en el fondo del modal (no en la imagen)
+    if (e.target.id === "imageModal") {
+        // Oculta el modal si el clic fue fuera de la imagen
+        e.target.style.display = "none";
     }
+};
 
-    // Cierra el modal al hacer clic en la cruz
-    document.querySelector(".close").onclick = function () {
-        document.getElementById("imageModal").style.display = "none";
-    };
-
-    // Opcional: cerrar al hacer clic fuera de la imagen
-    document.getElementById("imageModal").onclick = function (e) {
-        if (e.target.id === "imageModal") {
-            e.target.style.display = "none";
-        }
-    };
 </script>
 {% endblock %}
