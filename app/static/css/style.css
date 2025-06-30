@@ -224,6 +224,10 @@ h3 {
     margin-right: 2%;
 }
 
+.bloque-cueva{
+    margin-left: 5%;
+    margin-right: 5%;
+}
 
 .intro-cueva h4 {
     font-size: 30px;
@@ -243,7 +247,12 @@ h3 {
 
 .detalles-cueva ul{
     list-style: none;
-    
+    margin-top: 5%;
+}
+
+.detalles-cueva li{
+    margin-top: 4%;
+    font-size: larger;
 }
 
 .carruseles {

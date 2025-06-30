@@ -8,14 +8,14 @@
 
 {% block content %}
 <div class="portada-cueva">
-<img src="{{url_for('static', filename='img/fotos/portada_cueva.png')}}" alt="portada_cueva">
+    <img src="{{url_for('static', filename='img/fotos/portada_cueva.png')}}" alt="portada_cueva">
 </div>
 <div class="plantilla-cueva">
     <div class="bloque-cueva">
         <div class="intro-cueva">
             <h4>Autenticidad, historia y relax</h4>
             <p>
-                Capacidad 5 personas. Dormitorio principal con cama de matrimonio y opción de cama supletoria.
+                Capacidad 5 personas. Dormitorio principal con cama de matrimonio.
                 Salón acogedor con estufa decorativa, sofá, TV y WiFi. Comedor integrado y cocina totalmente equipada
                 con microondas, cafetera, tostadora, hervidor, frigorífico y menaje completo.
             </p>
@@ -25,30 +25,35 @@
             <h4>Un espacio con alma y tradición</h4>
             <p>
                 La cueva conserva su estructura excavada en la roca, lo que le proporciona aislamiento térmico natural
-                y un ambiente silencioso y sereno durante todo el año. La decoración rústica —piedra vista, madera y
-                suelos de barro— se mezcla con todas las comodidades modernas.
+                y un ambiente silencioso y sereno durante todo el año. La decoración rústica piedra vista, madera y
+                suelos de barro se mezcla con todas las comodidades modernas.
             </p>
 
             <p>
-                En el exterior, una <strong>bañera artesanal circular</strong> invita al relax, junto a una zona
-                chill-out
-                con
-                cojines y vistas al entorno rural. También destaca un <strong>antiguo horno tradicional</strong> en
-                perfecto
-                estado,
-                símbolo del pasado del barrio, cuando esta cueva formaba parte del obrador local.
+                En el exterior, una bañera artesanal circular invita al relax, junto a una zona
+                chill-out con cojines y vistas al entorno rural.
             </p>
-
+            <p>
+                En la entrada, una acogedora terraza con sombra natural ofrece el lugar perfecto para compartir una
+                comida al aire libre o disfrutar de un café en calma. Su mobiliario sencillo se integra con el entorno
+                de paredes encaladas y materiales naturales, proyectando juegos de luz y sombra que realzan el encanto
+                de la arquitectura tradicional.
+            </p>
             <p>
                 Su nombre, <em>La Partera</em>, rinde homenaje a las mujeres que aquí cuidaban de la vida y del entorno,
                 manteniendo viva su memoria en cada rincón.
             </p>
             <ul>
-                <li><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="capacidad"><strong>Capacidad estándar:</strong> 5 personas.</li>
-                <li><img src="{{url_for('static', filename='img/iconos/wifi.png')}}" alt="wifi"><strong>WiFi gratuito.</strong></li>
-                <li><img src="{{url_for('static', filename='img/iconos/piscina.png')}}" alt="bañera"><strong>Bañera exterior</strong></li>
-                <li><img src="{{url_for('static', filename='img/iconos/cocina.png')}}" alt="cocina"><strong>Cocina equipada</strong></li>
-                <li><img src="{{url_for('static', filename='img/iconos/cama.png')}}" alt="cama"><strong>Decoración tradicional, comodidad moderna.</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="capacidad"><strong>
+                        Capacidad estándar:</strong> 5 personas.</li>
+                <li><img src="{{url_for('static', filename='img/iconos/wifi.png')}}" alt="wifi"><strong> WiFi
+                        gratuito.</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/piscina.png')}}" alt="bañera"><strong> Bañera
+                        exterior</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/cocina.png')}}" alt="cocina"><strong> Cocina
+                        equipada</strong></li>
+                <li><img src="{{url_for('static', filename='img/iconos/cama.png')}}" alt="cama"><strong> Decoración
+                        tradicional, comodidad moderna.</strong></li>
             </ul>
         </div>
     </div>
@@ -59,14 +64,14 @@
             <!--Contenedor de imagenes-->
             <div class="swiper-wrapper">
                 {% for img in [
-                'entrada.jpg', 'comedor.jpg', 'cocina.jpeg', 'baño.jpeg', 'baño2.jpeg',
+                'entrada.jpeg', 'comedor.jpg', 'cocina.jpeg', 'baño.jpeg', 'baño2.jpeg',
                 'dormitorio.jpeg', 'habitacion2.jpeg', 'cama.jpg', 'cama2.jpg',
                 'cama3.jpeg', 'balcon.jpg', 'piscina.jpeg', 'terraza.jpg'
                 ] %}
                 <!--Bloque representa cada imagen del carrusel-->
                 <div class="swiper-slide">
                     <a href="#" onclick="openModal(this); return false;">
-                    <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
+                        <img src="{{ url_for('static', filename='img/fotos/cuevas/partera/' + img) }}" alt="{{ img }}">
                     </a>
                 </div>
                 {% endfor %}
@@ -79,7 +84,7 @@
         <div class="swiper gallery-thumbs">
             <div class="swiper-wrapper">
                 {% for img in [
-                'entrada.jpg', 'comedor.jpg', 'cocina.jpeg', 'baño.jpeg', 'baño2.jpeg',
+                'entrada.jpeg', 'comedor.jpg', 'cocina.jpeg', 'baño.jpeg', 'baño2.jpeg',
                 'dormitorio.jpeg', 'habitacion2.jpeg', 'cama.jpg', 'cama2.jpg',
                 'cama3.jpeg', 'balcon.jpg', 'piscina.jpeg', 'terraza.jpg'
                 ] %}
@@ -93,7 +98,8 @@
     <!-- Modal para ampliar imágenes -->
     <div id="imageModal" class="modal">
         <span class="close">&times;</span> <!--Botón "X" cerrar-->
-        <img id="modalImg" class="modal-content" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Imagen ampliada">
+        <img id="modalImg" class="modal-content"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Imagen ampliada">
     </div>
 </div>
 
@@ -122,34 +128,34 @@
     });
 </script>
 <script> //Script para abrir y cerrar el modal
-// Parámetro 'el' es el elemento HTML (normalmente el <a> o contenedor) que se ha clicado
+    // Parámetro 'el' es el elemento HTML (normalmente el <a> o contenedor) que se ha clicado
     function openModal(el) {
-    // Obtiene el elemento del modal por su ID
-    const modal = document.getElementById("imageModal");
-    // Obtiene el elemento <img> dentro del modal donde se mostrará la imagen ampliada
-    const modalImg = document.getElementById("modalImg");
-    // Dentro del elemento clicado, busca la etiqueta <img> para obtener su src
-    const img = el.querySelector('img');
-    // Muestra el modal cambiando su estilo display a "block"
-    modal.style.display = "block";
-    // Asigna la imagen clicada (src) al src del <img> del modal para mostrarla ampliada
-    modalImg.src = img.src;
-}
-
-// Event listener para cerrar el modal al hacer clic en la "X" (elemento con clase "close")
-document.querySelector(".close").onclick = function () {
-    // Oculta el modal cambiando su display a "none"
-    document.getElementById("imageModal").style.display = "none";
-};
-
-// Event listener para cerrar el modal si el usuario hace clic fuera de la imagen
-document.getElementById("imageModal").onclick = function (e) {
-    // Comprueba que el clic fue en el fondo del modal (no en la imagen)
-    if (e.target.id === "imageModal") {
-        // Oculta el modal si el clic fue fuera de la imagen
-        e.target.style.display = "none";
+        // Obtiene el elemento del modal por su ID
+        const modal = document.getElementById("imageModal");
+        // Obtiene el elemento <img> dentro del modal donde se mostrará la imagen ampliada
+        const modalImg = document.getElementById("modalImg");
+        // Dentro del elemento clicado, busca la etiqueta <img> para obtener su src
+        const img = el.querySelector('img');
+        // Muestra el modal cambiando su estilo display a "block"
+        modal.style.display = "block";
+        // Asigna la imagen clicada (src) al src del <img> del modal para mostrarla ampliada
+        modalImg.src = img.src;
     }
-};
+
+    // Event listener para cerrar el modal al hacer clic en la "X" (elemento con clase "close")
+    document.querySelector(".close").onclick = function () {
+        // Oculta el modal cambiando su display a "none"
+        document.getElementById("imageModal").style.display = "none";
+    };
+
+    // Event listener para cerrar el modal si el usuario hace clic fuera de la imagen
+    document.getElementById("imageModal").onclick = function (e) {
+        // Comprueba que el clic fue en el fondo del modal (no en la imagen)
+        if (e.target.id === "imageModal") {
+            // Oculta el modal si el clic fue fuera de la imagen
+            e.target.style.display = "none";
+        }
+    };
 
 </script>
 {% endblock %}
