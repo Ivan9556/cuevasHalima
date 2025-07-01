@@ -858,6 +858,10 @@ p {
 
 /*ESTILO TIPO MOVIL*/
 @media (max-width:760px) {
+    body{
+        margin-top: 25%;
+    }
+
     .barraNavegacion {
         flex-direction: row;
         /*colocar los elementos en fila*/
@@ -922,6 +926,7 @@ p {
         color: #057075;
         font-size: 20px;
     }
+    /*Sobre nosotros*/
     .nosotros .cabecera {
         font-size: 24px;
         text-align: center;
@@ -957,4 +962,407 @@ p {
         border-radius: 8px;
     }
 
+    /*Nuestra cueva*/
+
+    /* Portada responsive */
+    .portada-cueva img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    /* Layout en columna */
+    .plantilla-cueva {
+        flex-direction: column;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    .bloque-cueva {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .intro-cueva h4,
+    .detalles-cueva h4 {
+        font-size: 22px;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .detalles-cueva p {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .detalles-cueva ul {
+        padding-left: 0;
+        margin-top: 20px;
+    }
+
+    .detalles-cueva li {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .detalles-cueva li img {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Carruseles adaptados */
+    .gallery-top {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .gallery-top img {
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .gallery-thumbs {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .gallery-thumbs .swiper-slide {
+        height: 60px;
+    }
+
+    .gallery-thumbs img {
+        width: auto;
+        height: 100%;
+    }
+
+    /* Modal sigue igual, ya es responsive */
+    .modal-content {
+        max-width: 95%;
+        max-height: 75vh;
+    }
+
+    .close {
+        font-size: 32px;
+        top: 10px;
+        right: 15px;
+    }
+    /*Qué hacer*/
+    .intro {
+        margin: 0 5%;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .fila,
+    .fila-2 {
+        flex-direction: column;
+        margin: 0 5%;
+        gap: 30px;
+    }
+
+    .fila div,
+    .fila-2 div {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .fila img,
+    .fila-2 img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .fila h3,
+    .fila-2 h3 {
+        font-size: 20px;
+        margin-top: 10px;
+        color: #057075;
+    }
+
+    .fila p,
+    .fila-2 p {
+        font-size: 16px;
+        margin: 10px 0;
+        padding: 0 10px;
+        text-align: justify;
+    }
+
+    .fila a,
+    .fila-2 a {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #d6e8df;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        text-decoration: none;
+    }  
+    /*Senderismo*/
+    .rutas h3 {
+        font-size: 20px;
+        margin: 30px 10px 10px;
+        text-align: center;
+        color: #057075;
+    }
+
+    .tracamulas,
+    .chimeneas,
+    .pajarillo,
+    .playa,
+    .jabalcon {
+        flex-direction: column;
+        margin: 0 5%;
+        gap: 20px;
+    }
+
+    .tracamulas div,
+    .chimeneas div,
+    .pajarillo div,
+    .playa div,
+    .jabalcon div {
+        text-align: justify;
+    }
+
+    .rutas img {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin-top: 10px;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+    .rutas p {
+        font-size: 16px;
+        margin: 6px 0;
+    }
+
+    /*Kayak*/
+    .actividad-acuatica h3 {
+        font-size: 22px;
+        margin: 20px 10px;
+        color: #057075;
+    }
+
+    .acuatica {
+        flex-direction: column;
+        margin: 0 5%;
+        gap: 20px;
+    }
+
+    .acuatica div {
+        text-align: justify;
+    }
+
+    .acuatica img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+    .acuatica p {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    /*Termales*/
+    .termales h3 {
+        font-size: 22px;
+        margin: 20px 10px;
+        color: #057075;
+    }
+
+    .actividad-termal,
+    .baño {
+        flex-direction: column;
+        margin: 0 5%;
+        gap: 20px;
+    }
+
+    .actividad-termal .texto,
+    .baño .texto {
+        margin-top: 0;
+        text-align: justify;
+    }
+
+    .actividad-termal img,
+    .baño img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+    .actividad-termal p,
+    .baño p {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    /*Gastronomia*/
+
+    .gastronomia h3 {
+        font-size: 24px;
+        margin: 20px 10px;
+        color: #057075;
+    }
+
+    .comida {
+        flex-direction: column;
+        margin: 0 5%;
+        gap: 20px;
+    }
+
+    .comida .texto {
+        margin-top: 0;
+        text-align: justify;
+    }
+
+    .comida .texto h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #444;
+    }
+
+    .gastronomia img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        background-color: transparent;
+        border-radius: 10px;
+    }
+
+    .comida p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    /*Lugares*/
+    .sitios {
+        flex-direction: column;
+        margin: 0 5%;
+        gap: 20px;
+    }
+
+    .sitios .texto {
+        margin-top: 0;
+        text-align: justify;
+    }
+
+    .sitios .texto h3 {
+        font-size: 22px;
+        margin-top: 20px;
+        color: #057075;
+    }
+
+    .sitios .texto p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .sitios img {
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+    .lugar {
+        margin-bottom: 40px;
+    }
+
+    /*Ubicacion*/
+    .ubicacion {
+        flex-direction: column;
+        margin: 5%;
+        align-items: center;
+    }
+
+    .informacion {
+        font-size: 16px;
+        margin-right: 0;
+        margin-bottom: 20px;
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .informacion h3 {
+        text-align: center;
+        font-size: 20px;
+        margin-left: 0;
+    }
+
+    .informacion .ubicaciones div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .informacion .ubicaciones img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .ubicacion iframe {
+        width: 100%;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    .formulario {
+        margin: 30px 10%;
+        padding: 20px;
+        width: auto;
+        box-sizing: border-box;
+    }
+
+    .formulario h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .formulario form {
+        font-size: 14px;
+    }
+
+    .formulario input,
+    .formulario textarea {
+        font-size: 14px;
+    }
+
+    .formulario button {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .toast {
+        top: 20px;
+        right: 20px;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
 }
