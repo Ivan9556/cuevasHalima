@@ -914,6 +914,15 @@ p {
 
     }
 
+    .bienvenida p{
+        margin: 0px 5%;
+        font-size: 20px;
+    }
+
+    .ofrecemos{
+        margin: 0px 3%;
+    }
+
     .tabla-ofrecemos thead {
         display: none;
     }
