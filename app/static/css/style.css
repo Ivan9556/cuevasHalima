@@ -922,6 +922,39 @@ p {
         color: #057075;
         font-size: 20px;
     }
+    .nosotros .cabecera {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
 
+    .nosotros .cuerpo {
+        display: flex;
+        flex-direction: column; 
+        margin-left: 5%;
+        margin-right: 5%;
+        gap: 1.5rem; 
+        align-items: center; /
+    }
+
+    .nosotros .cuerpo .texto {
+        width: 100%;
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .nosotros .cuerpo h3 {
+        font-size: 20px;
+        margin-bottom: 0.5rem;
+    }
+
+    .nosotros .cuerpo img {
+        width: 100%; 
+        max-width: 400px; 
+        height: auto; 
+        box-shadow: 0 10px 30px #d6e8df;
+        border-radius: 8px;
+    }
 
 }
