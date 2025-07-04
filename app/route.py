@@ -18,6 +18,7 @@ from flask import Blueprint, render_template, url_for, flash, request, redirect,
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
+from pymongo import MongoClient
 from .models import Vivienda, Reserva
 from datetime import datetime, timedelta
 import stripe
@@ -28,7 +29,11 @@ main = Blueprint('main' ,__name__)
 
 
 def fechas_ocupadas(db):
-    db = mongo.db
+    
+    #Variable db
+    cliente = MongoClient(current_app.config['MONGO_URI'])
+    db = cliente["cuevasHalima"]
+
     #Almacenamos las reservas de la db
     reservas = db.reservas.find()
     #Numero de viviendas en total, para saber cuando una fecha está ocupada en todas 
@@ -104,7 +109,7 @@ def encuentranos():
 
 @main.route('/reserva')
 def reserva():
-    db= mongo.db
+    db = MongoClient(current_app.config['MONGO_URI'])
     fechas_reservadas = fechas_ocupadas(db)
     return render_template('reserva.html', fechas_reservadas = fechas_reservadas)
 
@@ -147,12 +152,30 @@ def enviar_mensaje():
 @main.route("/test-db")
 def test_db():    
     try:
-        # Accede a la base de datos y realiza un ping
-        db = mongo.db  # Accede al cliente MongoDB
-        db.command("ping")
-        return jsonify({"Insetada vivienda nueva"})
-        
-        return jsonify({"status": "Conectado a MongoDB correctamente"})
+        """
+        mongo_url = current_app.config['MONGO_URI']
+        client = MongoClient(mongo_url)
+
+        listName = client.list_database_names()
+        print("Estas son las bases de datos: ", listName)
+        return jsonify({"status": "Conexion existosa", "b2ase de datos" : listName })
+        """
+
+        cliente = MongoClient(current_app.config['MONGO_URI'])
+        db = cliente["cuevasHalima"]
+
+        """
+        viviendas = db["viviendas"]
+
+        vivienda = Vivienda("La Partera",
+        "Wifi, cocina equipada, bañera exterior. Tradición y confort en un solo espacio", 175, "cama.jpg", "5")
+
+        resultado = viviendas.insert_one(vivienda.to_dict())
+        """
+
+        reserva
+        return jsonify({"mensaje": "Vivienda insertada correctamente"})  
+
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -160,7 +183,8 @@ def test_db():
 def buscar_reserva():
     
     #Variable db
-    db= mongo.db
+    cliente = MongoClient(current_app.config['MONGO_URI'])
+    db = cliente["cuevasHalima"]
 
     #Recogemos los datos del formulario 
     entrada_str = request.args.get('entrada')
@@ -219,7 +243,9 @@ def buscar_reserva():
 @main.route('/form_reserva', methods=['POST'])
 def hacer_reserva():
 
-    db = mongo.db
+    #Variable db
+    cliente = MongoClient(current_app.config['MONGO_URI'])
+    db = cliente["cuevasHalima"]
 
     id_reserva = Reserva.generar_id(db)
     nombre_vivienda = request.form["nombre_vivienda"]
@@ -279,8 +305,8 @@ def hacer_reserva():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url=f'http://127.0.0.1:5000/success',
-            cancel_url='http://127.0.0.1:5000/cancelacion',
+            success_url=f'http://192.168.1.145:8000/success',
+            cancel_url='http://192.168.1.145:8000/cancelacion',
             customer_email=correo,
         )
         return redirect(sesion.url)
@@ -289,7 +315,11 @@ def hacer_reserva():
     
 @main.route('/success')
 def success():
-    db = mongo.db
+    
+    #Variable db
+    cliente = MongoClient(current_app.config['MONGO_URI'])
+    db = cliente["cuevasHalima"]
+
     #Recogemos los datos de la sesión y la borramos 
     datos = session.pop("datos-reserva", None)
 

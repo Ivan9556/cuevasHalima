@@ -1374,4 +1374,57 @@ p {
         font-size: 14px;
         padding: 10px 15px;
     }
+    /*Reservas*/
+    .form-calendario {
+        padding: 20px;
+    }
+
+    .form-calendario form {
+        flex-direction: column;
+        gap: 15px;
+        font-size: 18px;
+    }
+
+    .form-calendario input,
+    .form-calendario select,
+    .form-calendario button {
+        width: 100%;
+    }
+
+    .vivienda {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .img-vivienda {
+        width: 100%;
+        height: auto;
+    }
+
+    .bloque-reserva {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .datos-reserva {
+        padding: 20px;
+    }
+
+    .datos-reserva img {
+        width: 100%;
+        height: auto;
+    }
+
+    .form-reserva {
+        padding: 20px;
+    }
+
+    .ventana-confi_cancel {
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 5%;
+        font-size: medium;
+    }
 }
