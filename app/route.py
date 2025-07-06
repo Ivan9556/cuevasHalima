@@ -305,8 +305,8 @@ def hacer_reserva():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url='https://distinctive-anne-marie-ivan9556-1b647a5f.koyeb.app/success',
-            cancel_url='https://distinctive-anne-marie-ivan9556-1b647a5f.koyeb.app/cancelacion',
+            success_url='https://www.cuevashalima.com/success',
+            cancel_url='https://www.cuevashalima.com/cancelacion',
             customer_email=correo,
         )
         return redirect(sesion.url)
