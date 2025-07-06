@@ -288,7 +288,7 @@ def hacer_reserva():
     }
 
         #Clave Stripe
-    stripe.api_key = 'sk_test_51RVutIQ6yxCCrrhAY5KuAL4b48LqwXJ0W3xCk1o4TabzZSqV9hVGoxQcjTIJaPggCy8GQpOYs7EKBmkIbAQt8WRI00r2LEGouc'
+    stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
 
     try:
         sesion = stripe.checkout.Session.create(

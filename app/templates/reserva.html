@@ -124,7 +124,7 @@
 <script id="fechasJSON">{{fechas_reservadas | tojson | safe }}</script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    const stripe = Stripe("pk_test_51RVutIQ6yxCCrrhAN9oVhwjwBQwOQ5gRZQp4pXVg1yG4nhKLUdrljl6LSQ9WRlBrXm1bq2AxYhAwi9Gie6d7eoKA00RTwJO1Tk");
+    const stripe = Stripe("pk_live_51RVut0LKrBHn3DnXRrlYVjxS3BcOJRomHvZH7jP3pLHpH0bXTa9IBMAjwYEl4x3iwws8iK5qBSCZm7j6YsmcOAZ700xzs4240Y");
     return stripe.redirectToCheckout({
         sessionId: data.id
     })
