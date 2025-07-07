@@ -14,7 +14,8 @@ registrar rutas y para llamar con url_for('main.nombre_función').
 __name__: Indica el módulo actual. Flask lo usa para localizar archivos 
 relacionados (por ejemplo, plantillas o archivos estáticos si se personaliza).
 """
-from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify, session
+from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify, session, send_from_directory
+import os
 from flask_mail import Message
 from . import mail #Iniciandolo previamente en __init__.py
 from app import mongo # importa el objeto mongo de __init__.py
@@ -425,3 +426,23 @@ def gastronomia():
 @main.route('/lugares')
 def lugares():
     return render_template('/lugares.html')
+
+"""
+En la siguiente ruta definimos la funcion que contiene el archivo a indexar en el navegador:
+
+-current_app.root_path : Obtiene la ruta absoluta del directorio principal de Flask
+
+-os.path.join(..., 'static', 'xml'): Aquí indicamos la ruta donde se encuenta el archivo XML
+
+-'sitemap.xml': Especifica el nombre del archivo a devolver al navegador  
+
+-mimetype='application/xml': Este atributo le indica al navegador y a Google que el archivo es un XML 
+
+"""
+@main.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(
+        os.path.join(current_app.root_path, 'static', 'xml'),
+        'sitemap.xml',
+        mimetype='application/xml'
+    )

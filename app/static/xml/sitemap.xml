@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+Indexacion de Google para mejor uso de busqueda
+
+<urlset> = contenedor de todas las URLs
+
+<url> = una entrada individual
+
+<loc> = la URL real
+
+<lastmod> → para decir cuándo se modificó por última vez (opcional)
+
+<priority> → importancia relativa (de 0.0 a 1.0) (opcional)
+
+-->
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://cuevashalima.com/</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/sobre-nosotros</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/cueva</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/que-hacer</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/encuentranos</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/reserva</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/formulario-reserva</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/success</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/cancelacion</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/senderismo</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/kayak</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/aguas-termales</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/gastronomia</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cuevashalima.com/lugares</loc>
+        <lastmod>2025-07-07</lastmod>
+        <priority>0.7</priority>
+    </url>
+</urlset>
