@@ -32,6 +32,28 @@ class Vivienda:
         })    
         return reserva is None #Devuelve true si la vivienda está disponible "is not Done" devuelve false y no estaría disponible 
 
+    @staticmethod
+    def precio_reserva(n_personas, n_noches):
+        
+        match n_personas:
+
+            case 1:
+                p_total = 78 * n_noches
+            case 2:
+                p_total = 82 * n_noches
+            case 3:
+                p_total = 103 * n_noches
+            case 4:
+                p_total = 116 * n_noches
+            case 5:
+                p_total = 129 * n_noches
+            case 6:
+                p_total = 138 * n_noches
+            case _:
+                p_total = 144 * n_noches
+
+        return p_total
+
 class Reserva():
     def __init__(self, id_reserva, nombre_vivienda, precio_reserva, nombre_persona, apellidos_persona, fecha_entrada, 
     fecha_salida, numero_adultos, numero_ninos, telefono, correo, direccion, ciudad, provincia, codigo_postal, pais, estado):

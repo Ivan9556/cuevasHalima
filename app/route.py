@@ -190,8 +190,8 @@ def buscar_reserva():
     #Recogemos los datos del formulario 
     entrada_str = request.args.get('entrada')
     salida_str = request.args.get('salida')
-    numero_adultos = request.args.get('adultos')
-    numero_ninos = request.args.get('ninos')
+    numero_adultos = int(request.args.get('adultos'))
+    numero_ninos = int(request.args.get('ninos'))
     
     #Comprobamos que existen fechas
     if not entrada_str or not salida_str:
@@ -204,6 +204,14 @@ def buscar_reserva():
 
     #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
     cantidad_noches = (fecha_salida - fecha_entrada).days
+
+    #Recogemos el numero de personas para la reserva
+
+    numero_personas = numero_adultos + numero_ninos
+
+    #Obtenemos el precio de la reserva
+
+    precio_reserva = Vivienda.precio_reserva(numero_personas, cantidad_noches)
     
     #Obtenemos todas las viviendas disponibles en la bd
     listaViviendas = db.viviendas.find({})
@@ -217,7 +225,7 @@ def buscar_reserva():
         vivienda = Vivienda(
             nombre=v['nombre'],
             descripcion=v['descripcion'],
-            precio=v['precio'],
+            precio=precio_reserva,
             img=v['img'],
             capacidad=v['capacidad']
         )

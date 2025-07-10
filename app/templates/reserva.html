@@ -47,10 +47,10 @@
             <h3>{{ vivienda.nombre }}</h3>
             <p>Descripcion: {{ vivienda.descripcion }}</p>
             <p><img src="{{url_for('static', filename='img/iconos/usuarios.png')}}" alt="usuarios"> {{vivienda.capacidad}}</p>
-            <p>Precio reserva: {{ vivienda.precio * cantidad_noches }}€</p>
-            <p class="precio-noche">{{ vivienda.precio }}€ por noche</p>
+            <p>Precio reserva: {{ vivienda.precio }}€</p>
+            <!--<p class="precio-noche">{{ vivienda.precio }}€ por noche</p>-->
             <button type="button" class="seleccionar-vivienda" data-img="{{vivienda.img}}" data-nombre="{{ vivienda.nombre }}"
-                data-precio="{{ vivienda.precio * cantidad_noches }}">Seleccionar</button>
+                data-precio="{{ vivienda.precio }}">Seleccionar</button>
         </div>
         {% endfor %}
         {% endif %}
