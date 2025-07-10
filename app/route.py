@@ -194,7 +194,7 @@ def buscar_reserva():
     numero_ninos = int(request.args.get('ninos'))
     
     #Comprobamos que existen fechas
-    if not entrada_str or not salida_str:
+    if not entrada_str or not salida_str and not numero_adultos or not numero_ninos:
         fechas_reservadas = fechas_ocupadas(db)
         return render_template('/reserva.html', fechas_reservadas=fechas_reservadas)
 
