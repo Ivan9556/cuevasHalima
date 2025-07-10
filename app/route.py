@@ -190,17 +190,28 @@ def buscar_reserva():
     #Recogemos los datos del formulario 
     entrada_str = request.args.get('entrada')
     salida_str = request.args.get('salida')
-    numero_adultos = int(request.args.get('adultos'))
-    numero_ninos = int(request.args.get('ninos'))
+    numero_adultos_str= request.args.get('adultos')
+    numero_ninos_str = request.args.get('ninos')
     
-    #Comprobamos que existen fechas
-    if not entrada_str or not salida_str and not numero_adultos or not numero_ninos:
+    # Comprobamos que todos los campos estén presentes
+    if not entrada_str or not salida_str or not numero_adultos_str:
+        fechas_reservadas = fechas_ocupadas(db)
+        return render_template('/reserva.html', fechas_reservadas=fechas_reservadas)
+    try:
+        #los convertimos en "datetime" para comparar fechas. Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
+        fecha_entrada = datetime.strptime(entrada_str , "%Y-%m-%d")
+        fecha_salida = datetime.strptime(salida_str, "%Y-%m-%d")
+
+        #Covertimos en int los datos de personas
+        numero_adultos = int(numero_adultos_str)
+        numero_ninos = int(numero_ninos_str)
+        if(numero_adultos <= 0):
+            fechas_reservadas = fechas_ocupadas(db)
+            return render_template('/reserva.html', fechas_reservadas=fechas_reservadas)
+    except(ValueError, TypeError):
         fechas_reservadas = fechas_ocupadas(db)
         return render_template('/reserva.html', fechas_reservadas=fechas_reservadas)
 
-    #los convertimos en "datetime" para comparar fechas. Utilizamos '%Y-%m-%d' para covertir la cadena str a datetime
-    fecha_entrada = datetime.strptime(entrada_str , "%Y-%m-%d")
-    fecha_salida = datetime.strptime(salida_str, "%Y-%m-%d")
 
     #Recogemos el número de noches de las fechas señaladas por el metodo .days (datetime)
     cantidad_noches = (fecha_salida - fecha_entrada).days
