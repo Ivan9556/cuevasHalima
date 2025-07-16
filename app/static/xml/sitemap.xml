@@ -48,21 +48,6 @@ Indexacion de Google para mejor uso de busqueda
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://cuevashalima.com/formulario-reserva</loc>
-        <lastmod>2025-07-07</lastmod>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://cuevashalima.com/success</loc>
-        <lastmod>2025-07-07</lastmod>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://cuevashalima.com/cancelacion</loc>
-        <lastmod>2025-07-07</lastmod>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://cuevashalima.com/senderismo</loc>
         <lastmod>2025-07-07</lastmod>
         <priority>0.7</priority>
