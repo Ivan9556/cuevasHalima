@@ -179,6 +179,16 @@ def test_db():
 
     except Exception as e:
         return jsonify({"error": str(e)})
+@main.route("/consultar_reservas")
+def consulta_reservas():
+    cliente = MongoClient(current_app.config['MONGO_URI'])
+    db = cliente['cuevasHalima']
+
+    reservas = db["reservas"]
+
+    resultado = reservas.find()
+
+    return jsonify({resultado})
 
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
