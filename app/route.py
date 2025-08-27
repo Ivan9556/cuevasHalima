@@ -23,8 +23,8 @@ from pymongo import MongoClient
 from .models import Vivienda, Reserva
 from datetime import datetime, timedelta
 import stripe
-
-
+import time
+import jwt
 
 main = Blueprint('main' ,__name__)
 
@@ -190,6 +190,11 @@ def consulta_reservas():
 
     return jsonify({resultado})
 
+@main.route("/login", methods=['POST'])
+def login():
+    admin = current_app.config['ADMIN_USER']
+    password = current_app.config['PASS_USER']
+    
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
     
