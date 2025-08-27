@@ -192,8 +192,22 @@ def consulta_reservas():
 
 @main.route("/login", methods=['POST'])
 def login():
+
+    #Variables de entorno
     admin = current_app.config['ADMIN_USER']
-    password = current_app.config['PASS_USER']
+    admin_pass = current_app.config['PASS_USER']
+    clave = current_app.config['SECRET_KEY']
+
+    #Datos que manda la APK en formato JSON 
+    datos = request.json
+    user = data.get("user")
+    user_pass = data.get("userpass")
+
+    if user != admin or user_pass != admin_pass:
+        return jsonify({"Error": "Nombre y constraseña incorrectos"})
+    
+
+
     
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
