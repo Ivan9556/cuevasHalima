@@ -193,6 +193,13 @@ def consulta_reservas():
 @main.route("/login", methods=['POST'])
 def login():
 
+    """
+    JWT (JSON Wen Token) está formador por 3 partes:
+    Header: metadatos (algoritmo de firma)
+    Playload: la informacion 
+    Signature: firma digital que afirma que no esta manipulado
+    """
+
     #Variables de entorno
     admin = current_app.config['ADMIN_USER']
     admin_pass = current_app.config['PASS_USER']
@@ -200,13 +207,22 @@ def login():
 
     #Datos que manda la APK en formato JSON 
     datos = request.json
-    user = data.get("user")
-    user_pass = data.get("userpass")
+    user = datos.get("user")
+    user_pass = datos.get("userpass")
 
     if user != admin or user_pass != admin_pass:
-        return jsonify({"Error": "Nombre y constraseña incorrectos"})
-    
+        return jsonify({"Error": "Nombre y contraseña incorrectos"})
 
+    #Payload en terminos JWT pertenece al cuerpo del Token 
+    payload = {
+        "sub": "admin",         #"subject", quien es el usuario
+        "iat": int(time.time()), #"issued at" cuando se emite 
+        "exp": int(time.time())+900 #"expiración", cuando caduca(15 min)
+    }
+    #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
+    token = jwt.encode(payload,clave,algorithm="HS256") 
+
+    return jsonify(token)
 
     
 @main.route('/buscar-reserva', methods=['GET'])
