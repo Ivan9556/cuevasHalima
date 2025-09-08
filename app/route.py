@@ -202,17 +202,19 @@ def login():
     
     #Variables de entorno
     admin = current_app.config['ADMIN_USER']
-    admin_pass = current_app.config['PASS_USER']
+    admin_pass = current_app.config['ADMIN_PASS']
     clave = current_app.config['SECRET_KEY']
+    
 
     #Datos que manda la APK en formato JSON 
     datos = request.json
     user = datos.get("user")
     user_pass = datos.get("userpass")
-
+    """
     if user != admin or user_pass != admin_pass:
         return jsonify({"Error": "Nombre y contraseña incorrectos"})
-
+    """
+    print(clave)
     #Payload en terminos JWT pertenece al cuerpo del Token 
     payload = {
         "sub": "admin",         #"subject", quien es el usuario
@@ -221,6 +223,11 @@ def login():
     }
     #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
     token = jwt.encode(payload,clave,algorithm="HS256") 
+    
+    """    
+    if isinstance(token, bytes):
+        token = token.decode("utf-8")
+    """
 
     return jsonify({"token": token})
     
