@@ -199,7 +199,7 @@ def login():
     Playload: la informacion 
     Signature: firma digital que afirma que no esta manipulado
     """
-
+    
     #Variables de entorno
     admin = current_app.config['ADMIN_USER']
     admin_pass = current_app.config['PASS_USER']
@@ -222,8 +222,7 @@ def login():
     #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
     token = jwt.encode(payload,clave,algorithm="HS256") 
 
-    return jsonify(token)
-
+    return jsonify({"token": token})
     
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
