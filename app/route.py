@@ -214,7 +214,6 @@ def login():
     if user != admin or user_pass != admin_pass:
         return jsonify({"Error": "Nombre y contraseña incorrectos"})
     """
-    print(clave)
     #Payload en terminos JWT pertenece al cuerpo del Token 
     payload = {
         "sub": "admin",         #"subject", quien es el usuario
