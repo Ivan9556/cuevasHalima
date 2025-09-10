@@ -210,26 +210,21 @@ def login():
     datos = request.json
     user = datos.get("user")
     user_pass = datos.get("userpass")
-    """
-    if user != admin or user_pass != admin_pass:
-        return jsonify({"Error": "Nombre y contraseña incorrectos"})
-    """
-    #Payload en terminos JWT pertenece al cuerpo del Token 
-    payload = {
-        "sub": "admin",         #"subject", quien es el usuario
-        "iat": int(time.time()), #"issued at" cuando se emite 
-        "exp": int(time.time())+900 #"expiración", cuando caduca(15 min)
-    }
-    #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
-    token = jwt.encode(payload,clave,algorithm="HS256") 
-    
-    """    
-    if isinstance(token, bytes):
-        token = token.decode("utf-8")
-    """
 
-    return jsonify({"token": token})
-    
+
+    if admin == user and admin_pass == user_pass:
+        #Payload en terminos JWT pertenece al cuerpo del Token 
+        payload = {
+            "sub": "admin",         #"subject", quien es el usuario
+            "iat": int(time.time()), #"issued at" cuando se emite 
+            "exp": int(time.time())+900 #"expiración", cuando caduca(15 min)
+            }
+        #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
+        token = jwt.encode(payload,clave,algorithm="HS256") 
+        return jsonify({"token": token})
+    else: 
+        return jsonify("Error de conexion")
+
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
     
