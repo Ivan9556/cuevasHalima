@@ -211,7 +211,7 @@ def login():
     user = datos.get("user")
     user_pass = datos.get("userpass")
 
-
+    #Confirmación acreditación
     if admin == user and admin_pass == user_pass:
         #Payload en terminos JWT pertenece al cuerpo del Token 
         payload = {
