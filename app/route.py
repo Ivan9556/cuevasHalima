@@ -180,15 +180,22 @@ def test_db():
     except Exception as e:
         return jsonify({"error": str(e)})
 @main.route("/consultar_reservas")
-def consulta_reservas():
-    cliente = MongoClient(current_app.config['MONGO_URI'])
-    db = cliente['cuevasHalima']
+def consulta_reservas(Authoriation : str = Header(none)):
 
-    reservas = db["reservas"]
+    token = current_app.config['TOKEN']
+    
+    if(Authoriation != f"Bearer {token}"):
+        return jsonify("Token invalido")
+    else:
+        cliente = MongoClient(current_app.config['MONGO_URI'])
+        db = cliente['cuevasHalima']
 
-    resultado = reservas.find()
+        reservas = db["reservas"]
 
-    return jsonify({resultado})
+        resultado = reservas.find()
+
+        return jsonify({resultado})
+    
 
 @main.route("/login", methods=['POST'])
 def login():
