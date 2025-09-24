@@ -25,6 +25,7 @@ from datetime import datetime, timedelta
 import stripe
 import time
 import jwt
+from fastapi import Header
 
 main = Blueprint('main' ,__name__)
 
@@ -179,8 +180,8 @@ def test_db():
 
     except Exception as e:
         return jsonify({"error": str(e)})
-@main.route("/consultar_reservas")
-def consulta_reservas(Authoriation : str = Header(none)):
+@main.route("/consultar_reservas", methods=['GET'])
+def consulta_reservas(Authoriation : str = Header(None)):
 
     token = current_app.config['TOKEN']
     
