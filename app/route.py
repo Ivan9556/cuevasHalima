@@ -14,6 +14,7 @@ registrar rutas y para llamar con url_for('main.nombre_función').
 __name__: Indica el módulo actual. Flask lo usa para localizar archivos 
 relacionados (por ejemplo, plantillas o archivos estáticos si se personaliza).
 """
+from json import dumps
 from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify, session, send_from_directory
 import os
 from flask_mail import Message
@@ -25,10 +26,11 @@ from datetime import datetime, timedelta
 import stripe
 import time
 import jwt
-from fastapi import Header
+from fastapi import Header, Response
 
 main = Blueprint('main' ,__name__)
 
+#Varibles 
 
 def fechas_ocupadas(db):
     
@@ -181,21 +183,55 @@ def test_db():
     except Exception as e:
         return jsonify({"error": str(e)})
 @main.route("/consultar_reservas", methods=['GET'])
-def consulta_reservas(Authoriation : str = Header(None)):
-
-    token = current_app.config['TOKEN']
+def consulta_reservas():
     
-    if(Authoriation != f"Bearer {token}"):
-        return jsonify("Token invalido")
-    else:
+    # Clave secreta para verificar el JWT
+    # Se obtiene del config de Flask para poder decodificar el token enviado por el cliente
+    clave = current_app.config['SECRET_KEY']
+
+    # Obtener el token del header Authorization
+    # request.headers.get("Authorization") obtiene el valor completo del header
+    # que tiene la forma "Bearer <token>"
+    autorizacion = request.headers.get("Authorization")
+
+    # Separamos "Bearer " del token real
+    # split(" ")[1] toma la segunda parte de la cadena
+    token = autorizacion.split(" ")[1]
+
+    # Decodificación y validación del JWT
+    try:
+        # jwt.decode valida que:
+        # - El token no haya sido modificado (firma correcta)
+        # - No haya expirado (campo 'exp')
+        # Devuelve un diccionario con la información del payload
+        payload = jwt.decode(token, clave, algorithms=["HS256"])
+
+        # Conexión a MongoDB y acceso a la colección
         cliente = MongoClient(current_app.config['MONGO_URI'])
         db = cliente['cuevasHalima']
-
         reservas = db["reservas"]
 
-        resultado = reservas.find()
+        # Crear una lista filtrada solo con los campos que queremos enviar
+        lista_reservas = []
+        for i in reservas.find():
+            lista_reservas.append({
+                "nombre": i.get("nombre_persona"),    # Campo nombre de la reserva
+                "apellidos": i.get("apellidos_persona")  # Campo apellidos de la reserva
+            })
 
-        return jsonify({resultado})
+        # Imprimir en consola para depuración
+        print(lista_reservas)
+
+        # Devolver los datos filtrados al cliente como JSON
+        # jsonify convierte la lista de diccionarios en JSON válido
+        return jsonify(lista_reservas)
+
+    #Manejo de error si el token ha expirado
+    except jwt.ExpiredSignatureError:
+        # Retorna un JSON indicando que el token no existe o ha expirado
+        return jsonify({"error": "No existe token"})
+
+    
     
 
 @main.route("/login", methods=['POST'])
@@ -212,8 +248,6 @@ def login():
     admin = current_app.config['ADMIN_USER']
     admin_pass = current_app.config['ADMIN_PASS']
     clave = current_app.config['SECRET_KEY']
-    
-
     #Datos que manda la APK en formato JSON 
     datos = request.json
     user = datos.get("user")
