@@ -268,23 +268,23 @@ def hacer_reserva():
     db = cliente["cuevasHalima"]
 
     id_reserva = Reserva.generar_id(db)
-    nombre_vivienda = request.form["nombre_vivienda"]
-    precio_reserva = request.form["precio_vivienda"]
+    nombre_vivienda = request.form["nombre_vivienda"].strip()
+    precio_reserva = request.form["precio_vivienda"].strip()
     precio_reserva_stripe = int(float(request.form["precio_vivienda"]) * 100) #Parseamos el precio en centavos para que pueda entenderlo stripe
-    cantidad_noches = request.form["cantidad_noches"]
-    nombre_persona = request.form["nombre_persona"]
-    apellidos_persona = request.form["apellidos_persona"]
-    fecha_entrada_str = request.form["fecha_entrada"]
-    fecha_salida_str= request.form["fecha_salida"]
-    numero_adultos = request.form["numero_adultos"]
-    numero_ninos = request.form["numero_ninos"]
-    telefono = request.form["telefono"]
-    correo = request.form["correo"]
-    direccion = request.form["direccion"]
-    ciudad = request.form["ciudad"]
-    provincia = request.form["provincia"]
-    codigo_postal = request.form["codigo_postal"]
-    pais = request.form["pais"]
+    cantidad_noches = request.form["cantidad_noches"].strip()
+    nombre_persona = request.form["nombre_persona"].strip()
+    apellidos_persona = request.form["apellidos_persona"].strip()
+    fecha_entrada_str = request.form["fecha_entrada"].strip()
+    fecha_salida_str= request.form["fecha_salida"].strip()
+    numero_adultos = request.form["numero_adultos"].strip()
+    numero_ninos = request.form["numero_ninos"].strip()
+    telefono = request.form["telefono"].strip()
+    correo = request.form["correo"].strip()
+    direccion = request.form["direccion"].strip()
+    ciudad = request.form["ciudad"].strip()
+    provincia = request.form["provincia"].strip()
+    codigo_postal = request.form["codigo_postal"].strip()
+    pais = request.form["pais"].strip()
 
     #Utilizamos session de Flask, para guardar dato temporales, del usuario entre peticiones. 
     session['datos-reserva'] = {
