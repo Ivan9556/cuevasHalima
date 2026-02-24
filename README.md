@@ -10,28 +10,28 @@ Este proyecto está desarrolado como ejemplo práctico de una **API Rest** con e
 
 ## Variables de entorno
 
-Esta API se ha construido utilizando variables de entorno para garantizar la seguridad de las credenciales. Para poner en práctica este ejemplo, es necesario crear un archivo **.env** en la raíz del proyecto y asignar las variables correspondientes 
+Esta API se ha construido utilizando variables de entorno para garantizar la seguridad de las credenciales. Para poner en práctica este ejemplo, es necesario crear un archivo **.env** en la raíz del proyecto y asignar las variables correspondientes
 
-##  Instalación
+## Instalación
 
 Sigue estos pasos para configurar el proyecto localmente:
 
 1. **Clonar el repositorio:**
-   ```bash
+```bash
    git clone https://github.com/Ivan9556/cuevasHalima.git
 
 2. **Crea un entorno virtual:**
-   ```Bash 
+```Bash 
    python3 -m venv venv
 
 3. **Actíva el entorno virtual:**
-   ```Bash 
+```Bash 
    source vevn/bin/activate 
 
 4. **Instala dependencias:**
-   ```Bash 
+```Bash
    pip install -r requirements.txt 
 
 5. **Inciar la API:**
-   ```Bash 
+```Bash
    python run.py 
