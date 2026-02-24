@@ -20,8 +20,8 @@ Sigue estos pasos para configurar el proyecto localmente:
    ```bash
    git clone https://github.com/Ivan9556/cuevasHalima.git
 
-2. Crea un entorno virtual: 
-   Bash python3 -m venv venv
+2. **Crea un entorno virtual:**
+   ```Bash python3 -m venv venv
 
 3. Actíva el entorno virtual:
    Bash source vevn/bin/activate 
