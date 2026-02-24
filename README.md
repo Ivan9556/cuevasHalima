@@ -8,11 +8,9 @@ Este proyecto está desarrolado como ejemplo práctico de una **API Rest** con e
 * **Frontend:** HTML5, CSS3 y JavaScript para la funcionalidad.
 * **Base de Datos:** MongoDB (No relacional) con almacenamiento en la nube mediante MongoDB Atlas.
 
-## 🔐 Variables de entorno
+## Variables de entorno
 
-Esta API se ha construido utilizando variables de entorno para garantizar la seguridad de las credenciales. 
-
-> Para poner en práctica este ejemplo, es necesario crear un archivo **.env** en la raíz del proyecto y asignar las variables correspondientes 
+Esta API se ha construido utilizando variables de entorno para garantizar la seguridad de las credenciales. Para poner en práctica este ejemplo, es necesario crear un archivo **.env** en la raíz del proyecto y asignar las variables correspondientes 
 
 ## Instalación
 
@@ -20,14 +18,13 @@ Esta API se ha construido utilizando variables de entorno para garantizar la seg
    git clone https://github.com/Ivan9556/cuevasHalima.git
 
 2. Crea un entorno virtual:
-   Bash python3 -m venv venv
+   Bash python3 -m venv venv 
 
 3. Actíva el entorno virtual:
-   Bash source vevn/bin/activate
+   Bash source vevn/bin/activate 
 
 4. Instala dependencias:
-   Bash pip install -r requirements.txt
+   Bash pip install -r requirements.txt 
 
 5. Inciar la API:
-   Bash python run.py
-
+   Bash python run.py 
