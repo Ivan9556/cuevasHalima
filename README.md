@@ -21,13 +21,17 @@ Sigue estos pasos para configurar el proyecto localmente:
    git clone https://github.com/Ivan9556/cuevasHalima.git
 
 2. **Crea un entorno virtual:**
-   ```Bash python3 -m venv venv
+   ```Bash 
+   python3 -m venv venv
 
-3. Actíva el entorno virtual:
-   Bash source vevn/bin/activate 
+3. **Actíva el entorno virtual:**
+   ```Bash 
+   source vevn/bin/activate 
 
-4. Instala dependencias:
-   Bash pip install -r requirements.txt 
+4. **Instala dependencias:**
+   ```Bash 
+   pip install -r requirements.txt 
 
-5. Inciar la API:
-   Bash python run.py 
+5. **Inciar la API:**
+   ```Bash 
+   python run.py 
