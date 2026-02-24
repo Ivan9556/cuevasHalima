@@ -18,7 +18,7 @@ Sigue estos pasos para configurar el proyecto localmente:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/Ivan9556/cuevasHalima.git](https://github.com/Ivan9556/cuevasHalima.git)
+   git clone (https://github.com/Ivan9556/cuevasHalima.git)
 
 2. Crea un entorno virtual: 
    Bash python3 -m venv venv
