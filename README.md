@@ -39,4 +39,12 @@ Sigue estos pasos para configurar el proyecto localmente:
 5. **Inciar la API:**
 
    ```Bash
-   python run.py 
+   python run.py
+   
+# Terminos de uso
+
+Este repositorio ha sido creado con fines exclusivamente educativos y de demostración de cómo estructurar una API REST para reservas.
+
+* **Se permite:** Estudiar el código, probarlo localmente y usar fragmentos como aprendizaje para tus propios proyectos.
+
+* **No se permite:** La copia íntegra del repositorio para fines comerciales, ni la redistribución del proyecto bajo otro nombre sin autorización previa.
