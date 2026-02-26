@@ -48,3 +48,9 @@ Este repositorio ha sido creado con fines exclusivamente educativos y de demostr
 * **Se permite:** Estudiar el código, probarlo localmente y usar fragmentos como aprendizaje para tus propios proyectos.
 
 * **No se permite:** La copia íntegra del repositorio para fines comerciales, ni la redistribución del proyecto bajo otro nombre sin autorización previa.
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia **CC BY-NC 4.0 (Atribución-NoComercial)**.
+
+Está diseñado exclusivamente como un **recurso educativo** para la comunidad. Se permite su uso para aprendizaje y consulta personal. Queda prohibida la explotación comercial o venta de este código sin permiso expreso del autor.
