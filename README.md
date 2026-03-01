@@ -7,6 +7,7 @@ Este proyecto está desarrolado como ejemplo práctico de una **API Rest** con e
 * **Backend:** Python.
 * **Frontend:** HTML5, CSS3 y JavaScript para la funcionalidad.
 * **Base de Datos:** MongoDB (No relacional) con almacenamiento en la nube mediante MongoDB Atlas.
+* **Pagos:** [Stripe](https://stripe.com/) - Pasarela segura para la gestión de reservas y transacciones. 
 
 ## Variables de entorno
 
