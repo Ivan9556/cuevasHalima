@@ -231,9 +231,6 @@ def consulta_reservas():
         # Retorna un JSON indicando que el token no existe o ha expirado
         return jsonify({"error": "No existe token"})
 
-    
-    
-
 @main.route("/login", methods=['POST'])
 def login():
 
