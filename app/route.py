@@ -237,7 +237,7 @@ def login():
     """
     JWT (JSON Wen Token) está formador por 3 partes:
     Header: metadatos (algoritmo de firma)
-    Playload: la informacion 
+    Payload: la informacion 
     Signature: firma digital que afirma que no esta manipulado
     """
     
