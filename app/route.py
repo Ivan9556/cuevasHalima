@@ -216,7 +216,13 @@ def consulta_reservas():
         for i in reservas.find():
             lista_reservas.append({
                 "nombre": i.get("nombre_persona"),    # Campo nombre de la reserva
-                "apellidos": i.get("apellidos_persona")  # Campo apellidos de la reserva
+                "apellidos": i.get("apellidos_persona"), # Campo apellidos de la reserva
+                "fecha_entrada": i.get("fecha_entrada"),
+                "fecha_salida": i.get("fecha_salida"),
+                "numero_adultos": i.get("numero_adultos"),
+                "numero_ninos": i.get("numero_ninos"),
+                "telefono": i.get("telefono"),
+                "correo": i.get("correo")
             })
 
         # Imprimir en consola para depuración
