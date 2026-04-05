@@ -215,8 +215,9 @@ def consulta_reservas():
         lista_reservas = []
         for i in reservas.find():
             lista_reservas.append({
-                "nombre": i.get("nombre_persona"),    # Campo nombre de la reserva
-                "apellidos": i.get("apellidos_persona"), # Campo apellidos de la reserva
+                "nombre": i.get("nombre_persona"),   
+                "apellidos": i.get("apellidos_persona"), 
+                # Eliminamos el tipo "date.time" del servidor parseando la fecha a String para que la app la entienda.
                 "fecha_entrada": i.get("fecha_entrada").strftime('%Y-%m-%d') if hasattr(i.get("fecha_entrada"), 'strftime') else str(i.get("fecha_entrada") or ""),
                 "fecha_salida": i.get("fecha_salida").strftime('%Y-%m-%d') if hasattr(i.get("fecha_salida"), 'strftime') else str(i.get("fecha_salida") or ""),
                 "numero_adultos": str(i.get("numero_adultos")),
