@@ -210,26 +210,25 @@ def consulta_reservas():
         cliente = MongoClient(current_app.config['MONGO_URI'])
         db = cliente['cuevasHalima']
         reservas = db["reservas"]
+
+        # Crear una lista filtrada solo con los campos que queremos enviar
         lista_reservas = []
         for i in reservas.find():
-            # Limpiamos y convertimos cada campo a string puro
-            d = {
-                "nombre": str(i.get("nombre_persona") or ""),
-                "apellidos": str(i.get("apellidos_persona") or ""),
+            lista_reservas.append({
+                "nombre": i.get("nombre_persona"),    # Campo nombre de la reserva
+                "apellidos": i.get("apellidos_persona"), # Campo apellidos de la reserva
                 "fecha_entrada": i.get("fecha_entrada").strftime('%Y-%m-%d') if hasattr(i.get("fecha_entrada"), 'strftime') else str(i.get("fecha_entrada") or ""),
                 "fecha_salida": i.get("fecha_salida").strftime('%Y-%m-%d') if hasattr(i.get("fecha_salida"), 'strftime') else str(i.get("fecha_salida") or ""),
-                "numero_adultos": str(i.get("numero_adultos") or "0"),
-                "numero_ninos": str(i.get("numero_ninos") or "0"),
-                "telefono": str(i.get("telefono") or ""),
-                "correo": str(i.get("correo") or ""),
-                "precio_reserva": str(i.get("precio_reserva") or "0")
-            }
-            lista_reservas.append(d)
+                "numero_adultos": str(i.get("numero_adultos")),
+                "numero_ninos": str(i.get("numero_ninos")),
+                "telefono": i.get("telefono"),
+                "correo": i.get("correo"),
+                "precio_reserva":i.get("precio_reserva")
+                
+            })
 
-        # DEBUG REAL: Esto debe mostrar comillas en las fechas
-        print(f"JSON FINAL: {lista_reservas}")
-        
-        return jsonify(lista_reservas)
+        # Imprimir en consola para depuración
+        print(lista_reservas)
 
         # Devolver los datos filtrados al cliente como JSON
         # jsonify convierte la lista de diccionarios en JSON válido
