@@ -22,5 +22,8 @@ class Config:
     STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
     TOKEN = os.getenv("TOKEN")
 
+    # Prueba local mongoDB
+    MONGO_URI_LOCAL = os.getenv("MONGO_URI_LOCAL")  
+
 
 
