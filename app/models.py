@@ -111,7 +111,7 @@ class Reserva():
         )
         return resultado["valor"]
 """
-@classmethod es un decorador que indica a Python que el método pertenece a ka clase, no a una instancia de la clase.
+@classmethod es un decorador que indica a Python que el método pertenece a la clase, no a una instancia de la clase.
 En vez de usar "self" (representa una instancia), recibe "cls", que representa la clase misma. Útil si queremos acceder
 al método de la clase, pero no a un objeto.
 Podemos unar también @staticmethod, no necesita pasar "cls" ni "self" dentro del método ya que lo que hacemos es hacer estático el 
