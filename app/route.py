@@ -34,7 +34,7 @@ main = Blueprint('main' ,__name__)
 def fechas_ocupadas(db):
     
     #Variable db
-    cliente = MongoClient(current_app.config['MONGO_URI'])
+    cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
     db = cliente["cuevasHalima"]
 
     #Almacenamos las reservas de la db
@@ -465,7 +465,7 @@ def consulta_reservas():
         payload = jwt.decode(token, clave, algorithms=["HS256"])
 
         # Conexión a MongoDB y acceso a la colección
-        cliente = MongoClient(current_app.config['MONGO_URI'])
+        cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
         db = cliente['cuevasHalima']
         reservas = db["reservas"]
 
@@ -501,44 +501,53 @@ def consulta_reservas():
 @main.route("/registrar_reserva", methods=["POST"])
 def registrar_reserva():
 
-    clave = current_app.config['SECRET_KEY']
-
-    autorizacion = request.headers.get("Authorization")
-
-    token = autorizacion.split(" ")[1]
-
-    # Fechas a bloquear
-    fechas_bloquear = request.json
-
     try: 
+        clave = current_app.config['SECRET_KEY']
+
+        autorizacion = request.headers.get("Authorization")
+
+        token = autorizacion.split(" ")[1]
+
+        # Fechas a bloquear
+        fechas_bloquear = request.json
+
+        # Quitamos posibles espacios en blanco con .strip()
+        f_entrada_str = fechas_bloquear[0].strip()
+        f_salida_str= fechas_bloquear[1].strip()
+            
+        fecha_entrada_date = datetime.strptime(f_entrada_str, "%d-%m-%Y")
+        fecha_salida_date = datetime.strptime(f_salida_str, "%d-%m-%Y")
+
         # Firma de validacion
         payload = jwt.decode(token, clave, algorithms=["HS256"])
         
         cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
         db = cliente["cuevasHalima"]
 
+
         nuevaReserva = Reserva(
             id_reserva=Reserva.generar_id(db),
-            nombre_vivienda="none",
-            precio_reserva="none",
-            nombre_persona="none",
-            apellidos_persona="none",
-            fecha_entrada=fechas_bloquear[0],
-            fecha_salida=fechas_bloquear[1],
-            numero_adultos="none",
-            numero_ninos="none",
-            telefono="none",
-            correo="none",
+            nombre_vivienda="La Partera", 
+            precio_reserva="0",
+            nombre_persona="BLOQUEO",
+            apellidos_persona="ADMIN",
+            fecha_entrada=fecha_entrada_date,
+            fecha_salida=fecha_salida_date,  
+            numero_adultos="0",
+            numero_ninos="0",
+            telefono="000",
+            correo="admin@cuevashalima.com",
             direccion="none",
             ciudad="none",
             provincia="none",
             codigo_postal="none",
             pais="none",
-            estado="none"
+            estado="bloqueado"
         )
 
         #print(nuevaReserva.to_dict())
         db.reservas.insert_one(nuevaReserva.to_dict())
+        print("Reserva relizada correctamente")
 
         return jsonify("operacion realizada correctamente")
     except:
