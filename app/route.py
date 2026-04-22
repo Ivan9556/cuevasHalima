@@ -473,6 +473,7 @@ def consulta_reservas():
         lista_reservas = []
         for i in reservas.find():
             lista_reservas.append({
+                "id": i.get("id_reserva"),
                 "nombre": i.get("nombre_persona"),   
                 "apellidos": i.get("apellidos_persona"), 
                 # Eliminamos el tipo "date.time" del servidor parseando la fecha a String para que la app la entienda.
@@ -553,6 +554,34 @@ def registrar_reserva():
     except:
         return jsonify("No se encuentra token")
 
+
+@main.route("/borrar_reserva", methods=['POST'])
+def borrar_reserva():
+
+    try:
+        
+        clave = current_app.config["SECRET_KEY"]
+
+        autorizacion = request.headers.get("Authorization")
+
+        token = autorizacion.split(" ")[1]
+
+        id_reserva = request.get_json()
+
+        #Firma
+        payload = jwt.decode(token, clave, algorithms=["HS256"])
+
+        cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
+        db = cliente["cuevasHalima"]
+        
+        reserva_borrada = db.reservas.delete_one({'id_reserva': id_reserva})
+
+        print(f"RESERVA {id_reserva} ELIMINADA")
+
+        return jsonify("operacion realizada correctamente")
+
+    except:
+        return jsonify("No se encuentra token")
 
 #                                                            --- ACTIVIDADES --- 
 @main.route('/senderismo')
