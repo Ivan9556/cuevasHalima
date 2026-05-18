@@ -432,7 +432,7 @@ def login():
         payload = {
             "sub": "admin",         #"subject", quien es el usuario
             "iat": int(time.time()), #"issued at" cuando se emite 
-            "exp": int(time.time())+900 #"expiración", cuando caduca(15 min)
+            "exp": int(time.time())+60 #"expiración", cuando caduca(15 min)
             }
         #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
         token = jwt.encode(payload,clave,algorithm="HS256") 
@@ -497,7 +497,8 @@ def consulta_reservas():
     #Manejo de error si el token ha expirado
     except jwt.ExpiredSignatureError:
         # Retorna un JSON indicando que el token no existe o ha expirado
-        return jsonify({"error": "No existe token"})
+        print("NO EXISTE TOKEN")
+        return jsonify({"error": "No existe token"}), 401
 
 @main.route("/registrar_reserva", methods=["POST"])
 def registrar_reserva():
@@ -509,16 +510,18 @@ def registrar_reserva():
 
         token = autorizacion.split(" ")[1]
 
-        # Fechas a bloquear
-        fechas_bloquear = request.json
+        # datos reserva
+        datos = request.json
 
         # Quitamos posibles espacios en blanco con .strip()
-        f_entrada_str = fechas_bloquear[0].strip()
-        f_salida_str= fechas_bloquear[1].strip()
-            
+        f_entrada_str = datos[0].strip()
+        f_salida_str= datos[1].strip()
+  
+        #Parseamos fechas str a tipo datetime
         fecha_entrada_date = datetime.strptime(f_entrada_str, "%d-%m-%Y")
         fecha_salida_date = datetime.strptime(f_salida_str, "%d-%m-%Y")
-
+        
+       
         # Firma de validacion
         payload = jwt.decode(token, clave, algorithms=["HS256"])
         
@@ -530,14 +533,14 @@ def registrar_reserva():
             id_reserva=Reserva.generar_id(db),
             nombre_vivienda="La Partera", 
             precio_reserva="0",
-            nombre_persona="BLOQUEO",
-            apellidos_persona="ADMIN",
-            fecha_entrada=fecha_entrada_date,
-            fecha_salida=fecha_salida_date,  
+            nombre_persona=datos[2].strip(),      # El índice 2 de Android es el Nombre ("BLOQUEO")
+            apellidos_persona=datos[3].strip(),   # El índice 3 de Android es el Apellido ("ADMIN")
+            fecha_entrada=fecha_entrada_date,     # datetime parseado de datos[0]
+            fecha_salida=fecha_salida_date,       # datetime parseado de datos[1]
             numero_adultos="0",
             numero_ninos="0",
-            telefono="000",
-            correo="admin@cuevashalima.com",
+            telefono=datos[4].strip(),            # El índice 4 de Android es el Teléfono
+            correo=datos[5].strip(),              # El índice 5 de Android es el Correo
             direccion="none",
             ciudad="none",
             provincia="none",
