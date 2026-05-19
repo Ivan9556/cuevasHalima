@@ -420,7 +420,7 @@ def login():
     #Variables de entorno
     admin = current_app.config['ADMIN_USER']
     admin_pass = current_app.config['ADMIN_PASS']
-    clave = current_app.config['SECRET_KEY']
+    clave = current_app.config['SECRET_KEY_TOKEN']
     #Datos que manda la APK en formato JSON 
     datos = request.json
     user = datos.get("user")
@@ -445,7 +445,7 @@ def consulta_reservas():
     
     # Clave secreta para verificar el JWT
     # Se obtiene del config de Flask para poder decodificar el token enviado por el cliente
-    clave = current_app.config['SECRET_KEY']
+    clave = current_app.config['SECRET_KEY_TOKEN'] #clave .env
 
     # Obtener el token del header Authorization
     # request.headers.get("Authorization") obtiene el valor completo del header
@@ -504,7 +504,7 @@ def consulta_reservas():
 def registrar_reserva():
 
     try: 
-        clave = current_app.config['SECRET_KEY']
+        clave = current_app.config['SECRET_KEY_TOKEN']
 
         autorizacion = request.headers.get("Authorization")
 
@@ -563,7 +563,7 @@ def borrar_reserva():
 
     try:
         
-        clave = current_app.config["SECRET_KEY"]
+        clave = current_app.config["SECRET_KEY_TOKEN"]
 
         autorizacion = request.headers.get("Authorization")
 
