@@ -27,6 +27,9 @@ def create_app():
 
     mongo.init_app(app)  # Inicializa MongoDB
     mail.init_app(app)  # Inicializa Mail
+    #Clave privada guardada en la conf. de Flask 
+    #Para llamar desde cualquier punto a la variable de entorno
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') 
 
     # Rutas
     from .route import main

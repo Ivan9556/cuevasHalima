@@ -14,6 +14,7 @@ registrar rutas y para llamar con url_for('main.nombre_función').
 __name__: Indica el módulo actual. Flask lo usa para localizar archivos 
 relacionados (por ejemplo, plantillas o archivos estáticos si se personaliza).
 """
+from json import dumps
 from flask import Blueprint, render_template, url_for, flash, request, redirect, current_app, jsonify, session, send_from_directory
 import os
 from flask_mail import Message
@@ -23,12 +24,13 @@ from pymongo import MongoClient
 from .models import Vivienda, Reserva
 from datetime import datetime, timedelta
 import stripe
-
-
+import time
+import jwt
+from fastapi import Header, Response
 
 main = Blueprint('main' ,__name__)
 
-
+#                                               --- METEDO ELIMINACION FECHAS CALENDARIO --- 
 def fechas_ocupadas(db):
     
     #Variable db
@@ -88,6 +90,8 @@ def fechas_ocupadas(db):
 
     return fechas_bloqueadas
 
+
+#                                                       --- NAVEGACION WEB --- 
 @main.route('/') #se carga desde la raiz index.html
 def inicio():
     return render_template('index.html') #busca html en 'template'
@@ -150,36 +154,8 @@ def enviar_mensaje():
     flash('Mensaje enviado correctamente')
     return redirect(url_for('main.encuentranos'))
 
-@main.route("/test-db")
-def test_db():    
-    try:
-        """
-        mongo_url = current_app.config['MONGO_URI']
-        client = MongoClient(mongo_url)
-
-        listName = client.list_database_names()
-        print("Estas son las bases de datos: ", listName)
-        return jsonify({"status": "Conexion existosa", "b2ase de datos" : listName })
-        """
-
-        cliente = MongoClient(current_app.config['MONGO_URI'])
-        db = cliente["cuevasHalima"]
-
-        """
-        viviendas = db["viviendas"]
-
-        vivienda = Vivienda("La Partera",
-        "Wifi, cocina equipada, bañera exterior. Tradición y confort en un solo espacio", 175, "cama.jpg", "5")
-
-        resultado = viviendas.insert_one(vivienda.to_dict())
-        """
-
-        reserva
-        return jsonify({"mensaje": "Vivienda insertada correctamente"})  
-
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
+   
+#                                                        --- REGISTRO RESERVAS ---
 @main.route('/buscar-reserva', methods=['GET'])
 def buscar_reserva():
     
@@ -410,6 +386,8 @@ def success():
 
     return render_template("/confirmacion.html", reserva=reserva, fechas_reservadas=fechas_reservadas)
 
+
+#                                               --- MENSAJES CONDIRMACION Y CANCELACION ---
 @main.route('/msg')
 def msg():
     return render_template('/msg.html')
@@ -426,6 +404,189 @@ def confirmacion():
 def cancelacion():
     return render_template('/cancelacion.html')
 
+
+
+#                                                        --- ROUTES APP ANDROID --- 
+@main.route("/login", methods=['POST'])
+def login():
+
+    """
+    JWT (JSON Wen Token) está formador por 3 partes:
+    Header: metadatos (algoritmo de firma)
+    Payload: la informacion 
+    Signature: firma digital que afirma que no esta manipulado
+    """
+    
+    #Variables de entorno
+    admin = current_app.config['ADMIN_USER']
+    admin_pass = current_app.config['ADMIN_PASS']
+    clave = current_app.config['SECRET_KEY']
+    #Datos que manda la APK en formato JSON 
+    datos = request.json
+    user = datos.get("user")
+    user_pass = datos.get("userpass")
+
+    #Confirmación acreditación
+    if admin == user and admin_pass == user_pass:
+        #Payload en terminos JWT pertenece al cuerpo del Token 
+        payload = {
+            "sub": "admin",         #"subject", quien es el usuario
+            "iat": int(time.time()), #"issued at" cuando se emite 
+            "exp": int(time.time())+3000 #"expiración", cuando caduca
+            }
+        #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
+        token = jwt.encode(payload,clave,algorithm="HS256") 
+        return jsonify({"token": token})
+    else: 
+        return jsonify("Error de conexion")
+
+@main.route("/consultar_reservas", methods=['GET'])
+def consulta_reservas():
+    
+    # Clave secreta para verificar el JWT
+    # Se obtiene del config de Flask para poder decodificar el token enviado por el cliente
+    clave = current_app.config['SECRET_KEY']
+
+    # Obtener el token del header Authorization
+    # request.headers.get("Authorization") obtiene el valor completo del header
+    # que tiene la forma "Bearer <token>"
+    autorizacion = request.headers.get("Authorization")
+
+    # Separamos "Bearer " del token real
+    # split(" ")[1] toma la segunda parte de la cadena
+    token = autorizacion.split(" ")[1]
+
+    # Decodificación y validación del JWT
+    try:
+        # jwt.decode valida que:
+        # - El token no haya sido modificado (firma correcta)
+        # - No haya expirado (campo 'exp')
+        # Devuelve un diccionario con la información del payload
+        payload = jwt.decode(token, clave, algorithms=["HS256"])
+
+        # Conexión a MongoDB y acceso a la colección
+        cliente = MongoClient(current_app.config['MONGO_URI'])
+        db = cliente['cuevasHalima']
+        reservas = db["reservas"]
+
+        # Crear una lista filtrada solo con los campos que queremos enviar
+        lista_reservas = []
+        for i in reservas.find():
+            lista_reservas.append({
+                "id": i.get("id_reserva"),
+                "nombre": i.get("nombre_persona"),   
+                "apellidos": i.get("apellidos_persona"), 
+                # Eliminamos el tipo "date.time" del servidor parseando la fecha a String para que la app la entienda.
+                "fecha_entrada": i.get("fecha_entrada").strftime('%Y-%m-%d') if hasattr(i.get("fecha_entrada"), 'strftime') else str(i.get("fecha_entrada") or ""),
+                "fecha_salida": i.get("fecha_salida").strftime('%Y-%m-%d') if hasattr(i.get("fecha_salida"), 'strftime') else str(i.get("fecha_salida") or ""),
+                "numero_adultos": str(i.get("numero_adultos")),
+                "numero_ninos": str(i.get("numero_ninos")),
+                "telefono": i.get("telefono"),
+                "correo": i.get("correo"),
+                "precio_reserva":i.get("precio_reserva")
+                
+            })
+
+        # Imprimir en consola para depuración
+        print(lista_reservas)
+
+        # Devolver los datos filtrados al cliente como JSON
+        # jsonify convierte la lista de diccionarios en JSON válido
+        return jsonify(lista_reservas)
+
+    #Manejo de error si el token ha expirado
+    except jwt.ExpiredSignatureError:
+        # Retorna un JSON indicando que el token no existe o ha expirado
+        print("NO EXISTE TOKEN")
+        return jsonify({"error": "No existe token"}), 401
+
+@main.route("/registrar_reserva", methods=["POST"])
+def registrar_reserva():
+
+    try: 
+        clave = current_app.config['SECRET_KEY']
+
+        autorizacion = request.headers.get("Authorization")
+
+        token = autorizacion.split(" ")[1]
+
+        # datos reserva
+        datos = request.json
+
+        # Quitamos posibles espacios en blanco con .strip()
+        f_entrada_str = datos[0].strip()
+        f_salida_str= datos[1].strip()
+  
+        #Parseamos fechas str a tipo datetime
+        fecha_entrada_date = datetime.strptime(f_entrada_str, "%d-%m-%Y")
+        fecha_salida_date = datetime.strptime(f_salida_str, "%d-%m-%Y")
+        
+       
+        # Firma de validacion
+        payload = jwt.decode(token, clave, algorithms=["HS256"])
+        
+        cliente = MongoClient(current_app.config['MONGO_URI'])
+        db = cliente["cuevasHalima"]
+
+
+        nuevaReserva = Reserva(
+            id_reserva=Reserva.generar_id(db),
+            nombre_vivienda="La Partera", 
+            precio_reserva="0",
+            nombre_persona=datos[2].strip(),      # El índice 2 de Android es el Nombre ("BLOQUEO")
+            apellidos_persona=datos[3].strip(),   # El índice 3 de Android es el Apellido ("ADMIN")
+            fecha_entrada=fecha_entrada_date,     # datetime parseado de datos[0]
+            fecha_salida=fecha_salida_date,       # datetime parseado de datos[1]
+            numero_adultos="0",
+            numero_ninos="0",
+            telefono=datos[4].strip(),            # El índice 4 de Android es el Teléfono
+            correo=datos[5].strip(),              # El índice 5 de Android es el Correo
+            direccion="none",
+            ciudad="none",
+            provincia="none",
+            codigo_postal="none",
+            pais="none",
+            estado="bloqueado"
+        )
+
+        #print(nuevaReserva.to_dict())
+        db.reservas.insert_one(nuevaReserva.to_dict())
+        print("Reserva relizada correctamente")
+
+        return jsonify("operacion realizada correctamente")
+    except:
+        return jsonify("No se encuentra token")
+
+
+@main.route("/borrar_reserva", methods=['POST'])
+def borrar_reserva():
+
+    try:
+        
+        clave = current_app.config["SECRET_KEY"]
+
+        autorizacion = request.headers.get("Authorization")
+
+        token = autorizacion.split(" ")[1]
+
+        id_reserva = request.get_json()
+
+        #Firma
+        payload = jwt.decode(token, clave, algorithms=["HS256"])
+
+        cliente = MongoClient(current_app.config['MONGO_URI'])
+        db = cliente["cuevasHalima"]
+        
+        reserva_borrada = db.reservas.delete_one({'id_reserva': id_reserva})
+
+        print(f"RESERVA {id_reserva} ELIMINADA")
+
+        return jsonify("operacion realizada correctamente")
+
+    except:
+        return jsonify("No se encuentra token")
+
+#                                                            --- ACTIVIDADES --- 
 @main.route('/senderismo')
 def senderismo():
     return render_template('/senderismo.html')
@@ -446,6 +607,40 @@ def gastronomia():
 def lugares():
     return render_template('/lugares.html')
 
+
+
+#                                                           --- TEST mongoDB ---
+@main.route("/test-db")
+def test_db():    
+    try:
+        """
+        mongo_url = current_app.config['MONGO_URI']
+        client = MongoClient(mongo_url)
+
+        listName = client.list_database_names()
+        print("Estas son las bases de datos: ", listName)
+        return jsonify({"status": "Conexion existosa", "b2ase de datos" : listName })
+        """
+
+        cliente = MongoClient(current_app.config['MONGO_URI'])
+        db = cliente["cuevasHalima"]
+        
+        """
+        viviendas = db["viviendas"]
+
+        vivienda = Vivienda("La Partera",
+        "Wifi, cocina equipada, bañera exterior. Tradición y confort en un solo espacio", 175, "cama.jpg", "5")
+
+        resultado = viviendas.insert_one(vivienda.to_dict())
+        """
+        return jsonify({"mensaje": "Conexion exitosa"})  
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+
+#                                                         --- SITEMAP DE GOOGLE ---
 """
 En la siguiente ruta definimos la funcion que contiene el archivo a indexar en el navegador:
 

@@ -8,8 +8,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    MONGO_URI = os.getenv("MONGO_URI")
+    ADMIN_USER = os.getenv("ADMIN_USER")
+    ADMIN_PASS = os.getenv("ADMIN_PASS")
     SECRET_KEY = os.getenv("SECRET_KEY")
+    MONGO_URI = os.getenv("MONGO_URI")
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = int(os.getenv("MAIL_PORT"))
     MAIL_USE_TLS = os.getenv("MAIL_USE_TLS") == "True"
@@ -18,6 +20,10 @@ class Config:
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     MAIL_DEFAULT_SENDER = os.getenv("MAIL_DEFAULT_SENDER")
     STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+    TOKEN = os.getenv("TOKEN")
+
+    # Prueba local mongoDB
+    MONGO_URI_LOCAL = os.getenv("MONGO_URI_LOCAL")  
 
 
 
