@@ -13,6 +13,9 @@ from flask_pymongo import PyMongo #extensión para conectar Flask con MongoDB.
 from flask_mail import Mail
 from config import Config
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 mongo = PyMongo()
 mail = Mail()
@@ -29,7 +32,7 @@ def create_app():
     mail.init_app(app)  # Inicializa Mail
     #Clave privada guardada en la conf. de Flask 
     #Para llamar desde cualquier punto a la variable de entorno
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') 
+    app.config['SECRET_KEY_TOKEN'] = os.environ.get('SECRET_KEY_TOKEN')
 
     # Rutas
     from .route import main
