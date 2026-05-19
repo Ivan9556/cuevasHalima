@@ -34,7 +34,7 @@ main = Blueprint('main' ,__name__)
 def fechas_ocupadas(db):
     
     #Variable db
-    cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
+    cliente = MongoClient(current_app.config['MONGO_URI'])
     db = cliente["cuevasHalima"]
 
     #Almacenamos las reservas de la db
@@ -432,7 +432,7 @@ def login():
         payload = {
             "sub": "admin",         #"subject", quien es el usuario
             "iat": int(time.time()), #"issued at" cuando se emite 
-            "exp": int(time.time())+60 #"expiración", cuando caduca(15 min)
+            "exp": int(time.time())+3000 #"expiración", cuando caduca
             }
         #"algorithm", firma que se le da al token para saber que no ha sido manipulado tras su emisión (Signature)
         token = jwt.encode(payload,clave,algorithm="HS256") 
@@ -465,7 +465,7 @@ def consulta_reservas():
         payload = jwt.decode(token, clave, algorithms=["HS256"])
 
         # Conexión a MongoDB y acceso a la colección
-        cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
+        cliente = MongoClient(current_app.config['MONGO_URI'])
         db = cliente['cuevasHalima']
         reservas = db["reservas"]
 
@@ -525,7 +525,7 @@ def registrar_reserva():
         # Firma de validacion
         payload = jwt.decode(token, clave, algorithms=["HS256"])
         
-        cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
+        cliente = MongoClient(current_app.config['MONGO_URI'])
         db = cliente["cuevasHalima"]
 
 
@@ -574,7 +574,7 @@ def borrar_reserva():
         #Firma
         payload = jwt.decode(token, clave, algorithms=["HS256"])
 
-        cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
+        cliente = MongoClient(current_app.config['MONGO_URI'])
         db = cliente["cuevasHalima"]
         
         reserva_borrada = db.reservas.delete_one({'id_reserva': id_reserva})
@@ -622,7 +622,7 @@ def test_db():
         return jsonify({"status": "Conexion existosa", "b2ase de datos" : listName })
         """
 
-        cliente = MongoClient(current_app.config['MONGO_URI_LOCAL'])
+        cliente = MongoClient(current_app.config['MONGO_URI'])
         db = cliente["cuevasHalima"]
         
         """
